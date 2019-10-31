@@ -9,6 +9,7 @@ build_project:
   tags:
     - dockerbuilder
   script:
+    - if [ ! "$(docker ps -q -f name=pinjamaja)" ]; then echo "Container empty"; else docker rm -f pinjamaja && docker rmi -f registry.carsworld.id/ahmad/pinjamaja:local; fi
     - docker build -t registry.carsworld.id/ahmad/pinjamaja:local --build-arg app_env=.env.example .
     - docker push registry.carsworld.id/ahmad/pinjamaja:local
 
