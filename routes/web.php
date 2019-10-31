@@ -18,3 +18,4 @@ Route::get('/activity', 'ActivityController@index')->name('activity');
 Route::get('/investation', 'InvestationController@index')->name('investation');
 Route::get('/notification', 'NotificationController@index')->name('notification');
 Route::get('/account', 'AccountController@index')->name('account');
+Route::get('/list-item', 'ListItemController@index')->name('list-item');

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
         <div class="item-category">
-            <a class="per-category">
+            <a href="{{ route('list-item') }}" class="per-category">
                 <div class="menu category-menu" style="width: 100%;">
                     <div class="menu-icon">
                         <img src="{{ asset('tema/img/sport-icon.png') }}">
@@ -13,7 +13,7 @@
                     </div>
                 </div>
             </a>
-            <a class="per-category">
+            <a href="{{ route('list-item') }}" class="per-category">
                 <div class="menu category-menu" style="width: 100%;">
                     <div class="menu-icon">
                         <img src="{{ asset('tema/img/photography-icon.png') }}">
@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </a>
-            <a class="per-category">
+            <a href="{{ route('list-item') }}" class="per-category">
                 <div class="menu category-menu" style="width: 100%;">
                     <div class="menu-icon">
                         <img src="{{ asset('tema/img/outdoor-icon.png') }}">
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </a>
-            <a class="per-category">
+            <a href="{{ route('list-item') }}" class="per-category">
                 <div class="menu category-menu" style="width: 100%;">
                     <div class="menu-icon">
                         <img src="{{ asset('tema/img/vehicle-icon.png') }}">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
             </a>
-            <a class="per-category">
+            <a href="{{ route('list-item') }}" class="per-category">
                 <div class="menu category-menu" style="width: 100%;">
                     <div class="menu-icon">
                         <img src="{{ asset('tema/img/music-icon.png') }}">
@@ -53,7 +53,7 @@
                     </div>
                 </div>
             </a>
-            <a class="per-category">
+            <a href="{{ route('list-item') }}" class="per-category">
                 <div class="menu category-menu" style="width: 100%;">
                     <div class="menu-icon">
                         <img src="{{ asset('tema/img/others-icon.png') }}">

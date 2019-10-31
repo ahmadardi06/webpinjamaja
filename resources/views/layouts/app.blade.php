@@ -28,8 +28,11 @@
         <link rel="stylesheet" href="{{ asset('tema/css/investation.css') }}">
     @elseif (Request::is('account'))
         <link rel="stylesheet" href="{{ asset('tema/css/account.css') }}">
+    @elseif (Request::is('list-item'))
+        <link rel="stylesheet" href="{{ asset('tema/css/list-item.css') }}">
     @endif
 
+    @yield('css')
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -39,7 +42,7 @@
     <div id="app">
         
         <div class="nav">
-            <a href="#">
+            <a href="{{ url('/') }}">
                 <img src="{{ asset('tema/img/logo-pinjemaja-white.png') }}">
             </a>
         </div>
