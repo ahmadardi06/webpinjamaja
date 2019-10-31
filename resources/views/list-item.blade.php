@@ -14,7 +14,7 @@
 
     <div class="container">
         <div class="item-category list-for-rent">
-            <a href="#" class="click-link">
+            <a href="{{ route('detail-product') }}" class="click-link">
                 <div class="one-list-for-rent">
                     <figure class="pic-for-rent">
                         <img src="{{ asset('tema/img/img1.jpg') }}" class="">
@@ -29,7 +29,7 @@
             </a>
         </div>
         <div class="item-category list-for-rent">
-            <a href="#" class="click-link">
+            <a href="{{ route('detail-product') }}" class="click-link">
                 <div class="one-list-for-rent">
                     <figure class="pic-for-rent">
                         <img src="{{ asset('tema/img/img1.jpg') }}" class="">

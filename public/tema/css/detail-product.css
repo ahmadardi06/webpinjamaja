@@ -1,0 +1,118 @@
+.item-margin{
+    margin: 20px 0 0px;
+    padding-bottom: 20px;
+}
+
+.product-pic{
+    position: relative;
+    top: 35px;
+    max-width: 480px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0px auto;
+    background-color: white;
+    padding: 0px 0 0 0;
+    text-align: center;
+    font-size: 16px;
+    overflow: hidden;
+    display: block;
+}
+
+.product-pic img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.container{
+    top: 35px;
+    margin-top: 0;
+    background-color: white;
+    text-align: center;
+    max-height: fit-content;
+}
+.bottom-menu{
+    display: none;
+}
+
+.product-name{
+    width: 100%;
+    height: auto;
+    font-size: 16px;
+    display: inline-block;
+    border-bottom: 2px rgb(231, 231, 231) solid;
+    padding-bottom: 20px ;
+}
+.name{
+    display: inline-block;
+    width: 49%;
+    /* float: left; */
+    text-align: left;
+    font-weight: bold;
+}
+.price{
+    display: inline-block;
+    width: 49%;
+    /* float: left; */
+    text-align: right;
+    color: red;
+}
+
+.product-store{
+    width: 100%;
+    display: inline-block;
+    padding-bottom: 20px ;
+    border-bottom: 2px rgb(231, 231, 231) solid;
+}
+
+.store-pic{
+    display: inline-block;
+    width: 20%;
+    margin: 5px;
+    height: 70px;
+    width: 70px;
+    border-radius: 100%;
+    overflow: hidden;
+    vertical-align: middle;
+}
+.store-pic img{
+    width: 100%;
+    height: 100%;
+}
+.store-name{
+    display: inline-block;
+    width: 40%;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 10px;
+}
+.store-address{
+    display: inline-block;
+    width: 40%;
+    font-size: 16px;
+    text-align: left;
+    vertical-align: middle;
+    font-size: 14px;
+}
+.product-description{
+    text-align: left;
+}
+
+.product-spec{
+    text-align: left;
+}
+
+.specs{
+    display: inline-block;
+    text-align: center;
+}
+.spec{
+    display: inherit;
+    width: 24%;
+    padding: 15px;
+}
+.spec img{
+    width: 70%;
+    margin-bottom: 10px;
+}

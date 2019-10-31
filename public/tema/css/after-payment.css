@@ -1,0 +1,42 @@
+.item-margin{
+    margin: 20px 0 0px;
+    padding-bottom: 20px;
+}
+
+.container{
+    background-color: white;
+}
+.bottom-menu{
+    display: none;
+}
+
+.form{
+    text-align: center;
+}
+
+.align-left{
+    text-align: left;
+}
+
+.total{
+    display: inline-block;
+    width: 100%;
+}
+.total-desc{
+    display: inherit;
+    width: 80%;
+}
+.copy{
+    display: inherit;
+    width: 10%;
+    color: red;
+    font-weight: bold;
+}
+.payment-detail{
+    text-align: center;
+    font-size: 16px;
+}
+.payment-detail img{
+    width: 15%;
+    height: auto;
+}

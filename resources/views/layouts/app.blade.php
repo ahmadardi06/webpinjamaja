@@ -42,6 +42,14 @@
         <link rel="stylesheet" href="{{ asset('tema/css/phone-verification.css') }}">
     @elseif (Request::is('identity-verification'))
         <link rel="stylesheet" href="{{ asset('tema/css/identity-verification.css') }}">
+    @elseif (Request::is('detail-product'))
+        <link rel="stylesheet" href="{{ asset('tema/css/detail-product.css') }}">
+    @elseif (Request::is('form-order'))
+        <link rel="stylesheet" href="{{ asset('tema/css/form-order.css') }}">
+    @elseif (Request::is('payment'))
+        <link rel="stylesheet" href="{{ asset('tema/css/payment.css') }}">
+    @elseif (Request::is('after-payment'))
+        <link rel="stylesheet" href="{{ asset('tema/css/after-payment.css') }}">
     @endif
 
     @yield('css')

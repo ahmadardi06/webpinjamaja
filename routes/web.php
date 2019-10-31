@@ -25,3 +25,9 @@ Route::get('/account-verification', 'AccountVerificationController@index')->name
 Route::get('/email-verification', 'EmailVerificationController@index')->name('email-verification');
 Route::get('/phone-verification', 'PhoneVerificationController@index')->name('phone-verification');
 Route::get('/identity-verification', 'IdentityVerificationController@index')->name('identity-verification');
+Route::get('/detail-product', 'DetailProductController@index')->name('detail-product');
+Route::get('/form-order', 'FormOrderController@index')->name('form-order');
+Route::get('/payment', 'PaymentController@index')->name('payment');
+Route::get('/after-payment', 'AfterPaymentController@index')->name('after-payment');
+
+
