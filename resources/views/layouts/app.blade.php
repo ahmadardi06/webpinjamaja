@@ -30,6 +30,18 @@
         <link rel="stylesheet" href="{{ asset('tema/css/account.css') }}">
     @elseif (Request::is('list-item'))
         <link rel="stylesheet" href="{{ asset('tema/css/list-item.css') }}">
+    @elseif (Request::is('tracking-order'))
+        <link rel="stylesheet" href="{{ asset('tema/css/tracking-order.css') }}">
+    @elseif (Request::is('account-info'))
+        <link rel="stylesheet" href="{{ asset('tema/css/account-info.css') }}">
+    @elseif (Request::is('account-verification'))
+        <link rel="stylesheet" href="{{ asset('tema/css/account-verification.css') }}">
+    @elseif (Request::is('email-verification'))
+        <link rel="stylesheet" href="{{ asset('tema/css/email-verification.css') }}">
+    @elseif (Request::is('phone-verification'))
+        <link rel="stylesheet" href="{{ asset('tema/css/phone-verification.css') }}">
+    @elseif (Request::is('identity-verification'))
+        <link rel="stylesheet" href="{{ asset('tema/css/identity-verification.css') }}">
     @endif
 
     @yield('css')
@@ -129,5 +141,8 @@
         </div>
 
     </div>
+
+@yield('js')
+
 </body>
 </html>

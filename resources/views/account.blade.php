@@ -15,12 +15,11 @@
 </div>
 
 <div class="container">
-    <a href="#" class="btn btn-list">Info Akun</a>
-    <a href="#" class="btn btn-list">Ganti Password</a>
-
-    <br><br>
+    <a href="{{ route('account-info') }}" class="btn  btn-list">Info Akun</a>
+    <a href="#" class="btn  btn-list">Ganti Password</a>
+    <a href="{{ route('account-verification') }}" class="btn  btn-list">Verifikasi Akun</a>
     <div class="about">
-        <a href="#" style="text-decoration: none;">Tentang PinjemAja</a>
+        <a href="#">Tentang PinjemAja</a>
     </div>
 </div>
 @endsection

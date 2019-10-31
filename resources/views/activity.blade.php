@@ -9,7 +9,7 @@
 <div class="container" style="top: 30px;">
     <div id="Diproses" class="tabcontent">
         <div class="item-category list-for-rent">
-            <a href="#" class="click-link">
+            <a href="{{ route('tracking-order') }}" class="click-link">
                 <div class="one-list-for-rent">
                     <figure class="pic-for-rent">
                         <img src="{{ asset('tema/img/img1.jpg') }}" class="">
@@ -23,7 +23,7 @@
             </a>
         </div>
         <div class="item-category list-for-rent">
-            <a href="#" class="click-link">
+            <a href="{{ route('tracking-order') }}" class="click-link">
                 <div class="one-list-for-rent">
                     <figure class="pic-for-rent">
                         <img src="{{ asset('tema/img/img1.jpg') }}" class="">
@@ -37,7 +37,7 @@
             </a>
         </div>
         <div class="item-category list-for-rent">
-            <a href="#" class="click-link">
+            <a href="{{ route('tracking-order') }}" class="click-link">
                 <div class="one-list-for-rent">
                     <figure class="pic-for-rent">
                         <img src="{{ asset('tema/img/img1.jpg') }}" class="">
@@ -51,7 +51,7 @@
             </a>
         </div>
         <div class="item-category list-for-rent">
-            <a href="#" class="click-link">
+            <a href="{{ route('tracking-order') }}" class="click-link">
                 <div class="one-list-for-rent">
                     <figure class="pic-for-rent">
                         <img src="{{ asset('tema/img/img1.jpg') }}" class="">
@@ -68,7 +68,7 @@
 
     <div id="Selesai" class="tabcontent">
         <div class="item-category list-for-rent">
-            <a href="#" class="click-link">
+            <a href="{{ route('tracking-order') }}" class="click-link">
                 <div class="one-list-for-rent">
                     <figure class="pic-for-rent">
                         <img src="{{ asset('tema/img/img2.jpg') }}" class="">
@@ -82,7 +82,7 @@
             </a>
         </div>
         <div class="item-category list-for-rent">
-            <a href="#" class="click-link">
+            <a href="{{ route('tracking-order') }}" class="click-link">
                 <div class="one-list-for-rent">
                     <figure class="pic-for-rent">
                         <img src="{{ asset('tema/img/img2.jpg') }}" class="">
@@ -96,7 +96,7 @@
             </a>
         </div>
         <div class="item-category list-for-rent">
-            <a href="#" class="click-link">
+            <a href="{{ route('tracking-order') }}" class="click-link">
                 <div class="one-list-for-rent">
                     <figure class="pic-for-rent">
                         <img src="{{ asset('tema/img/img2.jpg') }}" class="">

@@ -1,0 +1,78 @@
+.item-category{
+    height: auto;
+}
+.status-rent{
+    color: red;
+}
+
+/* Style the tab */
+.tab {
+    position: relative;
+    top: 35px;
+    overflow: hidden;
+    background-color: rgb(226, 6, 6);
+    max-width: 480px;
+    /* width: 100%; */
+    box-sizing: border-box;
+    margin: 0px auto;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 10px;
+    color: white;
+    width: 16.5%;
+    text-align: center;
+}
+
+.container{
+    top: 35px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    font-weight: bold;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    /* border-bottom: white 3px solid; */
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+}
+
+@media only screen and (max-width: 480px){
+    .container{
+        top: 50px;
+    }
+    .tab{
+        top: 50px;
+    }
+    .tab button{
+        padding: 10px 10px;
+        font-size: 12px;
+    }
+}
+
+.desc{
+    font-size: 14px;
+    color: rgb(74, 74, 74);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin: 0.25em 0em;
+    overflow: hidden;
+}
