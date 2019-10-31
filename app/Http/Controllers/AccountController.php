@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class AboutController extends Controller
+class AccountController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -13,7 +13,7 @@ class AboutController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -23,6 +23,6 @@ class AboutController extends Controller
      */
     public function index()
     {
-        return view('about', ['message'=>'Hai arra']);
+        return view('account');
     }
 }

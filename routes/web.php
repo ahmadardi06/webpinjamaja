@@ -11,11 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
-
+Route::get('/', 'AppController@index')->name('app');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/about', 'AboutController@index')->name('about');
+Route::get('/activity', 'ActivityController@index')->name('activity');
+Route::get('/investation', 'InvestationController@index')->name('investation');
+Route::get('/notification', 'NotificationController@index')->name('notification');
+Route::get('/account', 'AccountController@index')->name('account');

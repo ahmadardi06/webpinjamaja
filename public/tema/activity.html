@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Aplikasi Pinjem Aja!" />
+<meta name="author" content="http://pinjemaja.com" />
+	<title>Pinjem Aja!</title>
+</head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/style.css">
+<style>
+    .item-category{
+        height: auto;
+    }
+    .status-rent{
+        color: red;
+    }
+
+    /* Style the tab */
+    .tab {
+        position: relative;
+        top: 60px;
+        overflow: hidden;
+        background-color: rgb(226, 6, 6);
+        max-width: 480px;
+        /* width: 100%; */
+        box-sizing: border-box;
+        margin: 0px auto;
+    }
+
+    /* Style the buttons inside the tab */
+    .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+        color: white;
+        width: 50%;
+    }
+
+    .container{
+        top: 60px;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+        font-weight: bold;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+        border-bottom: white 3px solid;
+        font-weight: bold;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+    }
+
+    @media only screen and (max-width: 480px){
+        .container{
+            top: 50px;
+        }
+        .tab{
+            top: 50px;
+        }
+        .tab button{
+            padding: 10px 10px;
+            font-size: 12px;
+        }
+}
+</style>
+
+<body>
+    <div class="nav">
+        <a href="#">
+            <img src="img/logo-pinjemaja.png">
+        </a>
+    </div>
+
+    <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'Diproses')" id="defaultOpen">Sedang Diproses</button>
+        <button class="tablinks" onclick="openCity(event, 'Selesai')">Selesai</button>
+    </div>
+
+    <div class="container">
+        <div id="Diproses" class="tabcontent">
+            <div class="item-category list-for-rent">
+                <a href="#" class="click-link">
+                    <div class="one-list-for-rent">
+                        <figure class="pic-for-rent">
+                            <img src="img/img1.jpg" class="">
+                        </figure>
+                        <div class="desc-for-rent">
+                            <span class="title-of-rent">Ahmad Ardiansyah Rental Motor</span>
+                            <span class="status-rent" style="font-size: 12px;">Dipinjam</span>
+                            <span class="date-of-rent" font-weight: bold">30 Sep 2019 11.06</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="item-category list-for-rent">
+                <a href="#" class="click-link">
+                    <div class="one-list-for-rent">
+                        <figure class="pic-for-rent">
+                            <img src="img/img1.jpg" class="">
+                        </figure>
+                        <div class="desc-for-rent">
+                            <span class="title-of-rent">Stik Golf Harga Murah daerah Surabaya</span>
+                            <span class="status-rent" style="font-size: 12px;">Dipinjam</span>
+                            <span class="date-of-rent" font-weight: bold">30 Sep 2019 11.06</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="item-category list-for-rent">
+                <a href="#" class="click-link">
+                    <div class="one-list-for-rent">
+                        <figure class="pic-for-rent">
+                            <img src="img/img1.jpg" class="">
+                        </figure>
+                        <div class="desc-for-rent">
+                            <span class="title-of-rent">Stik Golf Harga Murah daerah Surabaya</span>
+                            <span class="status-rent" style="font-size: 12px;">Dipinjam</span>
+                            <span class="date-of-rent" font-weight: bold">30 Sep 2019 11.06</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="item-category list-for-rent">
+                <a href="#" class="click-link">
+                    <div class="one-list-for-rent">
+                        <figure class="pic-for-rent">
+                            <img src="img/img1.jpg" class="">
+                        </figure>
+                        <div class="desc-for-rent">
+                            <span class="title-of-rent">Stik Golf Harga Murah daerah Surabaya</span>
+                            <span class="status-rent" style="font-size: 12px;">Dipinjam</span>
+                            <span class="date-of-rent" font-weight: bold">30 Sep 2019 11.06</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div id="Selesai" class="tabcontent">
+            <div class="item-category list-for-rent">
+                <a href="#" class="click-link">
+                    <div class="one-list-for-rent">
+                        <figure class="pic-for-rent">
+                            <img src="img/img2.jpg" class="">
+                        </figure>
+                        <div class="desc-for-rent">
+                            <span class="title-of-rent">Stik Golf Harga Murah daerah Surabaya</span>
+                            <span class="status-rent" style="font-size: 12px;">Dipinjam</span>
+                            <span class="date-of-rent" font-weight: bold">30 Sep 2019 11.06</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="item-category list-for-rent">
+                <a href="#" class="click-link">
+                    <div class="one-list-for-rent">
+                        <figure class="pic-for-rent">
+                            <img src="img/img2.jpg" class="">
+                        </figure>
+                        <div class="desc-for-rent">
+                            <span class="title-of-rent">Stik Golf Harga Murah daerah Surabaya</span>
+                            <span class="status-rent" style="font-size: 12px;">Dipinjam</span>
+                            <span class="date-of-rent" font-weight: bold">30 Sep 2019 11.06</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="item-category list-for-rent">
+                <a href="#" class="click-link">
+                    <div class="one-list-for-rent">
+                        <figure class="pic-for-rent">
+                            <img src="img/img2.jpg" class="">
+                        </figure>
+                        <div class="desc-for-rent">
+                            <span class="title-of-rent">Stik Golf Harga Murah daerah Surabaya</span>
+                            <span class="status-rent" style="font-size: 12px;">Dipinjam</span>
+                            <span class="date-of-rent" font-weight: bold">30 Sep 2019 11.06</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-menu">
+        <a class="menu-link" href="index.html">
+            <div id="home-menu" class="menu">
+                <div class="menu-icon">
+                    <img src="img/home-icon-grey.png">
+                </div>
+                <div class="menu-text">
+                    <span>Home</span>
+                </div>
+            </div>
+        </a>
+        
+        <a class="menu-link" href="activity.html">
+            <div id="activity-menu" class="menu">
+                <div class="menu-icon">
+                    <img src="img/activity-icon.png">
+                </div>
+                <div class="menu-text">
+                    <span>Activity</span>
+                </div>
+            </div>
+        </a>
+        
+        <a class="menu-link" href="#">
+            <div id="investation-menu" class="menu">
+                <div class="menu-icon">
+                    <img src="img/investation-icon-grey.png">
+                </div>
+                <div class="menu-text">
+                    <span>Investation</span>
+                </div>
+            </div>
+        </a>
+        
+        <a class="menu-link" href="notif.html">
+            <div id="notif-menu" class="menu">
+                <div class="menu-icon">
+                    <img src="img/notif-icon-grey.png">
+                </div>
+                <div class="menu-text">
+                    <span>Notification</span>
+                </div>
+            </div>
+        </a>
+        
+        <a class="menu-link" href="account.html">
+            <div id="account" class="menu">
+                <div class="menu-icon">
+                    <img src="img/account-icon-grey.png">
+                </div>
+                <div class="menu-text">
+                    <span>Account</span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <script>
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+@media only screen and (max-width: 480px){
+    .carousel-caption h3{
+        font-size: 6vw;
+    }
+}
+
+.per-category{
+    display: inline-block;
+    width: 32%;
+    text-align: center;
+    padding: 10px;
+}
+.per-category:hover{
+    background-color: rgb(221, 222, 255);
+}
+.per-category span{
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+/* Make the image fully responsive */
+.carousel-inner img {
+    width: 100%;
+    height: 100%;
+}
+
+.for-carousel{
+    padding: 0px;
+    overflow: hidden;
+    overflow-x: hidden;
+    height: auto;
+}
+
+.carousel-indicators{
+    top: 0;
+}
+.carousel-caption{
+    text-align: left;
+    left: 5%;
+    padding-bottom: 0px;
+    text-shadow: 1px 1px 10px black;;
+}
+
+
+
+.category-menu{
+    font-size: 16px;
+}
+.category-menu img{
+    height: 40px;
+}
+.category-menu .menu-text{
+    margin-top: 5px;
+}

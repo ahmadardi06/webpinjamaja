@@ -1,0 +1,23 @@
+stages:
+  - build
+  - deploy
+
+build_project:
+  stage: build
+  only:
+    - master
+  tags:
+    - dockerbuilder
+  script:
+    - docker build -t registry.carsworld.id/ahmad/pinjamaja:local --build-arg app_env=.env.example .
+    - docker push registry.carsworld.id/ahmad/pinjamaja:local
+
+deploy_project:
+  stage: deploy
+  only:
+    - master
+  tags:
+    - dockerbuilder
+  script:
+    - docker run --name pinjamaja -dit -p 8018:80 registry.carsworld.id/ahmad/pinjamaja:local
+

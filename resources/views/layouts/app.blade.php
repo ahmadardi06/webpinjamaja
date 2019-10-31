@@ -17,67 +17,114 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('tema/css/style.css') }}">
+
+    @if (Request::is('/'))
+        <link rel="stylesheet" href="{{ asset('tema/css/app.css') }}">
+    @elseif (Request::is('activity') || Request::is('notification'))
+        <link rel="stylesheet" href="{{ asset('tema/css/activity.css') }}">
+    @elseif (Request::is('investation'))
+        <link rel="stylesheet" href="{{ asset('tema/css/investation.css') }}">
+    @elseif (Request::is('account'))
+        <link rel="stylesheet" href="{{ asset('tema/css/account.css') }}">
+    @endif
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('about') }}">About</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        
+        <div class="nav">
+            <a href="#">
+                <img src="{{ asset('tema/img/logo-pinjemaja.png') }}">
+            </a>
+        </div>
 
         <main class="py-4">
             @yield('content')
         </main>
+
+        <div class="bottom-menu">
+            <a class="menu-link" href="{{ url('/') }}">
+                <div id="home-menu" class="menu">
+                    <div class="menu-icon">
+                        @if(Request::is('/'))
+                            <img src="{{ asset('tema/img/home-icon.png') }}">
+                        @else
+                            <img src="{{ asset('tema/img/home-icon-grey.png') }}">
+                        @endif
+                    </div>
+                    <div class="menu-text">
+                        <span>Home</span>
+                    </div>
+                </div>
+            </a>
+            
+            <a class="menu-link" href="{{ url('/activity') }}">
+                <div id="activity-menu" class="menu">
+                    <div class="menu-icon">
+                        @if(Request::is('activity'))
+                            <img src="{{ asset('tema/img/activity-icon.png') }}">
+                        @else
+                            <img src="{{ asset('tema/img/activity-icon-grey.png') }}">
+                        @endif
+                    </div>
+                    <div class="menu-text">
+                        <span>Activity</span>
+                    </div>
+                </div>
+            </a>
+            
+            <a class="menu-link" href="{{ url('/investation') }}">
+                <div id="investation-menu" class="menu">
+                    <div class="menu-icon">
+                        @if(Request::is('investation'))
+                            <img src="{{ asset('tema/img/investation-icon.png') }}">
+                        @else
+                            <img src="{{ asset('tema/img/investation-icon-grey.png') }}">
+                        @endif
+                    </div>
+                    <div class="menu-text">
+                        <span>Investation</span>
+                    </div>
+                </div>
+            </a>
+            
+            <a class="menu-link" href="{{ url('/notification') }}">
+                <div id="notif-menu" class="menu">
+                    <div class="menu-icon">
+                        @if(Request::is('notification'))
+                            <img src="{{ asset('tema/img/notif-icon.png') }}">
+                        @else
+                            <img src="{{ asset('tema/img/notif-icon-grey.png') }}">
+                        @endif
+                    </div>
+                    <div class="menu-text">
+                        <span>Notification</span>
+                    </div>
+                </div>
+            </a>
+            
+            <a class="menu-link" href="{{ url('/account') }}">
+                <div id="account" class="menu">
+                    <div class="menu-icon">
+                        @if(Request::is('account'))
+                            <img src="{{ asset('tema/img/account-icon.png') }}">
+                        @else
+                            <img src="{{ asset('tema/img/account-icon-grey.png') }}">
+                        @endif
+                    </div>
+                    <div class="menu-text">
+                        <span>Account</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
     </div>
 </body>
 </html>
