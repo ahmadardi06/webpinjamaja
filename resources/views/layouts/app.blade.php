@@ -40,7 +40,7 @@
         
         <div class="nav">
             <a href="#">
-                <img src="{{ asset('tema/img/logo-pinjemaja.png') }}">
+                <img src="{{ asset('tema/img/logo-pinjemaja-white.png') }}">
             </a>
         </div>
 

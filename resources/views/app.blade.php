@@ -9,7 +9,7 @@
                         <img src="{{ asset('tema/img/sport-icon.png') }}">
                     </div>
                     <div class="menu-text">
-                        <span>Olahraga</span>
+                        <span>Golf</span>
                     </div>
                 </div>
             </a>
@@ -29,7 +29,7 @@
                         <img src="{{ asset('tema/img/outdoor-icon.png') }}">
                     </div>
                     <div class="menu-text">
-                        <span>Outdoor</span>
+                        <span>Hiking</span>
                     </div>
                 </div>
             </a>
@@ -39,7 +39,7 @@
                         <img src="{{ asset('tema/img/vehicle-icon.png') }}">
                     </div>
                     <div class="menu-text">
-                        <span>Kendaraan</span>
+                        <span>Sepeda</span>
                     </div>
                 </div>
             </a>
