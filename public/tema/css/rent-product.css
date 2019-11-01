@@ -1,0 +1,113 @@
+.item-margin{
+    margin: 20px 0 0px;
+    padding-bottom: 20px;
+}
+
+.container{
+    top: 35px;
+    margin-top: 0;
+    background-color: white;
+    text-align: center;
+    max-height: fit-content;
+}
+.bottom-menu{
+    display: none;
+}
+
+.product-store{
+    width: 100%;
+    display: inline-block;
+    padding-bottom: 20px ;
+    border-bottom: 2px rgb(231, 231, 231) solid;
+}
+
+.store-pic{
+    display: inline-block;
+    width: 20%;
+    margin: 5px;
+    height: 70px;
+    width: 70px;
+    border-radius: 100%;
+    overflow: hidden;
+    vertical-align: middle;
+}
+.store-pic img{
+    width: 100%;
+    height: 100%;
+}
+.store-name{
+    display: inline-block;
+    width: 80%;
+    text-align: left;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.product-spec{
+    text-align: left;
+    padding: 0;
+}
+
+.specs{
+    display: inline-block;
+    text-align: center;
+}
+.spec{
+    display: inherit;
+    width: 24%;
+    padding: 15px;
+}
+.spec img{
+    width: 70%;
+    margin-bottom: 10px;
+}
+
+.btn-list{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+}
+.btn-icon{
+    display: inline-block;
+    width: 10%;
+}
+.btn-icon img{
+    width: 90%;
+}
+.btn-text{
+    margin-left: 10px;
+    width: 70%;
+    text-align: left;
+    background-color: white;
+    color: black;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0%;
+}
+.btn-text:hover{
+    background-color: white;
+    color: black;
+    border-bottom: 1px solid red;
+    font-size: larger;
+    margin-left: 15px;
+}
+
+a.thumbnail{
+    text-decoration: none;
+    color: black;
+}
+a.thumbnail:hover{
+    font-size: 16px;
+}
+
+.ready-item{
+    text-align: left;
+}
+.ready-item h6{
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.row{
+    text-align: center;
+}

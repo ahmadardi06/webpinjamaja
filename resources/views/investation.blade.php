@@ -3,10 +3,10 @@
 @section('content')
 <div class="container">
     <div class="text-center">
-        <img src="{{ asset('tema/img/img1.jpg') }}" width="200" class="rounded" style="margin-top: 80px;">
+        <img src="{{ asset('tema/img/store.png') }}" width="200" class="rounded" style="margin-top: 80px;">
         <br>
-        <a href="#" class="btn" style="margin-top: 30px; border-radius: 20px; background-color: red; color: white;">
-        	Mulai Menyewakan
+        <a href="{{ route('rent-product') }}" class="btn btn-red" style="margin-top: 30px; border-radius: 20px; background-color: red; color: white;">
+        	Sewakan Barang
         </a>
     </div>
 </div>

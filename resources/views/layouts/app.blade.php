@@ -50,6 +50,8 @@
         <link rel="stylesheet" href="{{ asset('tema/css/payment.css') }}">
     @elseif (Request::is('after-payment'))
         <link rel="stylesheet" href="{{ asset('tema/css/after-payment.css') }}">
+    @elseif (Request::is('rent-product'))
+        <link rel="stylesheet" href="{{ asset('tema/css/rent-product.css') }}">
     @endif
 
     @yield('css')
@@ -82,7 +84,7 @@
                         @endif
                     </div>
                     <div class="menu-text">
-                        <span>Home</span>
+                        <span>Beranda</span>
                     </div>
                 </div>
             </a>
@@ -97,7 +99,7 @@
                         @endif
                     </div>
                     <div class="menu-text">
-                        <span>Activity</span>
+                        <span>Aktivitas</span>
                     </div>
                 </div>
             </a>
@@ -112,7 +114,7 @@
                         @endif
                     </div>
                     <div class="menu-text">
-                        <span>Investation</span>
+                        <span>Ivestasi</span>
                     </div>
                 </div>
             </a>
@@ -127,7 +129,7 @@
                         @endif
                     </div>
                     <div class="menu-text">
-                        <span>Notification</span>
+                        <span>Notifikasi</span>
                     </div>
                 </div>
             </a>
@@ -142,7 +144,7 @@
                         @endif
                     </div>
                     <div class="menu-text">
-                        <span>Account</span>
+                        <span>Akun</span>
                     </div>
                 </div>
             </a>
