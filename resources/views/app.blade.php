@@ -8,9 +8,8 @@
 <div class="container">
         <div class="item-category" id="menuItem">
             <span>loading...</span>
-        </div>       
-        
-        
+        </div>
+                
         <div class="item-category for-carousel">
             <div id="demo" class="carousel slide" data-ride="carousel">
                 <ul class="carousel-indicators">
@@ -117,6 +116,19 @@
                     }
                     $('#listItem').html(html);
                 }
+            })
+
+            $('#btnLogin').on('click', function(){
+                var formData = { user: 'ahmad', pass: 'ardiansyah' };
+                localStorage.setItem('user', JSON.stringify(formData));
+            })
+
+            $('#btnCheck').on('click', function(){
+                console.log(localStorage.getItem('user'));
+            })
+
+            $('#btnLogout').on('click', function(){
+                console.log(localStorage.clear());
             })
         })
     </script>
