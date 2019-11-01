@@ -54,6 +54,8 @@
         <link rel="stylesheet" href="{{ asset('tema/css/rent-product.css') }}">
     @elseif (Request::is('preview-item'))
         <link rel="stylesheet" href="{{ asset('tema/css/detail-product.css') }}">
+    @elseif (Request::is('add-item'))
+        <link rel="stylesheet" href="{{ asset('tema/css/add-item.css') }}">
     @endif
 
     @yield('css')
