@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('tema/css/account-info.css') }}">
+@endsection
+
 @section('content')
 <div class="container">
     <div class="profile-pic">

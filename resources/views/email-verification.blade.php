@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+	<link rel="stylesheet" href="{{ asset('tema/css/email-verification.css') }}">
+@endsection
+
 @section('content')
 <div class="container">
     <form action="{{ route('email-verification') }}" class="form">

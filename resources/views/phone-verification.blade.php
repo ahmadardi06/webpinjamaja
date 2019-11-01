@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+	<link rel="stylesheet" href="{{ asset('tema/css/phone-verification.css') }}">
+@endsection
+
 @section('content')
 <div class="container">
     <form action="{{ route('phone-verification') }}" class="form">

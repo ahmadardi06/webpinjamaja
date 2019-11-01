@@ -1,68 +1,13 @@
 @extends('layouts.app')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('tema/css/app.css') }}">
+@endsection
+
 @section('content')
 <div class="container">
-        <div class="item-category">
-            <a href="{{ route('list-item') }}" class="per-category">
-                <div class="menu category-menu" style="width: 100%;">
-                    <div class="menu-icon">
-                        <img src="{{ asset('tema/img/sport-icon.png') }}">
-                    </div>
-                    <div class="menu-text">
-                        <span>Golf</span>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('list-item') }}" class="per-category">
-                <div class="menu category-menu" style="width: 100%;">
-                    <div class="menu-icon">
-                        <img src="{{ asset('tema/img/photography-icon.png') }}">
-                    </div>
-                    <div class="menu-text">
-                        <span>Fotografi</span>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('list-item') }}" class="per-category">
-                <div class="menu category-menu" style="width: 100%;">
-                    <div class="menu-icon">
-                        <img src="{{ asset('tema/img/outdoor-icon.png') }}">
-                    </div>
-                    <div class="menu-text">
-                        <span>Hiking</span>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('list-item') }}" class="per-category">
-                <div class="menu category-menu" style="width: 100%;">
-                    <div class="menu-icon">
-                        <img src="{{ asset('tema/img/vehicle-icon.png') }}">
-                    </div>
-                    <div class="menu-text">
-                        <span>Sepeda</span>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('list-item') }}" class="per-category">
-                <div class="menu category-menu" style="width: 100%;">
-                    <div class="menu-icon">
-                        <img src="{{ asset('tema/img/music-icon.png') }}">
-                    </div>
-                    <div class="menu-text">
-                        <span>Musik</span>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('list-item') }}" class="per-category">
-                <div class="menu category-menu" style="width: 100%;">
-                    <div class="menu-icon">
-                        <img src="{{ asset('tema/img/others-icon.png') }}">
-                    </div>
-                    <div class="menu-text">
-                        <span>Lainnya</span>
-                    </div>
-                </div>
-            </a>
+        <div class="item-category" id="menuItem">
+            <span>loading...</span>
         </div>       
         
         
@@ -103,52 +48,76 @@
         </div>  
 
 
-        <div class="item-category list-for-rent">
-            <a href="{{ route('detail-product') }}" class="click-link">
-                <div class="one-list-for-rent">
-                    <figure class="pic-for-rent">
-                        <img src="{{ asset('tema/img/img1.jpg') }}" class="">
-                    </figure>
-                    <div class="desc-for-rent">
-                        <span class="title-of-rent">Stik Golf Harga Murah daerah Surabaya</span>
-                        <span style="font-size: 12px;">Rama Store1</span>
-                        <span style="font-size: 18px; font-weight: bold">Rp. 30.000</span>
-                        <button class="btn btn-sm btn-primary">Pinjam Sekarang</button>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="item-category list-for-rent">
-            <a href="{{ route('detail-product') }}" class="click-link">
-                <div class="one-list-for-rent">
-                    <figure class="pic-for-rent">
-                        <img src="{{ asset('tema/img/img1.jpg') }}" class="">
-                    </figure>
-                    <div class="desc-for-rent">
-                        <span class="title-of-rent">Stik Golf</span>
-                        <span style="font-size: 12px;">Rama Store1</span>
-                        <span style="font-size: 18px; font-weight: bold">Rp. 30.000</span>
-                        <button class="btn btn-sm btn-primary">Pinjam Sekarang</button>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="item-category list-for-rent">
-            <a href="{{ route('detail-product') }}" class="click-link">
-                <div class="one-list-for-rent">
-                    <figure class="pic-for-rent">
-                        <img src="{{ asset('tema/img/img1.jpg') }}" class="">
-                    </figure>
-                    <div class="desc-for-rent">
-                        <span class="title-of-rent">Stik Golf</span>
-                        <span style="font-size: 12px;">Rama Store1</span>
-                        <span style="font-size: 18px; font-weight: bold">Rp. 30.000</span>
-                        <button class="btn btn-sm btn-primary">Pinjam Sekarang</button>
-                    </div>
-                </div>
-            </a>
+        <div id="listItem">
+            <div class="text-center">
+                <span>loading...</span>
+            </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        var urlOrigin = window.location.origin;
+
+        function renderMenuDOM(data) {
+            var html = '';
+            html += '<a href="{{ route('list-item') }}?category='+data.category+'" class="per-category">';
+                html += '<div class="menu category-menu" style="width: 100%;">';
+                    html += '<div class="menu-icon">';
+                        html += '<img src="'+data.icon+'">';
+                    html += '</div>';
+                    html += '<div class="menu-text">';
+                        html += '<span>'+data.category+'</span>';
+                    html += '</div>';
+                html += '</div>';
+            html += '</a>';
+            return html;
+        }
+
+        function renderListDOM(data) {
+            var price = 'Rp'+parseInt(data.price).toLocaleString(); 
+            var html = '';
+                html += '<div class="item-category list-for-rent">';
+                html += '<a href="{{ route('detail-product') }}?id='+data.id_item+'" class="click-link">';
+                    html += '<div class="one-list-for-rent">';
+                        html += '<figure class="pic-for-rent">';
+                            html += '<img src="'+data.img_item+'" class="">';
+                        html += '</figure>';
+                        html += '<div class="desc-for-rent">';
+                            html += '<span class="title-of-rent">'+data.item_name+'</span>';
+                            html += '<span style="font-size: 12px;">'+data.fk_id_store+'</span>';
+                            html += '<span style="font-size: 18px; font-weight: bold">'+price+'</span>';
+                            html += '<button class="btn btn-sm btn-primary">Pinjam Sekarang</button>';
+                        html += '</div>';
+                    html += '</div>';
+                html += '</a>';
+            html += '</div>';
+            return html;
+        }
+
+        $(function() {
+            var linkURL = urlOrigin+"/database/category.json";
+            $.get(linkURL, function(data) {
+                if(!data.error){
+                    var html = '';
+                    for(var i=0; i<data.items.length; i++) {
+                        html += renderMenuDOM(data.items[i]);
+                    }
+                    $('#menuItem').html(html);
+                }
+            })
+
+            var linkURL = urlOrigin+"/database/listitem.json";
+            $.get(linkURL, function(data) {
+                if(!data.error){
+                    var html = '';
+                    for(var i=0; i<3; i++) {
+                        html += renderListDOM(data.items[i]);
+                    }
+                    $('#listItem').html(html);
+                }
+            })
+        })
+    </script>
 @endsection
