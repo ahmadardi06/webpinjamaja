@@ -68,7 +68,7 @@
         <h6>Ready Items</h6>
         <div class="row">
             <div class="col col-6">
-                <a href="#" class="thumbnail">
+                <a href="{{ route('preview-item') }}" class="thumbnail">
                     <img src="{{ asset('tema/img/img1.jpg') }}" alt="Lights" style="width:100%">
                     <div class="caption">
                         <p style="margin: 0; font-weight: bold;">Bola Golf</p>
@@ -78,7 +78,7 @@
                 </a>
             </div>
             <div class="col col-6">
-                <a href="#" class="thumbnail">
+                <a href="{{ route('preview-item') }}" class="thumbnail">
                     <img src="{{ asset('tema/img/img1.jpg') }}" alt="Lights" style="width:100%">
                     <div class="caption">
                         <p style="margin: 0; font-weight: bold;">Bola Golf</p>
@@ -88,7 +88,7 @@
                 </a>
             </div>
             <div class="col col-6">
-                <a href="#" class="thumbnail">
+                <a href="{{ route('preview-item') }}" class="thumbnail">
                     <img src="{{ asset('tema/img/img1.jpg') }}" alt="Lights" style="width:100%">
                     <div class="caption">
                         <p style="margin: 0; font-weight: bold;">Bola Golf</p>
@@ -98,7 +98,7 @@
                 </a>
             </div>
             <div class="col col-6">
-                <a href="#" class="thumbnail">
+                <a href="{{ route('preview-item') }}" class="thumbnail">
                     <img src="{{ asset('tema/img/img1.jpg') }}" alt="Lights" style="width:100%">
                     <div class="caption">
                         <p style="margin: 0; font-weight: bold;">Bola Golf</p>

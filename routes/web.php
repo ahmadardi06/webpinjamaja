@@ -30,5 +30,6 @@ Route::get('/form-order', 'FormOrderController@index')->name('form-order');
 Route::get('/payment', 'PaymentController@index')->name('payment');
 Route::get('/after-payment', 'AfterPaymentController@index')->name('after-payment');
 Route::get('/rent-product', 'RentProductController@index')->name('rent-product');
+Route::get('/preview-item', 'PreviewItemController@index')->name('preview-item');
 
 
