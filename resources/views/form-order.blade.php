@@ -72,21 +72,28 @@
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 <script>
-    $('.tgl').datepicker({
-        format: 'dd-mm-yyyy'
+    $(function() {
+        $('.tgl').datepicker({
+            format: 'dd-mm-yyyy'
         }).on('hide', function(event) {
             event.preventDefault();
             event.stopPropagation();
+        });
     });
 
-    var jml = document.getElementById('jml').value;
-    jml = parseInt(jml);
+    console.log('tes');
 
     function tambahi(){
+        var jml = document.getElementById('jml').value;
+        jml = parseInt(jml);
+
         jml++;
         document.getElementById('jml').value = jml;
     }
     function kurangi(){
+        var jml = document.getElementById('jml').value;
+        jml = parseInt(jml);
+
         jml--;
         if(jml <= 0){
             document.getElementById('jml').value = 1;
