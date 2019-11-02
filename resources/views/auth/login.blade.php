@@ -30,14 +30,24 @@
 
 @section('js')
     <script>
+        var linkOrigin = window.location.origin;
         $(function(){
             $('#idLogin').on('click', function(){
                 var formData = { user: $('#user').val(), pass: $('#pass').val(), user_id: '1' };
-                if(formData.user == 'ahmad' && formData.pass == 'ardiansyah') {
-                    localStorage.setItem('user', JSON.stringify(formData))
-                    window.location.href = window.location.origin+'/account';
+                if(formData.user == '' || formData.pass == '') {
+                    $('#msgLogin').html('User or pass must be filled!')
+                    $('#user').focus()
                 } else {
-                    $('#msgLogin').html('User or pass mismatch!')
+                    var linkURL = "http://194.31.53.14/pinjem/api/user/login.php";
+                    $.post(linkURL, {name: formData.user, password: formData.pass}, function(data) {
+                        if(!data.error) {
+                            localStorage.setItem('user', JSON.stringify(data.data))
+                            $('#msgLogin').html(data.message)
+                            window.location.href = window.location.origin+'/account';
+                        } else {
+                            $('#msgLogin').html(data.message)
+                        }
+                    })
                 }
             })
         })

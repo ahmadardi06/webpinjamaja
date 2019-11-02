@@ -7,14 +7,14 @@
 @section('content')
     <div class="account-info" style="top: 30px;">
         <div class="profile-pic">
-            <img src="{{ asset('tema/img/img1.jpg') }}">
+            <img id="userPict" src="{{ asset('tema/img/img1.jpg') }}">
         </div>
         <div class="profile-name">
-            <span>Anonymous</span>
+            <span id="userName">Anonymous</span>
         </div>
         <div class="profile-info">
-            <span>anonymous@unknow.com</span><br>
-            <span>phone</span>
+            <span id="userEmail">anonymous@unknow.com</span><br>
+            <span id="userPhone">phone</span>
         </div>
     </div>
 
@@ -40,12 +40,24 @@
 
 @section('js')
     <script>
+        var linkOrigin = window.location.origin;
+
         $(function(){
-            var user = localStorage.getItem('user');
-            if(user == null){
+            var userInfo = localStorage.getItem('user');
+            var user = JSON.parse(userInfo);
+            if(userInfo == null){
                 $('#isLogin').hide();
                 $('#isLoged').show();
             } else {
+                // var linkURL = linkOrigin+'/database/user.json';
+                var linkURL = "http://194.31.53.14/pinjem/api/user/userDetail.php";
+                $.post(linkURL, {id_user: user.id_user}, function(data){
+                    $('#userPict').attr('src', data.img_user)
+                    $('#userName').html(data.full_name)
+                    $('#userEmail').html(data.email)
+                    $('#userPhone').html(data.phone)
+                })
+
                 $('#isLogin').show();
                 $('#isLoged').hide();
             }

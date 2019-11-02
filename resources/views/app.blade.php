@@ -85,7 +85,7 @@
                         html += '</figure>';
                         html += '<div class="desc-for-rent">';
                             html += '<span class="title-of-rent">'+data.item_name+'</span>';
-                            html += '<span style="font-size: 12px;">'+data.fk_id_store+'</span>';
+                            html += '<span style="font-size: 12px;">Stok '+data.stock+'</span>';
                             html += '<span style="font-size: 18px; font-weight: bold">'+price+'</span>';
                             html += '<button class="btn btn-sm btn-primary">Pinjam Sekarang</button>';
                         html += '</div>';
@@ -96,7 +96,8 @@
         }
 
         $(function() {
-            var linkURL = urlOrigin+"/database/category.json";
+            // var linkURL = urlOrigin+"/database/category.json";
+            var linkURL = "http://194.31.53.14/pinjem/api/item/category.php";
             $.get(linkURL, function(data) {
                 if(!data.error){
                     var html = '';
@@ -107,11 +108,12 @@
                 }
             })
 
-            var linkURL = urlOrigin+"/database/listitem.json";
+            // var linkURL = urlOrigin+"/database/listitem.json";
+            var linkURL = "http://194.31.53.14/pinjem/api/item/readItems.php";
             $.get(linkURL, function(data) {
                 if(!data.error){
                     var html = '';
-                    for(var i=0; i<3; i++) {
+                    for(var i=0; i<5; i++) {
                         html += renderListDOM(data.items[i]);
                     }
                     $('#listItem').html(html);

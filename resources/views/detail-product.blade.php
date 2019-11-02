@@ -38,19 +38,19 @@
         <div class="specs">
             <div class="spec">
                 <img src="{{ asset('tema/img/merk.png') }}" alt="">
-                <span>Nike</span>
+                <span id="merkItem">loading...</span>
             </div>
             <div class="spec">
                 <img src="{{ asset('tema/img/sent.png') }}" alt="">
-                <span>Bisa Dikirim</span>
+                <span id="itemStatusItem">loading...</span>
             </div>
             <div class="spec">
                 <img src="{{ asset('tema/img/color.png') }}" alt="">
-                <span>Putih</span>
+                <span id="colorItem">loading...</span>
             </div>
             <div class="spec">
                 <img src="{{ asset('tema/img/size.png') }}" alt="">
-                <span>114 cm</span>
+                <span id="sizeItem">loading...</span>
             </div>
         </div>
     </div>
@@ -70,12 +70,17 @@
         $(function(){
             var urlOrigin = window.location.origin;
 
-            var linkURL = urlOrigin+"/database/item.json";
-            $.get(linkURL, function(data) {
+            // var linkURL = urlOrigin+"/database/item.json";
+            var linkURL = "http://194.31.53.14/pinjem/api/item/itemDetail.php";
+            $.post(linkURL, {id_item: myParam}, function(data) {
                 $('#imgItem').attr('src', data.img_item)
                 $('#nameItem').html(data.item_name)
                 $('#priceItem').html(formatRP(data.price) + ' / hari')
                 $('#descriptionItem').html(data.description)
+                $('#merkItem').html(data.merk)
+                $('#sizeItem').html(data.size)
+                $('#itemStatusItem').html(data.item_status)
+                $('#colorItem').html(data.color)
 
                 $('#imgStore').attr('src', data.store.img_store)
                 $('#nameStore').html(data.store.store_name)
