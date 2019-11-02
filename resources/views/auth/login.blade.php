@@ -19,6 +19,7 @@
                         </div>
                         <div class="form-group">
                             <button id="idLogin" class="btn" style="background-color: red; color: white; border-radius: 20px;">Login</button>
+                            <a href="{{ route('register') }}" style="margin-left: 20px; text-decoration: none;">Register</a>
                         </div>
                     </div>
                 </div>
