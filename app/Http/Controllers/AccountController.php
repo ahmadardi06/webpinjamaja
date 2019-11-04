@@ -25,4 +25,9 @@ class AccountController extends Controller
     {
         return view('account');
     }
+
+    public function change()
+    {
+        return view('changepass');
+    }
 }

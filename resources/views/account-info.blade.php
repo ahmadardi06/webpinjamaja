@@ -8,7 +8,7 @@
 
 <div class="container">
     <div class="profile-pic">
-        <img src="{{ asset('tema/img/img1.jpg') }}">
+        <img id="userPict" src="{{ asset('tema/img/img1.jpg') }}">
     </div>
     <span id="message"></span>
     <!-- <form action="{{ route('account') }}" class="form"> -->
@@ -47,6 +47,7 @@
                 // var linkURL = linkOrigin+"/database/user.json";
                 var linkURL = "http://194.31.53.14/pinjem/api/user/userDetail.php";
                 $.post(linkURL, {id_user: user.id_user}, function(data){
+                    $('#userPict').attr('src', data.img_user)
                     $('#fullname').val(data.full_name)
                     $('#email').val(data.email)
                     $('#phone').val(data.phone)

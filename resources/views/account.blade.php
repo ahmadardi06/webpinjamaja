@@ -22,7 +22,7 @@
         <div class="container">
             <div id="isLogin">
                 <a id="btnInfo" href="{{ route('account-info') }}" class="btn btn-list">Info Akun</a>
-                <a id="btnGanti" href="#" class="btn  btn-list">Ganti Password</a>
+                <a id="btnGanti" href="{{ route('change-pass') }}" class="btn  btn-list">Ganti Password</a>
                 <a id="btnVerifikasi" href="{{ route('account-verification') }}" class="btn btn-list">Verifikasi Akun</a>
                 <a id="btnLogout" href="#" class="btn btn-list">Logout</a>
                 
