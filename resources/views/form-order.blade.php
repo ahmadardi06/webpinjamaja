@@ -7,14 +7,14 @@
 
 @section('content')
 <div class="product-pic">
-    <img src="{{ asset('tema/img/img1.jpg') }}">
+    <img id="imgItem" src="{{ asset('tema/img/img1.jpg') }}">
 </div>
 
 <div class="container">
     <div class="product-name">
         <div class="name ">
-            <span>Stick Golf</span><br>
-            <span style="color: red;">Rp. 30.000 / hari</span>
+            <span id="nameItem">loading...</span><br>
+            <span id="priceItem" style="color: red;">loading...</span>
         </div>
         <a href="#">
             <div class="chat-button">
@@ -28,10 +28,10 @@
         <form action="#" method="POST">
             <div class="align-left">
                 <label>Tanggal Pinjam</label>
-                <input type="text" name="tgl-pinjam" class="form-control tgl"><br>
+                <input type="text" name="tgl-pinjam" class="form-control tgl" id="tglPinjam"><br>
 
                 <label>Tanggal Kembali</label>
-                <input type="text" name="tgl-pinjam" class="form-control tgl"><br>
+                <input type="text" name="tgl-pinjam" class="form-control tgl" id="tglKembali"><br>
 
                 <label>Jumlah</label><br>
                 <a class="btn btn-default btn-min" id="min" onclick="kurangi()">-</a>
@@ -73,12 +73,23 @@
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 <script>
-    $('.tgl').datepicker({
-        format: 'dd-mm-yyyy'
+    var urlParams = new URLSearchParams(window.location.search);
+    var myParam = urlParams.get('id');
+
+    function formatRP(data) {
+        return 'Rp'+parseInt(data).toLocaleString(); 
+    }
+
+    $(function(){
+        $('#tglPinjam').datepicker();
+
+        $('.tgl').datepicker({
+            format: 'dd-mm-yyyy'
         }).on('hide', function(event) {
             event.preventDefault();
             event.stopPropagation();
-    });
+        });
+    })   
 
     var jml = document.getElementById('jml').value;
     jml = parseInt(jml);

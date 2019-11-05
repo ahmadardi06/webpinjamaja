@@ -54,7 +54,7 @@
             </div>
         </div>
     </div>
-    <a href="{{ route('form-order') }}" class="btn btn-red btn-danger">Order Sekarang</a>
+    <a id="orderItem" href="{{ route('form-order') }}" class="btn btn-red btn-danger">Order Sekarang</a>
 </div>
 @endsection
 
@@ -69,6 +69,7 @@
 
         $(function(){
             var urlOrigin = window.location.origin;
+            $('#orderItem').attr('href', $('#orderItem').attr('href')+'?id='+myParam);
 
             // var linkURL = urlOrigin+"/database/item.json";
             var linkURL = "http://194.31.53.14/pinjem/api/item/itemDetail.php";
