@@ -22,7 +22,14 @@ class FormOrderController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
+    {   
         return view('form-order');
+    }
+
+    public function getDataProduct(request $req){
+        $products = $req->all();
+        // dd($products);
+        
+        return redirect()->route('form-order', ['id' => $products['item_id']])->with(['products' => $products]);
     }
 }
