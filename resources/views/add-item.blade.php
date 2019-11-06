@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('tema/css/add-item.css') }}">
+@endsection
+
 @section('content')
 <div class="container">
     <h4>Tambah Barang</h4>
@@ -127,9 +131,7 @@
             
             <div class="btnbtn">
                 <button type='submit' class="btn btn-red btn-danger">Simpan</button>
-            </div>
-            
-            <hr>
+            </div>            
         </form>
     </div>
 </div>

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('tema/css/activity.css') }}">
+@endsection
+
 @section('content')
 <div class="tab" style="top: 32px;">
     <button class="tablinks" onclick="openCity(event, 'Diproses')" id="defaultOpen">PESAN</button>

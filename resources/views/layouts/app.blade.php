@@ -20,44 +20,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('tema/css/style.css') }}">
 
-    @if (Request::is('/'))
-        <link rel="stylesheet" href="{{ asset('tema/css/app.css') }}">
-    @elseif (Request::is('activity') || Request::is('notification'))
-        <link rel="stylesheet" href="{{ asset('tema/css/activity.css') }}">
-    @elseif (Request::is('investation'))
-        <link rel="stylesheet" href="{{ asset('tema/css/investation.css') }}">
-    @elseif (Request::is('account'))
-        <link rel="stylesheet" href="{{ asset('tema/css/account.css') }}">
-    @elseif (Request::is('list-item'))
-        <link rel="stylesheet" href="{{ asset('tema/css/list-item.css') }}">
-    @elseif (Request::is('tracking-order'))
-        <link rel="stylesheet" href="{{ asset('tema/css/tracking-order.css') }}">
-    @elseif (Request::is('account-info'))
-        <link rel="stylesheet" href="{{ asset('tema/css/account-info.css') }}">
-    @elseif (Request::is('account-verification'))
-        <link rel="stylesheet" href="{{ asset('tema/css/account-verification.css') }}">
-    @elseif (Request::is('email-verification'))
-        <link rel="stylesheet" href="{{ asset('tema/css/email-verification.css') }}">
-    @elseif (Request::is('phone-verification'))
-        <link rel="stylesheet" href="{{ asset('tema/css/phone-verification.css') }}">
-    @elseif (Request::is('identity-verification'))
-        <link rel="stylesheet" href="{{ asset('tema/css/identity-verification.css') }}">
-    @elseif (Request::is('detail-product'))
-        <link rel="stylesheet" href="{{ asset('tema/css/detail-product.css') }}">
-    @elseif (Request::is('form-order'))
-        <link rel="stylesheet" href="{{ asset('tema/css/form-order.css') }}">
-    @elseif (Request::is('payment'))
-        <link rel="stylesheet" href="{{ asset('tema/css/payment.css') }}">
-    @elseif (Request::is('after-payment'))
-        <link rel="stylesheet" href="{{ asset('tema/css/after-payment.css') }}">
-    @elseif (Request::is('rent-product'))
-        <link rel="stylesheet" href="{{ asset('tema/css/rent-product.css') }}">
-    @elseif (Request::is('preview-item'))
-        <link rel="stylesheet" href="{{ asset('tema/css/detail-product.css') }}">
-    @elseif (Request::is('add-item'))
-        <link rel="stylesheet" href="{{ asset('tema/css/add-item.css') }}">
-    @endif
-
     @yield('css')
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

@@ -1,0 +1,27 @@
+{
+    "id_item": "2",
+    "item_name": "Stick Golf",
+    "category": "Olahraga",
+    "description": "Stick Golf bagus banget",
+    "price": "45000",
+    "stock": "5",
+    "color": "Merah",
+    "merk": "Nike",
+    "condition": "Baru",
+    "size": "114",
+    "delivery": "dikirim",
+    "item_status": "ready",
+    "jumlah_waktu": "1",
+    "satuan": "hari",
+    "img_item": "http://194.31.53.14/pinjem/asset/store/9/items/2/2_img_item.jpg",
+    "investor": "inchiro",
+    "store": {
+        "id_store": "9",
+        "store_name": "Darma Official",
+        "address": "Gebang Wetan No. 22 A",
+        "city": "Surabaya",
+        "fk_user": "23",
+        "entry_date": "2019-10-14",
+        "img_store": "http://194.31.53.14/pinjem/asset/store/9/profile/"
+    }
+}

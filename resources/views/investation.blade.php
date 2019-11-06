@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+	<link rel="stylesheet" href="{{ asset('tema/css/investation.css') }}">
+@endsection
+
 @section('content')
 <div class="container">
     <div class="text-center">

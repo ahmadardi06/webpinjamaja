@@ -22,9 +22,11 @@ class ListItemController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    public function index()
+    public function index(Request $req)
     {
-        return view('list-item');
+        return view('list-item', [
+            'category' => $req->query('category')
+        ]);
     }
 
     

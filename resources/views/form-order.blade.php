@@ -1,19 +1,20 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="{{ asset('tema/css/form-order.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css">
 @endsection
 
 @section('content')
 <div class="product-pic">
-    <img src="{{ asset('tema/img/img1.jpg') }}">
+    <img id="imgItem" src="{{ asset('tema/img/img1.jpg') }}">
 </div>
 
 <div class="container">
     <div class="product-name">
         <div class="name ">
-            <span>Stick Golf</span><br>
-            <span style="color: red;">Rp. 30.000 / hari</span>
+            <span id="nameItem">loading...</span><br>
+            <span id="priceItem" style="color: red;">loading...</span>
         </div>
         <a href="#">
             <div class="chat-button">
@@ -27,10 +28,10 @@
         <form action="#" method="POST">
             <div class="align-left">
                 <label>Tanggal Pinjam</label>
-                <input type="text" name="tgl-pinjam" class="form-control tgl"><br>
+                <input type="text" name="tgl-pinjam" class="form-control tgl" id="tglPinjam"><br>
 
                 <label>Tanggal Kembali</label>
-                <input type="text" name="tgl-pinjam" class="form-control tgl"><br>
+                <input type="text" name="tgl-pinjam" class="form-control tgl" id="tglKembali"><br>
 
                 <label>Jumlah</label><br>
                 <a class="btn btn-default btn-min" id="min" onclick="kurangi()">-</a>
@@ -72,6 +73,13 @@
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 <script>
+    var urlParams = new URLSearchParams(window.location.search);
+    var myParam = urlParams.get('id');
+
+    function formatRP(data) {
+        return 'Rp'+parseInt(data).toLocaleString(); 
+    }
+    
     $(function() {
         $('.tgl').datepicker({
             format: 'dd-mm-yyyy'
@@ -79,9 +87,14 @@
             event.preventDefault();
             event.stopPropagation();
         });
-    });
 
-    console.log('tes');
+        var linkURL = "{{ env('APP_API') }}/api/item/itemDetail.php";
+        $.post(linkURL, {id_item: myParam}, function(data) {
+            $('#imgItem').attr('src', data.img_item)
+            $('#nameItem').html(data.item_name)
+            $('#priceItem').html(formatRP(data.price) + ' / hari')
+        })
+    })   
 
     function tambahi(){
         var jml = document.getElementById('jml').value;
@@ -90,15 +103,16 @@
         jml++;
         document.getElementById('jml').value = jml;
     }
+
     function kurangi(){
         var jml = document.getElementById('jml').value;
         jml = parseInt(jml);
-
-        jml--;
-        if(jml <= 0){
+        
+        if(jml < 2){
+            jml = 1;
             document.getElementById('jml').value = 1;
-        }
-        else{
+        } else{
+            jml--;
             document.getElementById('jml').value = jml;
         }
     }
