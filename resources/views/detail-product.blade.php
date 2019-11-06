@@ -62,17 +62,17 @@
     <script>
         var urlParams = new URLSearchParams(window.location.search);
         var myParam = urlParams.get('id');
+        var urlOrigin = window.location.origin;
 
         function formatRP(data) {
             return 'Rp'+parseInt(data).toLocaleString(); 
         }
 
         $(function(){
-            var urlOrigin = window.location.origin;
             $('#orderItem').attr('href', $('#orderItem').attr('href')+'?id='+myParam);
 
             // var linkURL = urlOrigin+"/database/item.json";
-            var linkURL = "http://194.31.53.14/pinjem/api/item/itemDetail.php";
+            var linkURL = "{{ env('APP_API') }}/api/item/itemDetail.php";
             $.post(linkURL, {id_item: myParam}, function(data) {
                 $('#imgItem').attr('src', data.img_item)
                 $('#nameItem').html(data.item_name)

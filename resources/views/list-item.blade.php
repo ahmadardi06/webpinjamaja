@@ -97,7 +97,7 @@
         // });
 
         // var linkURL = urlOrigin+"/database/listitem.json";
-        var linkURL = "http://194.31.53.14/pinjem/api/item/readItems.php";
+        var linkURL = "{{ env('APP_API') }}/api/item/readItems.php";
         $.get(linkURL, function(data) {
             if(!data.error){
                 var html = '';

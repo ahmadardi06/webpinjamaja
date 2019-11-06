@@ -45,7 +45,7 @@
             } else {
                 $('#id_user').val(user.id_user)
                 // var linkURL = linkOrigin+"/database/user.json";
-                var linkURL = "http://194.31.53.14/pinjem/api/user/userDetail.php";
+                var linkURL = "{{ env('APP_API') }}/api/user/userDetail.php";
                 $.post(linkURL, {id_user: user.id_user}, function(data){
                     $('#userPict').attr('src', data.img_user)
                     $('#fullname').val(data.full_name)
@@ -64,7 +64,7 @@
                     address: $('#address').val()
                 }
 
-                var linkURL = "http://194.31.53.14/pinjem/api/user/editUser.php";
+                var linkURL = "{{ env('APP_API') }}/api/user/editUser.php";
                 $.post(linkURL, formData, function(data){
                     if(!data.error) {
                         window.location.reload();

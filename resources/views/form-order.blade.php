@@ -89,6 +89,13 @@
             event.preventDefault();
             event.stopPropagation();
         });
+
+        var linkURL = "{{ env('APP_API') }}/api/item/itemDetail.php";
+        $.post(linkURL, {id_item: myParam}, function(data) {
+            $('#imgItem').attr('src', data.img_item)
+            $('#nameItem').html(data.item_name)
+            $('#priceItem').html(formatRP(data.price) + ' / hari')
+        })
     })   
 
     var jml = document.getElementById('jml').value;
@@ -97,15 +104,17 @@
     function tambahi(){
         jml++;
         document.getElementById('jml').value = jml;
+        console.log(jml);
     }
     function kurangi(){
-        jml--;
-        if(jml <= 0){
+        if(jml < 2){
+            jml = 1;
             document.getElementById('jml').value = 1;
-        }
-        else{
+        } else{
+            jml--;
             document.getElementById('jml').value = jml;
         }
+        console.log(jml);
     }
 </script>
 @endsection

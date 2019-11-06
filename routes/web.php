@@ -31,4 +31,7 @@ Route::get('/payment', 'PaymentController@index')->name('payment');
 Route::get('/after-payment', 'AfterPaymentController@index')->name('after-payment');
 Route::get('/change-pass', 'AccountController@change')->name('change-pass');
 
+// Route::get('/kirim', 'AccountController@message')->name('message');
+Route::post('/kirim', 'AccountController@message')->name('message');
+
 

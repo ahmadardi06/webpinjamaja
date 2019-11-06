@@ -61,7 +61,7 @@
                                 new_password: newPass
                             }
 
-                            var linkURL = "http://194.31.53.14/pinjem/api/user/changePassword.php";
+                            var linkURL = "{{ env('APP_API') }}/api/user/changePassword.php";
                             $.post(linkURL, formData, function(data){
                                 if(!data.error){
                                     $('#msgLogin').html(data.message)

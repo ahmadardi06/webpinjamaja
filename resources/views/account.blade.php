@@ -50,7 +50,7 @@
                 $('#isLoged').show();
             } else {
                 // var linkURL = linkOrigin+'/database/user.json';
-                var linkURL = "http://194.31.53.14/pinjem/api/user/userDetail.php";
+                var linkURL = "{{ env('APP_API') }}/api/user/userDetail.php";
                 $.post(linkURL, {id_user: user.id_user}, function(data){
                     $('#userPict').attr('src', data.img_user)
                     $('#userName').html(data.full_name)
