@@ -35,7 +35,6 @@ Route::get('/rent-product', 'RentProductController@index')->name('rent-product')
 Route::get('/preview-item', 'PreviewItemController@index')->name('preview-item');
 Route::get('/add-item', 'AddItemController@index')->name('add-item');
 
-Route::post('/kirim', 'AccountController@message')->name('message');
-
-
+Route::post('/verifikasi-email', 'AccountController@message')->name('message');
+Route::post('/verifikasi-phone', 'AccountController@phone')->name('phone');
 

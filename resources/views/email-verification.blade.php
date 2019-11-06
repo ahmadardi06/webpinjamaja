@@ -34,8 +34,6 @@
         <label>Token OTP</label>
         <input type="text" name="tokenVerifikasi" id="tokenVerifikasi" placeholder="token" class="form-control">
         <span style="color: red;" id="msgVerfikasi"></span>
-
-        <p id="msgOTP" style="font-weight: bold;"></p>
       </div>
 
       <!-- Modal footer -->
@@ -69,7 +67,7 @@
 
 		    $('#btnVerifikasi').on('click', function(){
                 var token = randomFixedInteger(6);
-                var linkURL = linkOrigin+'/kirim';
+                var linkURL = linkOrigin+'/verifikasi-email';
                 var formData = { 
                     token: token, 
                     name: user.name, 
@@ -88,13 +86,13 @@
 		    	$('#btnConfirm').on('click', function(){
 		    		var tokenOTP = $('#tokenVerifikasi').val();
 		    		if(tokenOTP == '') {
-		    			$('#msgVerfikasi').html('Required.');
+		    			$('#msgVerfikasi').html('Required');
 		    			$('#tokenVerifikasi').focus();
 		    		} else {
 		    			if(tokenOTP == localStorage.getItem('tokenEmail')) {
-                            $('#msgOTP').html('Email successfully verified.').attr('style', 'color: green;');
+                            $('#msgVerfikasi').html('Email successfully verified.').attr('style', 'color: green;');
                         } else {
-                            $('#msgOTP').html('Token mismatch!').attr('style', 'color: red;');
+                            $('#msgVerfikasi').html('Token mismatch!').attr('style', 'color: red;');
                         }
 		    		}
 		    	})

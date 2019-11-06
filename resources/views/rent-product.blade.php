@@ -15,7 +15,7 @@
             <span id="emailStore">loading...</span><br>
             <span id="phoneStore">loading...</span>
         </div>
-        <button class="btn btn-block btn-danger" style="margin-top: 10px; background-color: #fe0000; border-color: #fe0000; color: white;">Edit Store</button>
+        <button id="btnEditStore" onclick="alert('Under costruction !');" class="btn btn-block btn-danger" style="margin-top: 10px; background-color: #fe0000; border-color: #fe0000; color: white;">Edit Store</button>
     </div>
 
     <div id="userLogin">
@@ -114,13 +114,16 @@
 
         $(function(){
             $('#userLogin').hide();
+            $('#btnEditStore').hide();
             console.log(user);
 
             var linkURL = "{{ env('APP_API') }}/api/store/storeDetail.php";
             $.post(linkURL, {id_store: myParam}, function(data){
                 if(data.fk_user == user.id_user) {
                     $('#userLogin').show();
+                    $('#btnEditStore').show();
                 } else {
+                    $('#btnEditStore').hide();
                     $('#userLogin').hide();
                 }
             })
