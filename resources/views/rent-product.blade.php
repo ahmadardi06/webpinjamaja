@@ -128,7 +128,6 @@
                 }
             })
             $.post(linkURL, {id_store: myParam}, function(data){
-                console.log(data);
                 $('#imgStore').attr('src', data.img_store);
                 $('#nameStore').html(data.store_name);
                 $('#phoneStore').html(data.city);

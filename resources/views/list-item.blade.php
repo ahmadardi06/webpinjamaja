@@ -102,7 +102,6 @@
             var formData = {};
         }
         $.post(linkURL, {id_category: myParam}, function(data) {
-            console.log(data)
             if(!data.error){
                 var html = '';
                 for(var i=0; i<data.items.length; i++) {

@@ -119,7 +119,6 @@
             // var linkURL = urlOrigin+"/database/listitem.json";
             var linkURL = "{{ env('APP_API') }}/api/item/readPaging.php";
             $.post(linkURL+'?page=1', function(data) {
-                console.log(data)
                 if(!data.error){
                     var html = ''; var slider = '';
                     console.log(data.items.slice(0, 5));
