@@ -12,37 +12,7 @@
                 
         <div class="item-category for-carousel">
             <div id="demo" class="carousel slide" data-ride="carousel">
-                <ul class="carousel-indicators">
-                    <li data-target="#demo" data-slide-to="0" class="active"></li>
-                    <li data-target="#demo" data-slide-to="1"></li>
-                    <li data-target="#demo" data-slide-to="2"></li>
-                </ul>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="{{ asset('tema/img/img3.jpg') }}" alt="img1">  
-                        <div class="carousel-caption">
-                            <h3>Stik Golf</h3>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('tema/img/img3.jpg') }}" alt="img2">  
-                        <div class="carousel-caption">
-                            <h3>Barang Kedua</h3>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('tema/img/img3.jpg') }}" alt="img2">  
-                        <div class="carousel-caption">
-                            <h3>Barang Ketiga</h3>
-                        </div>
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                </a>
-                <a class="carousel-control-next" href="#demo" data-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                </a>
+                <span>loading...</span>
             </div>
         </div>  
 
@@ -61,7 +31,7 @@
 
         function renderMenuDOM(data) {
             var html = '';
-            html += '<a href="{{ route('list-item') }}?category='+data.category+'" class="per-category">';
+            html += '<a href="{{ route('list-item') }}?category='+data.id_category+'" class="per-category">';
                 html += '<div class="menu category-menu" style="width: 100%;">';
                     html += '<div class="menu-icon">';
                         html += '<img src="'+data.icon+'">';
@@ -71,6 +41,44 @@
                     html += '</div>';
                 html += '</div>';
             html += '</a>';
+            return html;
+        }
+
+        function renderSliderDOM(data) {
+            var indicator = ''; var slider = '';
+            for(var i=0; i<data.length; i++) {
+                if(i == 0){
+                    indicator += '<li data-target="#demo" data-slide-to="'+i+'" class="active"></li>';
+                    slider += '<div class="carousel-item active">';
+                        slider += '<img src="'+data[i].img_item+'" alt="'+data[i].item_name+'">';
+                        slider += '<div class="carousel-caption">';
+                            slider += '<h3>'+data[i].item_name+'</h3>';
+                        slider += '</div>';
+                    slider += '</div>';
+                } else {
+                    indicator += '<li data-target="#demo" data-slide-to="'+i+'"></li>';
+                    slider += '<div class="carousel-item">';
+                        slider += '<img src="'+data[i].img_item+'" alt="'+data[i].item_name+'">';
+                        slider += '<div class="carousel-caption">';
+                            slider += '<h3>'+data[i].item_name+'</h3>';
+                        slider += '</div>';
+                    slider += '</div>';
+                }
+            }
+
+            var html = '';
+                html += '<ul class="carousel-indicators">';
+                    html += indicator;
+                html += '</ul>';
+                html += '<div class="carousel-inner">';
+                    html += slider;
+                html += '</div>';
+                html += '<a class="carousel-control-prev" href="#demo" data-slide="prev">';
+                    html += '<span class="carousel-control-prev-icon"></span>';
+                html += '</a>';
+                html += '<a class="carousel-control-next" href="#demo" data-slide="next">';
+                    html += '<span class="carousel-control-next-icon"></span>';
+                html += '</a>';
             return html;
         }
 
@@ -109,13 +117,18 @@
             })
 
             // var linkURL = urlOrigin+"/database/listitem.json";
-            var linkURL = "{{ env('APP_API') }}/api/item/readItems.php";
-            $.get(linkURL, function(data) {
+            var linkURL = "{{ env('APP_API') }}/api/item/readPaging.php";
+            $.post(linkURL+'?page=1', function(data) {
+                console.log(data)
                 if(!data.error){
-                    var html = '';
-                    for(var i=0; i<5; i++) {
+                    var html = ''; var slider = '';
+                    console.log(data.items.slice(0, 5));
+                    slider += renderSliderDOM(data.items.slice(0, 5));
+                    for(var i=5; i<10; i++) {
                         html += renderListDOM(data.items[i]);
                     }
+
+                    $('#demo').html(slider);
                     $('#listItem').html(html);
                 }
             })

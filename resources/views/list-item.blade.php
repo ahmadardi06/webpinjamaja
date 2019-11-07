@@ -8,9 +8,10 @@
 @section('content')
     <div class="tab">
         <div class="title-page" >List Item</div>
-        <button class="tablinks" data-toggle="modal" data-target="#myModal">
-            Filter
-        </button>
+        <a href="{{ route('list-item') }}?category=all" class="tablinks btn">All</a>
+        <!-- <button class="tablinks" data-toggle="modal" data-target="#myModal"> -->
+            <!-- All -->
+        <!-- </button> -->
     </div>
 
     <div class="container" id="listItem">
@@ -93,15 +94,19 @@
             // event.stopPropagation();
         // });
 
-        // var linkURL = urlOrigin+"/database/listitem.json";
-        var linkURL = "{{ env('APP_API') }}/api/item/readItems.php";
-        $.get(linkURL, function(data) {
+        if(myParam != 'all') {
+            var linkURL = "{{ env('APP_API') }}/api/item/itemCategory.php";
+            var formData = {id_category: myParam};
+        } else {
+            var linkURL = "{{ env('APP_API') }}/api/item/readPaging.php?page=1";
+            var formData = {};
+        }
+        $.post(linkURL, {id_category: myParam}, function(data) {
+            console.log(data)
             if(!data.error){
                 var html = '';
                 for(var i=0; i<data.items.length; i++) {
-                    if(data.items[i].category == myParam) {
-                        html += renderDOM(data.items[i]);
-                    }
+                    html += renderDOM(data.items[i]);
                 }
                 $('#listItem').html(html);
             }
