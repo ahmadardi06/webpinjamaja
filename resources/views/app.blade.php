@@ -2,21 +2,32 @@
 
 @section('content')
 <div class="container">
-        <div class="item-category">
+        <div class="item-category cat">
+            <span>Pilih Kategori</span><br><br>
             <a href="{{ route('list-item') }}" class="per-category">
                 <div class="menu category-menu" style="width: 100%;">
                     <div class="menu-icon">
-                        <img src="{{ asset('tema/img/sport-icon.png') }}">
+                        <img src="{{ asset('asset/category/ic_music.png') }}">
                     </div>
                     <div class="menu-text">
-                        <span>Golf</span>
+                        <span>Alat Musik</span>
                     </div>
                 </div>
             </a>
             <a href="{{ route('list-item') }}" class="per-category">
                 <div class="menu category-menu" style="width: 100%;">
                     <div class="menu-icon">
-                        <img src="{{ asset('tema/img/photography-icon.png') }}">
+                        <img src="{{ asset('asset/category/ic_soccer.png') }}">
+                    </div>
+                    <div class="menu-text">
+                        <span>Olahraga</span>
+                    </div>
+                </div>
+            </a>
+            <a href="{{ route('list-item') }}" class="per-category">
+                <div class="menu category-menu" style="width: 100%;">
+                    <div class="menu-icon">
+                        <img src="{{ asset('asset/category/ic_camera.png') }}">
                     </div>
                     <div class="menu-text">
                         <span>Fotografi</span>
@@ -26,7 +37,7 @@
             <a href="{{ route('list-item') }}" class="per-category">
                 <div class="menu category-menu" style="width: 100%;">
                     <div class="menu-icon">
-                        <img src="{{ asset('tema/img/outdoor-icon.png') }}">
+                        <img src="{{ asset('asset/category/ic_hiking.png') }}">
                     </div>
                     <div class="menu-text">
                         <span>Hiking</span>
@@ -36,17 +47,7 @@
             <a href="{{ route('list-item') }}" class="per-category">
                 <div class="menu category-menu" style="width: 100%;">
                     <div class="menu-icon">
-                        <img src="{{ asset('tema/img/vehicle-icon.png') }}">
-                    </div>
-                    <div class="menu-text">
-                        <span>Sepeda</span>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('list-item') }}" class="per-category">
-                <div class="menu category-menu" style="width: 100%;">
-                    <div class="menu-icon">
-                        <img src="{{ asset('tema/img/music-icon.png') }}">
+                        <img src="{{ asset('asset/category/ic_sepeda.png') }}">
                     </div>
                     <div class="menu-text">
                         <span>Musik</span>
@@ -56,17 +57,17 @@
             <a href="{{ route('list-item') }}" class="per-category">
                 <div class="menu category-menu" style="width: 100%;">
                     <div class="menu-icon">
-                        <img src="{{ asset('tema/img/others-icon.png') }}">
+                        <img src="{{ asset('asset/category/ic_others.png') }}">
                     </div>
                     <div class="menu-text">
                         <span>Lainnya</span>
                     </div>
                 </div>
             </a>
-        </div>       
-        
+        </div><br>
         
         <div class="item-category for-carousel">
+            Item Terbaru<br><br>
             <div id="demo" class="carousel slide" data-ride="carousel">
                 <ul class="carousel-indicators">
                     <li data-target="#demo" data-slide-to="0" class="active"></li>
@@ -104,7 +105,7 @@
 
 
         <div class="item-category list-for-rent">
-            <a href="{{ route('detail-product') }}" class="click-link">
+            <a href="{{ route('detail-product') }}?id=1" class="click-link">
                 <div class="one-list-for-rent">
                     <figure class="pic-for-rent">
                         <img src="{{ asset('tema/img/img1.jpg') }}" class="">
@@ -113,14 +114,14 @@
                         <span class="title-of-rent">Stik Golf Harga Murah daerah Surabaya</span>
                         <span style="font-size: 12px;">Rama Store1</span>
                         <span style="font-size: 18px; font-weight: bold">Rp. 30.000</span>
-                        <button class="btn btn-sm btn-primary">Pinjam Sekarang</button>
+                        <button class="btn btn-sm btn-danger">Lihat Item</button>
                     </div>
                 </div>
             </a>
         </div>
 
         <div class="item-category list-for-rent">
-            <a href="{{ route('detail-product') }}" class="click-link">
+            <a href="{{ route('detail-product') }}?id=1" class="click-link">
                 <div class="one-list-for-rent">
                     <figure class="pic-for-rent">
                         <img src="{{ asset('tema/img/img1.jpg') }}" class="">
@@ -129,14 +130,14 @@
                         <span class="title-of-rent">Stik Golf</span>
                         <span style="font-size: 12px;">Rama Store1</span>
                         <span style="font-size: 18px; font-weight: bold">Rp. 30.000</span>
-                        <button class="btn btn-sm btn-primary">Pinjam Sekarang</button>
+                        <button class="btn btn-sm btn-danger">Lihat Item</button>
                     </div>
                 </div>
             </a>
         </div>
 
         <div class="item-category list-for-rent">
-            <a href="{{ route('detail-product') }}" class="click-link">
+            <a href="{{ route('detail-product') }}?id=1" class="click-link">
                 <div class="one-list-for-rent">
                     <figure class="pic-for-rent">
                         <img src="{{ asset('tema/img/img1.jpg') }}" class="">
@@ -145,7 +146,7 @@
                         <span class="title-of-rent">Stik Golf</span>
                         <span style="font-size: 12px;">Rama Store1</span>
                         <span style="font-size: 18px; font-weight: bold">Rp. 30.000</span>
-                        <button class="btn btn-sm btn-primary">Pinjam Sekarang</button>
+                        <button class="btn btn-sm btn-danger">Lihat Item</button>
                     </div>
                 </div>
             </a>

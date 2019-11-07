@@ -7,7 +7,8 @@ body{
     font-size: 14px;
     font-weight: 200;
     color: #4a4a4a;
-    background-color: #f7f7f7;
+    /* background-color: #f7f7f7; */
+    background-color: #f0efef;
     -webkit-font-smoothing: antialiased;
 }
 .nav{
@@ -40,7 +41,7 @@ body{
 }
 
 .container{
-    background-color: rgb(231, 231, 231);
+    background-color: #ffffff;
     position: relative;
     top: 35px;
     max-width: 480px;
@@ -48,15 +49,15 @@ body{
     box-sizing: border-box;
     min-height: calc(100vh - 60px);
     margin: 0px auto;
-    padding: 20px 16px 60px;
+    padding: 20px 10px 60px;
 }
 
 .item-category{
     height: 200px;
-    background-color: white;
-    border-radius: 15px;
-    margin: 15px;
-    padding: 15px;
+    /* background-color: white; */
+    /* border-radius: 15px; */
+    /* margin: 15px; */
+    /* padding: 15px; */
 }
 
 .bottom-menu{
@@ -153,6 +154,7 @@ body{
     background-color: red;
     border-radius: 20px;
     width: 50%;
+    color: white;
 }
 
 .btn-red:hover{
