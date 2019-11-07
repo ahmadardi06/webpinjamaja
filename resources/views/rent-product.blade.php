@@ -15,7 +15,7 @@
             <span id="emailStore">loading...</span><br>
             <span id="phoneStore">loading...</span>
         </div>
-        <button id="btnEditStore" onclick="alert('Under costruction !');" class="btn btn-block btn-danger" style="margin-top: 10px; background-color: #fe0000; border-color: #fe0000; color: white;">Edit Store</button>
+        <button id="btnEditStore" class="btn btn-block btn-danger" style="margin-top: 10px; background-color: #fe0000; border-color: #fe0000; color: white;">Edit Store</button>
     </div>
 
     <div id="userLogin">
@@ -81,7 +81,49 @@
             <p class="text-center">loading...</p>
         </div>
     </div>
+</div>
 
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Store</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="form">
+            <input type="hidden" name="idStore" id="idStore">
+            <div class="form-group">
+                <label class="form-label">Store Name</label>
+                <input type="text" name="storeName" id="storeName" placeholder="enter..." class="form-control">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Address</label>
+                <input type="text" name="address" id="address" placeholder="enter..." class="form-control">
+            </div>
+            <div class="form-group">
+                <label class="form-label">City</label>
+                <input type="text" name="city" id="city" placeholder="enter..." class="form-control">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Photo</label>
+                <input type="text" name="photo" id="photo" placeholder="enter..." class="form-control">
+            </div>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button id="btnSave" type="button" class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
 </div>
 @endsection
 
@@ -115,7 +157,34 @@
         $(function(){
             $('#userLogin').hide();
             $('#btnEditStore').hide();
-            console.log(user);
+
+            $('#btnEditStore').on('click', function(){
+                $('#myModal').modal('show');
+
+                var linkURL = "{{ env('APP_API') }}/api/store/storeDetail.php";
+                $.post(linkURL, {id_store: myParam}, function(data){
+                    $('#idStore').val(data.id_store);
+                    $('#storeName').val(data.store_name);
+                    $('#address').val(data.address);
+                    $('#city').val(data.city);
+                    $('#photo').val(data.img_store);
+                })
+
+                $('#btnSave').on('click', function(){
+                    var formData = { 
+                        id_store: $('#idStore').val(),
+                        store_name: $('#storeName').val(),
+                        address: $('#address').val(),
+                        city: $('#city').val(),
+                        img_store: $('#photo').val(),
+                    };
+
+                    var linkURLEdit = "{{ env('APP_API') }}/api/store/editStore.php";
+                    $.post(linkURLEdit, formData, function(data){
+                        window.location.reload();
+                    })
+                })
+            })
 
             var linkURL = "{{ env('APP_API') }}/api/store/storeDetail.php";
             $.post(linkURL, {id_store: myParam}, function(data){
@@ -136,7 +205,6 @@
 
             var linkURLItems = "{{ env('APP_API') }}/api/store/readItemStore.php";
             $.post(linkURLItems, {id_store: myParam}, function(data) {
-                console.log(data)
                 if(!data.error) {
                     var html = '';
                     for(var i=0; i<data.items.length; i++) {
