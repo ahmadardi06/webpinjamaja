@@ -104,6 +104,7 @@ body{
 }
 .list-for-rent{
     height: auto;
+    border-bottom: 1px solid rgb(145, 144, 144);
 }
 .one-list-for-rent{
     display: flex;
