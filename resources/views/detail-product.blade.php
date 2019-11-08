@@ -18,7 +18,7 @@ $id = $_GET['id'];
             <span id="nameItem">loading...</span><br>
         </div>
         <div class="price">
-            <span id="priceItem">loading...</span>
+            <span style="font-size: 12px;" id="priceItem">loading...</span>
         </div>
     </div>
     <div class="product-store item-margin">
@@ -81,7 +81,11 @@ $id = $_GET['id'];
             $.post(linkURL, {id_item: myParam}, function(data) {
                 $('#imgItem').attr('src', data.img_item)
                 $('#nameItem').html(data.item_name)
-                $('#priceItem').html(formatRP(data.price_hour) + ' / jam')
+                var priceHtml = formatRP(data.price_hour)+'/Hour<br>';
+                priceHtml += formatRP(data.price_day)+'/Day<br>';
+                priceHtml += formatRP(data.price_week)+'/Week<br>';
+                priceHtml += formatRP(data.price_month)+'/Month';
+                $('#priceItem').html(priceHtml)
                 $('#descriptionItem').html(data.description)
                 $('#merkItem').html(data.merk)
                 $('#sizeItem').html(data.size)

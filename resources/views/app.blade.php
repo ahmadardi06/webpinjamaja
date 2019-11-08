@@ -6,22 +6,36 @@
 
 @section('content')
 <div class="container">
-        <div class="item-category" id="menuItem">
+    <div class="item-category" id="menuItem">
+        <span>loading...</span>
+    </div>
+
+    <div class="item-category for-carousel">
+        <div id="demo" class="carousel slide" data-ride="carousel">
             <span>loading...</span>
         </div>
+    </div>
 
-        <div class="item-category for-carousel">
-            <div id="demo" class="carousel slide" data-ride="carousel">
-                <span>loading...</span>
-            </div>
-        </div>
-
-        <div id="listItem">
-            <div class="text-center">
-                <span>loading...</span>
-            </div>
+    <div id="listItem">
+        <div class="text-center">
+            <span>loading...</span>
         </div>
     </div>
+</div>
+
+<div class="modal" id="myFirstModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+          <!-- Modal body -->
+          <div class="modal-body text-center">
+            <iframe class="col-lg-12 col-md-12 col-sm-12" style="padding: 0px;" height="500px" src="http://pinjemaja.store/animation/dist/index.html"></iframe>
+            <a href="#" class="btn btn-primary">Download Apps</a>
+          </div>
+
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('js')
@@ -103,6 +117,8 @@
         }
 
         $(function() {
+            $('#myFirstModal').modal('show')
+            
             // var linkURL = urlOrigin+"/database/category.json";
             var linkURL = "{{ env('APP_API') }}/api/item/category.php";
             $.get(linkURL, function(data) {

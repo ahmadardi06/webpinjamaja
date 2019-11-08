@@ -28,10 +28,10 @@ $priceString = number_format($price);
     <div class="product-name">
         <div class="name ">
             <span id="nameItem">loading...</span><br>
-            <span id="priceHourItem" style="font-size: 10px;color: red;">loading...</span><br>
-            <span id="priceDayItem" style="font-size: 10px;color: red;">loading...</span><br>
-            <span id="priceWeekItem" style="font-size: 10px; color: red;">loading...</span><br>
-            <span id="priceMonthItem" style="font-size: 10px;color: red;">loading...</span><br>
+            <span id="priceHourItem" style="font-size: 12px;color: red;">loading...</span><br>
+            <span id="priceDayItem" style="font-size: 12px;color: red;">loading...</span><br>
+            <span id="priceWeekItem" style="font-size: 12px; color: red;">loading...</span><br>
+            <span id="priceMonthItem" style="font-size: 12px;color: red;">loading...</span><br>
         </div>
         <a href="#">
             <div class="chat-button">
@@ -41,59 +41,140 @@ $priceString = number_format($price);
         </a>
     </div>
 
+    <div class="row">
+        <div class="form-group" style="margin-left: 20px; margin-top: 10px;">
+            <input checked type="radio" class="radioButton" name="radioButton" value="hour"> Hour
+            <input type="hidden" name="priceHour" id="priceHour">
+            &nbsp;&nbsp;
+            <input type="radio" class="radioButton" name="radioButton" value="day"> Day
+            <input type="hidden" name="priceDay" id="priceDay">
+            &nbsp;&nbsp;
+            <input type="radio" class="radioButton" name="radioButton" value="week"> Week
+            <input type="hidden" name="priceWeek" id="priceWeek">
+            &nbsp;&nbsp;
+            <input type="radio" class="radioButton" name="radioButton" value="month"> Month
+            <input type="hidden" name="priceMonth" id="priceMonth">
+        </div>
+    </div>
+
+    <div id="formHour" style="text-align: left;">
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-3 col-form-label">Durasi Jam</label>
+            <div class="col-sm-9">
+                <input onchange="hitungDurasiJam(this)" type="number" class="form-control" id="durasiJam" value="1" placeholder="Berapa Jam">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-3 col-form-label">Tanggal</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control tgl" id="tanggalPinjam" placeholder="Set Tanggal Pinjam">
+            </div>
+        </div>
+    </div>
+
+    <div id="formDay" style="text-align: left;">
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-3 col-form-label">Pinjam</label>
+            <div class="col-sm-9">
+                <input type="email" class="form-control" id="durasiJam" placeholder="Set Tanggal Pinjam">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-3 col-form-label">Kembali</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control tgl" id="tanggalPinjam" placeholder="Set Tanggal Kembali">
+            </div>
+        </div>
+    </div>
+
+    <div id="formWeek" style="text-align: left;">
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-3 col-form-label">Minggu</label>
+            <div class="col-sm-9">
+                <input type="email" class="form-control" id="durasiJam" placeholder="Berapa Minggu">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-3 col-form-label">Tanggal</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control tgl" id="tanggalPinjam" placeholder="Set Tanggal Pinjam">
+            </div>
+        </div>
+    </div>
+
+    <div id="formMonth" style="text-align: left;">
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-3 col-form-label">Bulan</label>
+            <div class="col-sm-9">
+                <input type="email" class="form-control" id="durasiJam" placeholder="Berapa Bulan">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-3 col-form-label">Tanggal</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control tgl" id="tanggalPinjam" placeholder="Set Tanggal Pinjam">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row" style="text-align: left;">
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Jumlah</label>
+        <div class="col-sm-9">
+            <a class="btn btn-default btn-min" id="min" onclick="kurangi()">-</a>
+            <input type="text" id="jml" name="ammount" class="form-control jml" value="1" onchange="hitung_jml()">
+            <a class="btn btn-default btn-plus" id="plus" onclick="tambahi()">+</a>
+        </div>
+    </div>
+
+    <div class="form-group row" style="text-align: left;">
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Pengiriman</label>
+        <div class="col-sm-9">
+            <select name="pengiriman" class="custom-select mb-3">
+                <option selected disabled>Opsi Pengiriman</option>
+                <option value="Ambil Sendiri">Ambil Sendiri</option>
+                <option value="Diantar">Diantar</option>
+            </select>
+        </div>
+    </div>
+
+    <hr>
+
     <div class="form item-margin">
-            <div class="align-left">
-                <label>Tanggal Pinjam</label>
-
-                <input type="text" name="date_start" onchange="date_of_rent()" id="date_start" class="form-control tgl"><br>
-
-                <label>Tanggal Kembali</label>
-                <input type="text" name="date_end" onchange="date_of_rent()" id="date_end" class="form-control tgl"><br>
-
-                <label>Jumlah</label><br>
-                <a class="btn btn-default btn-min" id="min" onclick="kurangi()">-</a>
-                <input type="text" id="jml" name="ammount" class="form-control jml" value="1" onchange="hitung_jml()">
-                <a class="btn btn-default btn-plus" id="plus" onclick="tambahi()">+</a><br><br>
-
-                <label>Opsi Pengiriman</label>
-                <select name="pengiriman" class="custom-select mb-3">
-                    <option selected disabled>Opsi Pengiriman</option>
-                    <option value="Ambil Sendiri">Ambil Sendiri</option>
-                    <option value="Diantar">Diantar</option>
-                </select>
-                <hr>
-                <div class="total-price item-margin">
-                    <div class="price-desc">
-                        <span>Harga Sewa x <span id="jml_hari">1</span> hari</span><br>
-                        <span>Jumlah Barang <span id="jml_item">1</span> item</span>
-                    </div>
-                    <div class="price">
-                        <span>Rp. <span id="harga_xhari">{{ $priceString }}</span></span><br>
-                        <span>x <span id="xjml">1</span></span>
-                    </div><hr>
-                    <div class="price-desc">
-                        <span>Total<br>
-                    </div>
-                    <div class="price">
-                        <span style="color: red; font-weight: bold;">Rp. <span id="total_price">{{ $priceString }}</span></span><br>
-                        <input name="total" id="total" value="{{ $price }}" hidden="hidden">
-                    </div>
+        <div class="align-left">
+            <div class="total-price">
+                <div class="price-desc">
+                    <span>Harga Sewa x <span id="jml_hari">1 Hour</span></span><br>
+                    <span>Jumlah Barang</span>
+                </div>
+                <div class="price">
+                    <span>Rp<span id="harga_xhari">{{ $priceString }}</span></span><br>
+                    <span>x<span id="xjml">1</span></span>
+                </div><hr>
+                <div class="price-desc">
+                    <span>Total<br>
+                </div>
+                <div class="price">
+                    <span style="color: red; font-weight: bold;">Rp<span id="total_price">{{ $priceString }}</span></span><br>
+                    <input name="total" id="total" value="{{ $price }}" hidden="hidden">
                 </div>
             </div>
-            <input name="item_id" value="{{ $id }}" hidden>
-            <input name="item_name" id="a" value="{{ $products['item_name'] }}" hidden>
-            <input name="price" id="b" value="{{ $products['price'] }}" hidden>
-            <input name="img_item" id="d" value="{{ $products['img_item'] }}" hidden>
-            <input name="store_name" id="e" value="{{ $products['store_name'] }}" hidden>
-            <input name="address" id="f" value="{{ $products['address'] }}" hidden>
-            <input name="city" id="g" value="{{ $products['city'] }}" hidden>
-            <input name="description" id="h" value="{{ $products['description'] }}" hidden>
-            <input name="merk" id="i" value="{{ $products['merk'] }}" hidden>
-            <input name="delivery" id="j" value="{{ $products['delivery'] }}" hidden>
-            <input name="color" id="k" value="{{ $products['color'] }}" hidden>
-            <input name="size" id="l" value="{{ $products['size'] }}" hidden>
-            <br>
-            <button type="submit" id="submit" class="btn btn-red btn-danger">Lanjut Pembayaran</button>
+        </div>
+
+        <input name="item_id" value="{{ $id }}" hidden>
+        <input name="item_name" id="a" value="{{ $products['item_name'] }}" hidden>
+        <input name="price" id="b" value="{{ $products['price'] }}" hidden>
+        <input name="img_item" id="d" value="{{ $products['img_item'] }}" hidden>
+        <input name="store_name" id="e" value="{{ $products['store_name'] }}" hidden>
+        <input name="address" id="f" value="{{ $products['address'] }}" hidden>
+        <input name="city" id="g" value="{{ $products['city'] }}" hidden>
+        <input name="description" id="h" value="{{ $products['description'] }}" hidden>
+        <input name="merk" id="i" value="{{ $products['merk'] }}" hidden>
+        <input name="delivery" id="j" value="{{ $products['delivery'] }}" hidden>
+        <input name="color" id="k" value="{{ $products['color'] }}" hidden>
+        <input name="size" id="l" value="{{ $products['size'] }}" hidden>
+        <br>
+
+        <button type="submit" id="submit" class="btn btn-red btn-danger">Lanjut Pembayaran</button>
     </div>
 </form>
 </div>
@@ -113,7 +194,45 @@ $priceString = number_format($price);
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     }
 
+    function hitungDurasiJam(el) {
+        var initPrice = eval($('#priceHour').val()) * eval($('#durasiJam').val());
+        $('#harga_xhari').html(initPrice);
+        $('#jml_hari').html($('#durasiJam').val() + ' Hour')
+    }
+
     $(function() {
+        $('#formHour').show();
+        $('#formDay').hide();
+        $('#formWeek').hide();
+        $('#formMonth').hide();
+
+        $('.radioButton').on('click', function(){
+            var thisValue = $(this).val();
+            console.log(thisValue);
+
+            if(thisValue == 'hour') {
+                $('#formHour').show();
+                $('#formDay').hide();
+                $('#formWeek').hide();
+                $('#formMonth').hide();
+            } else if(thisValue == 'day') {
+                $('#formHour').hide();
+                $('#formDay').show();
+                $('#formWeek').hide();
+                $('#formMonth').hide();
+            } else if(thisValue == 'week') {
+                $('#formHour').hide();
+                $('#formDay').hide();
+                $('#formWeek').show();
+                $('#formMonth').hide();
+            } else {
+                $('#formHour').hide();
+                $('#formDay').hide();
+                $('#formWeek').hide();
+                $('#formMonth').show();
+            }
+        })
+
         $('.tgl').datepicker({
             format: 'mm-dd-yyyy'
         }).on('hide', function(event) {
@@ -125,10 +244,19 @@ $priceString = number_format($price);
         $.post(linkURL, {id_item: myParam}, function(data) {
             $('#imgItem').attr('src', data.img_item)
             $('#nameItem').html(data.item_name)
-            $('#priceHourItem').html(formatRP(data.price_hour) + '/Jam')
-            $('#priceDayItem').html(formatRP(data.price_day) + '/Hari')
-            $('#priceWeekItem').html(formatRP(data.price_week) + '/Minggu')
-            $('#priceMonthItem').html(formatRP(data.price_month) + '/Bulan')
+            $('#priceHourItem').html(formatRP(data.price_hour) + '/Hour')
+            $('#priceHour').val(data.price_hour)
+            $('#priceDayItem').html(formatRP(data.price_day) + '/Day')
+            $('#priceDay').val(data.price_day)
+            $('#priceWeekItem').html(formatRP(data.price_week) + '/Week')
+            $('#priceWeek').val(data.price_week)
+            $('#priceMonthItem').html(formatRP(data.price_month) + '/Month')
+            $('#priceMonth').val(data.price_month)
+
+            var initPrice = eval($('#priceHour').val()) * eval($('#durasiJam').val());
+            $('#harga_xhari').html(initPrice);
+            $('#jml_hari').html($('#durasiJam').val() + ' Hour')
+            // var initTotalPrice = initPrice * eval($('#'));
         })
     })
 
@@ -139,6 +267,7 @@ $priceString = number_format($price);
 
         jml++;
         document.getElementById('jml').value = jml;
+        $('#xjml').html(jml);
         hitung_jml();
     }
 
@@ -153,6 +282,7 @@ $priceString = number_format($price);
             jml--;
             document.getElementById('jml').value = jml;
         }
+        $('#xjml').html(jml);
         hitung_jml();
     }
 
