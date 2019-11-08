@@ -12,6 +12,7 @@
 */
 
 Auth::routes();
+
 Route::get('/', 'AppController@index')->name('app');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/activity', 'ActivityController@index')->name('activity');
@@ -26,8 +27,11 @@ Route::get('/email-verification', 'EmailVerificationController@index')->name('em
 Route::get('/phone-verification', 'PhoneVerificationController@index')->name('phone-verification');
 Route::get('/identity-verification', 'IdentityVerificationController@index')->name('identity-verification');
 Route::get('/detail-product', 'DetailProductController@index')->name('detail-product');
+
 Route::get('/form-order', 'FormOrderController@index')->name('form-order');
+
 Route::get('/payment', 'PaymentController@index')->name('payment');
+
 Route::get('/after-payment', 'AfterPaymentController@index')->name('after-payment');
 Route::get('/change-pass', 'AccountController@change')->name('change-pass');
 
@@ -37,4 +41,8 @@ Route::get('/add-item', 'AddItemController@index')->name('add-item');
 
 Route::post('/verifikasi-email', 'AccountController@message')->name('message');
 Route::post('/verifikasi-phone', 'AccountController@phone')->name('phone');
+Route::post('/order-now', 'FormOrderController@getDataProduct')->name('getDataOrder');
+Route::post('/payment-now', 'PaymentController@getDataProduct')->name('payment-now');
+
+Route::post('/cek', 'PaymentController@cek')->name('cek');
 

@@ -1,3 +1,6 @@
+<?php
+$id = $_GET['id'];
+?>
 @extends('layouts.app')
 
 @section('css')
@@ -78,7 +81,7 @@
             $.post(linkURL, {id_item: myParam}, function(data) {
                 $('#imgItem').attr('src', data.img_item)
                 $('#nameItem').html(data.item_name)
-                $('#priceItem').html(formatRP(data.price) + ' / hari')
+                $('#priceItem').html(formatRP(data.price_hour) + ' / jam')
                 $('#descriptionItem').html(data.description)
                 $('#merkItem').html(data.merk)
                 $('#sizeItem').html(data.size)
@@ -92,4 +95,54 @@
             })
         })
     </script>
+<!-- <script>
+    function formatNumber(num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    }
+    $(document).ready(function(){
+        $("#button").click(function(){
+            $.post("order-now/",
+            {
+                datas: "result"
+            });
+        });
+        $.ajax({
+            method: "GET",
+            url: "http://localhost:8000/api/detilItem",
+            data: { id_item: "{{ $id }}" }
+        })
+        .done(function( items ) {                
+            var result = JSON.parse(items);
+            $("#nama_item").html(result.item_name);
+            var price = formatNumber(result.price);
+            $("#harga").html(price);
+            $("#img_store").attr("src",result.store.img_store);
+            $("#img_item").attr("src",result.img_item);
+            $("#store_name").html(result.store.store_name);
+            $("#store_address").html(result.store.address);
+            $("#city_address").html(result.store.city);
+            $("#item_desc").html(result.description);
+            $("#merek").html(result.merk);
+            $("#kirim").html(result.delivery);
+            $("#color").html(result.color);
+            $("#size").html(result.size);
+
+
+            $("#a").val(result.item_name);
+            $("#b").val(result.price);
+            $("#c").val(result.store.img_store);
+            $("#d").val(result.img_item);
+            $("#e").val(result.store.store_name);
+            $("#f").val(result.store.address);
+            $("#g").val(result.store.city);
+            $("#h").val(result.description);
+            $("#i").val(result.merk);
+            $("#j").val(result.delivery);
+            $("#k").val(result.color);
+            $("#l").val(result.size);
+        });
+    });
+    
+</script>
+ --><!-- >>>>>>> layout -->
 @endsection

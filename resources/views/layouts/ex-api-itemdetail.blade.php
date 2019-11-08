@@ -1,0 +1,31 @@
+{
+    "id_item": "1",
+    "item_name": "Gitar",
+    "category": "Musik",
+    "description": "Gitar Berjalan",
+    "price": "70000",
+    "price_hour": "0",
+    "price_day": "0",
+    "price_week": "0",
+    "price_month": "0",
+    "stock": "2",
+    "color": "Coklat",
+    "merk": "YAMAHA",
+    "condition": "Baru",
+    "size": "115",
+    "delivery": "Tidak Dikirim",
+    "item_status": "ready",
+    "jumlah_waktu": "4",
+    "satuan": null,
+    "img_item": "http://194.31.53.14/pinjem/asset/store/7/items/1/gitar.jpg",
+    "investor": "ajiguna",
+    "store": {
+        "id_store": "7",
+        "store_name": "Guna Darmawan",
+        "address": "Jl. Kutisari Selatan",
+        "city": "Surabaya",
+        "fk_user": "1",
+        "entry_date": "2019-09-30",
+        "img_store": "http://194.31.53.14/pinjem/asset/store/7/profile/7_img_store.jpg"
+    }
+}

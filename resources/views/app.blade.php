@@ -9,13 +9,17 @@
         <div class="item-category" id="menuItem">
             <span>loading...</span>
         </div>
+
+        <br>
                 
         <div class="item-category for-carousel">
+            <p class="text-center" style="font-weight: bold;">Item Terbaru</p>
             <div id="demo" class="carousel slide" data-ride="carousel">
                 <span>loading...</span>
             </div>
-        </div>  
+        </div>
 
+        <br>
 
         <div id="listItem">
             <div class="text-center">
@@ -83,7 +87,7 @@
         }
 
         function renderListDOM(data) {
-            var price = 'Rp'+parseInt(data.price).toLocaleString(); 
+            var price = 'Rp'+parseInt(data.price_hour).toLocaleString(); 
             var html = '';
                 html += '<div class="item-category list-for-rent">';
                 html += '<a href="{{ route('detail-product') }}?id='+data.id_item+'" class="click-link">';
@@ -108,7 +112,7 @@
             var linkURL = "{{ env('APP_API') }}/api/item/category.php";
             $.get(linkURL, function(data) {
                 if(!data.error){
-                    var html = '';
+                    var html = '<p class="text-center" style="font-weight: bold;">Pilih Kategori</p>';
                     for(var i=0; i<data.items.length; i++) {
                         html += renderMenuDOM(data.items[i]);
                     }

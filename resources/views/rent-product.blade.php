@@ -52,7 +52,7 @@
                     <span style="float: right; color: red; font-weight: bold;">></span>
                 </div>
             </a>
-            <a href="{{ route('add-item') }}" class="btn-list">
+            <a href="{{ route('add-item') }}" id="detailInvestor" class="btn-list">
                 <div class="btn-icon">
                     <img src="{{ asset('tema/img/add.png') }}" alt="Identitas Toko">
                 </div>
@@ -157,6 +157,8 @@
         $(function(){
             $('#userLogin').hide();
             $('#btnEditStore').hide();
+
+            $('#detailInvestor').attr('href', $('#detailInvestor').attr('href')+'?id='+myParam);
 
             $('#btnEditStore').on('click', function(){
                 $('#myModal').modal('show');
