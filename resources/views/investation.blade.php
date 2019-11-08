@@ -34,7 +34,7 @@
 							var linkURLRedirect = "{{ env('APP_API') }}/api/store/userStore.php";
 							$.post(linkURLRedirect, {id_user: user.id_user}, function(data) {
 								console.log(data);
-								var linkRedirect = myOrigin+'/rent-product?id='+data.id_store;
+								var linkRedirect = "{{ route('rent-product') }}?id="+data.id_store;
 								console.log(linkRedirect);
 								window.location.href = linkRedirect;
 							})

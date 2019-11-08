@@ -60,14 +60,14 @@
 			var userInfo = localStorage.getItem('user');
 		    var user = JSON.parse(userInfo);
 		    if(userInfo == null) {
-		        window.location.href = window.location.origin + '/login';
+		        window.location.href = "{{ route('login') }}";
 		    } else {
 		    	$('#txtEmail').val(user.email);
 		    }
 
 		    $('#btnVerifikasi').on('click', function(){
                 var token = randomFixedInteger(6);
-                var linkURL = linkOrigin+'/verifikasi-email';
+                var linkURL = "{{ route('verifikasi-email') }}";
                 var formData = { 
                     token: token, 
                     name: user.name, 

@@ -44,7 +44,7 @@
                         if(!data.error) {
                             localStorage.setItem('user', JSON.stringify(data.data))
                             $('#msgLogin').html(data.message)
-                            window.location.href = "{{ route('account') }}/account";
+                            window.location.href = "{{ route('account') }}";
                         } else {
                             $('#msgLogin').html(data.message)
                         }

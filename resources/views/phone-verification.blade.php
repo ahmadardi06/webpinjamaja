@@ -61,7 +61,7 @@
 	    	var user = JSON.parse(userInfo);
 
 	    	if(userInfo == null) {
-		        window.location.href = window.location.origin + '/login';
+		        window.location.href = "{{ route('login') }}";
 		    } else {
 		    	var linkURLUser = "{{ env('APP_API') }}/api/user/userDetail.php";
 		    	$.post(linkURLUser, {id_user: user.id_user}, function(data){
@@ -71,7 +71,7 @@
 
 		    $('#btnVerifikasi').on('click', function(){
                 var token = randomFixedInteger(6);
-                var linkURL = linkOrigin+'/verifikasi-phone';
+                var linkURL = "{{ route('verifikasi-phone') }}";
                 var formData = { 
                     token: token, 
                     phone: $('#txtPhone').val(), 

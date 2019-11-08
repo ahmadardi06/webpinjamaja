@@ -64,7 +64,7 @@
 
             $('#btnLogout').on('click', function(){
                 localStorage.clear();
-                window.location.href = window.location.origin + '/login';
+                window.location.href = "{{ route('login') }}";
             })
         })
     </script>

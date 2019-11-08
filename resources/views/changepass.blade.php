@@ -40,7 +40,7 @@
             var userInfo = localStorage.getItem('user');
             var user = JSON.parse(userInfo);
             if(userInfo == null){
-                window.location.href = linkOrigin+'/login';
+                window.location.href = "{{ route('login') }}";
             } else {
                 $('#idLogin').on('click', function(){
                     var currPass = $('#currpass').val();
@@ -65,7 +65,7 @@
                             $.post(linkURL, formData, function(data){
                                 if(!data.error){
                                     $('#msgLogin').html(data.message)
-                                    window.location.href = linkOrigin+'/account'
+                                    window.location.href = "{{ route('account') }}";
                                 }
                             })
                         }
