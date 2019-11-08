@@ -39,12 +39,12 @@
                     $('#msgLogin').html('User or pass must be filled!')
                     $('#user').focus()
                 } else {
-                    var linkURL = "http://194.31.53.14/pinjem/api/user/login.php";
+                    var linkURL = "{{ env('APP_API') }}/api/user/login.php";
                     $.post(linkURL, {name: formData.user, password: formData.pass}, function(data) {
                         if(!data.error) {
                             localStorage.setItem('user', JSON.stringify(data.data))
                             $('#msgLogin').html(data.message)
-                            window.location.href = window.location.origin+'/account';
+                            window.location.href = "{{ route('account') }}/account";
                         } else {
                             $('#msgLogin').html(data.message)
                         }
