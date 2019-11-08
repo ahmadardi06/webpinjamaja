@@ -10,15 +10,11 @@
             <span>loading...</span>
         </div>
 
-        <br>
-                
         <div class="item-category for-carousel">
             <div id="demo" class="carousel slide" data-ride="carousel">
                 <span>loading...</span>
             </div>
         </div>
-
-        <br>
 
         <div id="listItem">
             <div class="text-center">
