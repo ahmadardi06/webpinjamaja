@@ -146,7 +146,7 @@
                     html += '<img src="'+data.img_item+'" alt="Lights" style="width:100%">';
                     html += '<div class="caption">';
                         html += '<a style="text-decoration: none;" href="{{ route('detail-product') }}?id='+data.id_item+'"><p style="margin: 0; font-weight: bold;">'+data.item_name+'</p></a>';
-                        html += '<p>'+formatRP(data.price)+'</p>';
+                        html += '<p>'+formatRP(data.price_hour)+'</p>';
                     html += '</div>';
                     html += '</a>';
                 html += '</a>';

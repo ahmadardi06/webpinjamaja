@@ -28,10 +28,10 @@ $priceString = number_format($price);
     <div class="product-name">
         <div class="name ">
             <span id="nameItem">loading...</span><br>
-            <span id="priceItem" style="color: red;">loading...</span>
-        <!-- <div class="name"> -->
-            <!-- <span>{{ $products['item_name'] }}</span><br> -->
-            <!-- <span style="color: red;">Rp. {{ $priceString }} / hari</span> -->
+            <span id="priceHourItem" style="font-size: 10px;color: red;">loading...</span><br>
+            <span id="priceDayItem" style="font-size: 10px;color: red;">loading...</span><br>
+            <span id="priceWeekItem" style="font-size: 10px; color: red;">loading...</span><br>
+            <span id="priceMonthItem" style="font-size: 10px;color: red;">loading...</span><br>
         </div>
         <a href="#">
             <div class="chat-button">
@@ -44,10 +44,7 @@ $priceString = number_format($price);
     <div class="form item-margin">
             <div class="align-left">
                 <label>Tanggal Pinjam</label>
-                <!-- <input type="text" name="tgl-pinjam" class="form-control tgl" id="tglPinjam"><br> -->
 
-                <!-- <label>Tanggal Kembali</label> -->
-                <!-- <input type="text" name="tgl-pinjam" class="form-control tgl" id="tglKembali"><br> -->
                 <input type="text" name="date_start" onchange="date_of_rent()" id="date_start" class="form-control tgl"><br>
 
                 <label>Tanggal Kembali</label>
@@ -105,12 +102,12 @@ $priceString = number_format($price);
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 <script>
-    // var urlParams = new URLSearchParams(window.location.search);
-    // var myParam = urlParams.get('id');
+    var urlParams = new URLSearchParams(window.location.search);
+    var myParam = urlParams.get('id');
 
-    // function formatRP(data) {
-    //     return 'Rp'+parseInt(data).toLocaleString(); 
-    // }
+    function formatRP(data) {
+        return 'Rp'+parseInt(data).toLocaleString(); 
+    }
     
     function formatNumber(num) {
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
@@ -123,15 +120,18 @@ $priceString = number_format($price);
             event.preventDefault();
             event.stopPropagation();
         });
+
+        var linkURL = "{{ env('APP_API') }}/api/item/itemDetail.php";
+        $.post(linkURL, {id_item: myParam}, function(data) {
+            $('#imgItem').attr('src', data.img_item)
+            $('#nameItem').html(data.item_name)
+            $('#priceHourItem').html(formatRP(data.price_hour) + '/Jam')
+            $('#priceDayItem').html(formatRP(data.price_day) + '/Hari')
+            $('#priceWeekItem').html(formatRP(data.price_week) + '/Minggu')
+            $('#priceMonthItem').html(formatRP(data.price_month) + '/Bulan')
+        })
     })
 
-    //     var linkURL = "{{ env('APP_API') }}/api/item/itemDetail.php";
-    //     $.post(linkURL, {id_item: myParam}, function(data) {
-    //         $('#imgItem').attr('src', data.img_item)
-    //         $('#nameItem').html(data.item_name)
-    //         $('#priceItem').html(formatRP(data.price) + ' / hari')
-    //     })
-    // })   
 
     function tambahi(){
         var jml = document.getElementById('jml').value;
@@ -169,65 +169,44 @@ $priceString = number_format($price);
         return Difference_In_Days;
     }
 
-    function totalPrice(){
-        var jml_item = document.getElementById('jml').value;
-        var jml_hari = countDays();
+    // function totalPrice(){
+    //     var jml_item = document.getElementById('jml').value;
+    //     var jml_hari = countDays();
 
-        var price = '{{ $price }}';
+    //     var price = {{ $price }};
 
-        var total_price = price * jml_item * jml_hari;
-        var total_price_string = formatNumber(total_price);
+    //     var total_price = price * jml_item * jml_hari;
+    //     var total_price_string = formatNumber(total_price);
 
-        document.getElementById("total_price").innerHTML = total_price_string;
-        $("#total").val(total_price);
+    //     document.getElementById("total_price").innerHTML = total_price_string;
+    //     $("#total").val(total_price);
 
-    }
+    // }
 
-    function date_of_rent(){
-        var Difference_In_Days = countDays() ;
+    // function date_of_rent(){
+    //     var Difference_In_Days = countDays() ;
         
-        document.getElementById("jml_hari").innerHTML = Difference_In_Days;
+    //     document.getElementById("jml_hari").innerHTML = Difference_In_Days;
 
-        var price = {{ $price }};    
+    //     var price = {{ $price }};    
 
-        var harga_xhari = Difference_In_Days * price;
+    //     var harga_xhari = Difference_In_Days * price;
 
-        var priceString = formatNumber(harga_xhari);
+    //     var priceString = formatNumber(harga_xhari);
 
-        document.getElementById("harga_xhari").innerHTML = priceString;
-        document.getElementById("total_price").innerHTML = priceString;
+    //     document.getElementById("harga_xhari").innerHTML = priceString;
+    //     document.getElementById("total_price").innerHTML = priceString;
 
-        totalPrice();
-    }
+    //     totalPrice();
+    // }
 
-    function hitung_jml(){
-        var jml_item = document.getElementById('jml').value;
+    // function hitung_jml(){
+    //     var jml_item = document.getElementById('jml').value;
         
-        document.getElementById("jml_item").innerHTML = jml_item;
-        document.getElementById("xjml").innerHTML = jml_item;
+    //     document.getElementById("jml_item").innerHTML = jml_item;
+    //     document.getElementById("xjml").innerHTML = jml_item;
 
-        totalPrice();
-    }
-
-
-    $(document).ready(function(){
-        $.ajax({
-            method: "GET",
-            url: "http://localhost:8000/api/detilItem",
-            data: { id_item: "{{ $id }}" }
-        })
-        .done(function( items ) {
-            var result = JSON.parse(items);
-            $("#submit").click(function(){
-                $.ajax({
-                    method: "POST",
-                    url: "http://194.31.53.14/pinjem/api/transaction/user/order.php",
-                    data: { 
-
-                    }
-                });
-            });
-        });
-    });
+    //     totalPrice();
+    // }
 </script>
 @endsection

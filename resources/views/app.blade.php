@@ -13,7 +13,6 @@
         <br>
                 
         <div class="item-category for-carousel">
-            <p class="text-center" style="font-weight: bold;">Item Terbaru</p>
             <div id="demo" class="carousel slide" data-ride="carousel">
                 <span>loading...</span>
             </div>
@@ -112,7 +111,7 @@
             var linkURL = "{{ env('APP_API') }}/api/item/category.php";
             $.get(linkURL, function(data) {
                 if(!data.error){
-                    var html = '<p class="text-center" style="font-weight: bold;">Pilih Kategori</p>';
+                    var html = '';
                     for(var i=0; i<data.items.length; i++) {
                         html += renderMenuDOM(data.items[i]);
                     }
