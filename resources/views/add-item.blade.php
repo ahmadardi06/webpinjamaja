@@ -234,9 +234,9 @@
             var linkURL = "{{ env('APP_API') }}/api/item/addItem.php";
             $.post(linkURL, formData, function(data) {
                 console.log(data);
-                // if(!data.error) {
-                    // window.location.href = myOrigin+'/rent-product?id='+myParam;
-                // }
+                if(!data.error) {
+                    window.location.href = myOrigin+'/rent-product?id='+myParam;
+                }
             })
         })
     })

@@ -22,10 +22,10 @@
 		var user = JSON.parse(userInfo);
 
 		$(function(){
-			var linkURL = "{{ env('APP_API') }}/api/user/userDetail.php";
-			$.post(linkURL, {id_user: user.id_user}, function(data){
+			// var linkURL = "{{ env('APP_API') }}/api/user/userDetail.php";
+			// $.post(linkURL, {id_user: user.id_user}, function(data){
 				
-			})
+			// })
 		})
 	</script>
 @endsection
