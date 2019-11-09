@@ -1,11 +1,3 @@
-<?php
-$products = Session::get('products');
-// dd($products);
-// dd($products['img_item']);
-$id = $products['item_id'];
-$price = $products['price'];
-$priceString = number_format($price);
-?>
 @extends('layouts.app')
 
 @section('css')
@@ -15,84 +7,99 @@ $priceString = number_format($price);
 @section('content')
 <div class="container">
     <div class="form item-margin">
-        <form action="">
-            @csrf
+        <div class="form">
             <div class="align-left">
                 <label>Metode Pembayaran</label>
-                <select name="payment" class="custom-select mb-3">
+                <select id="payment" name="payment" class="custom-select mb-3">
                     <option selected disabled>Metode Pembayaran</option>
-                    <option value="Link Aja">Link Aja</option>
-                    <option value="Bayar Di Tempat">Bayar Di Tempat</option>
-                    <option value="Transfer Bank">Transfer Bank</option>
+                    <option value="linkaja">Link Aja</option>
+                    <option value="bayarditempat">Bayar Di Tempat</option>
+                    <option value="transfer">Transfer Bank</option>
                 </select>
                 <hr>
                 <h5>Daftar Belanja</h5>
 
                 <div class="product-store item-margin">
                     <div class="store-icon">
-                        <img src="{{ asset('tema/img/store.png') }}">
+                        <img id="imgStore" src="{{ asset('tema/img/store.png') }}">
                     </div>
                     <div class="store-name">
-                        <span>{{ $products['store_name'] }}</span>
+                        <span id="nameStore">loading...</span>
                     </div>
                 </div>
 
                 <div class="list-product">
                     <figure class="product-pic">
-                        <img src="{{ asset('tema/img/img1.jpg') }}" class="">
+                        <img id="imgItem" src="{{ asset('tema/img/img1.jpg') }}" class="">
                     </figure>
                     <div class="product-desc">
-                        <span>{{ $products['item_name'] }}</span><br>
-                        <span>Rp. {{ $priceString }} x 1 item</span><br>
-                        <span>{{ $products['date_start'] }} s/d {{ $products['date_end'] }}</span>
+                        <span id="nameItem" style="font-weight: bold;">loading...</span><br>
+                        <span id="amountItem">loading...</span><br>
+                        <span id="dateItem">loading... s/d loading...</span>
                     </div>
                 </div>
                 
                 <label>Catatan Tambahan</label>
-                <input type="text" name="note" class="form-control">
+                <input type="text" name="note" id="note" class="form-control">
 
                 <div class="total-price item-margin">
                     <div class="price-desc">
                         <span>Total yang harus dibayar<br>
                     </div>
                     <div class="price">
-                        <span style="color: red; font-weight: bold;">Rp. {{ $priceString }}</span><br>
+                        <span id="totalPrice" style="color: red; font-weight: bold;">loading...</span><br>
                     </div>
                 </div>
             </div>
             
-            <br>
-            <input name="item_id" value="{{ $id }}" hidden>
-            <input name="item_name" id="a" value="{{ $products['item_name'] }}" hidden>
-            <input name="price" id="b" value="{{ $products['price'] }}" hidden>
-            <input name="img_item" id="d" value="{{ $products['img_item'] }}" hidden>
-            <input name="store_name" id="e" value="{{ $products['store_name'] }}" hidden>
-            <input name="address" id="f" value="{{ $products['address'] }}" hidden>
-            <input name="city" id="g" value="{{ $products['city'] }}" hidden>
-            <input name="description" id="h" value="{{ $products['description'] }}" hidden>
-            <input name="merk" id="i" value="{{ $products['merk'] }}" hidden>
-            <input name="delivery" id="j" value="{{ $products['delivery'] }}" hidden>
-            <input name="color" id="k" value="{{ $products['color'] }}" hidden>
-            <input name="size" id="l" value="{{ $products['size'] }}" hidden>
 
-            <button id="button" type="submit" class="btn btn-red btn-danger">Bayar Sekarang</button>
-        </form>
+            <button id="buttonBayar" type="submit" class="btn btn-red btn-danger">Bayar Sekarang</button>
+        </div>
     </div>
 </div>
 @endsection
 
 @section('js')
 <script>
-$(document).ready(function(){
-    $( "form" ).submit(function( event ) {
-        var data = $( this ).serializeArray() );
-        event.preventDefault();
-        $.ajax({
-            method: "POST",
-            url: "http://194.31.53.14/pinjem/api/transaction/user/order.php",
-            data: { data }
+    var urlParams = new URLSearchParams(window.location.search);
+    var search = location.search.substring(1);
+    var decodeQueryString = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')
+
+    function formatRP(data) {
+        return 'Rp'+parseInt(data).toLocaleString(); 
+    }
+
+    $(function(){
+        var linkDetail = "{{ env('APP_API') }}/api/item/itemDetail.php";
+        $.post(linkDetail, {id_item: urlParams.get('id_item')}, function(data){
+            $('#imgStore').attr('src', data.store.img_store);
+            $('#nameStore').html(data.store.store_name);
+
+            $('#imgItem').attr('src', data.img_item);
+            $('#nameItem').html(data.item_name);
+            $('#amountItem').html('Quantity '+urlParams.get('amount'));
+
+            $('#totalPrice').html(formatRP(urlParams.get('total')));
+            $('#dateItem').html(urlParams.get('date_start')+' s/d '+urlParams.get('date_end'));
         })
-    });
-});
+
+        $('#buttonBayar').on('click', function(data){
+            if($('#payment').val() == '') {
+                $('#payment').focus();
+            } else {
+                var formData = decodeQueryString;
+                formData.note = $('#note').val();
+                formData.payment = $('#payment').val();
+
+                var linkOrder = "{{ env('APP_API') }}/api/transaction/user/order.php";
+                $.post(linkOrder, formData, function(data){
+                    console.log(data);
+                    if(!data.error) {
+                        window.location.href = "{{ route('activity') }}"
+                    }
+                })
+            }
+        })
+    })
 </script>
 @endsection
