@@ -76,13 +76,13 @@ $priceString = number_format($price);
         <div class="form-group row">
             <label for="inputEmail3" class="col-sm-3 col-form-label">Pinjam</label>
             <div class="col-sm-9">
-                <input type="email" class="form-control" id="durasiJam" placeholder="Set Tanggal Pinjam">
+                <input type="email" class="form-control tgl" id="tglPinjam" placeholder="Set Tanggal Pinjam">
             </div>
         </div>
         <div class="form-group row">
             <label for="inputPassword3" class="col-sm-3 col-form-label">Kembali</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control tgl" id="tanggalPinjam" placeholder="Set Tanggal Kembali">
+                <input type="text" onchange="countDays()" class="form-control tgl" id="tglKembali" placeholder="Set Tanggal Kembali">
             </div>
         </div>
     </div>
@@ -91,13 +91,13 @@ $priceString = number_format($price);
         <div class="form-group row">
             <label for="inputEmail3" class="col-sm-3 col-form-label">Minggu</label>
             <div class="col-sm-9">
-                <input type="email" class="form-control" id="durasiJam" placeholder="Berapa Minggu">
+                <input type="number" onchange="hitungDurasiMinggu(this)" value="1" class="form-control" id="durasiMinggu" placeholder="Berapa Minggu">
             </div>
         </div>
         <div class="form-group row">
             <label for="inputPassword3" class="col-sm-3 col-form-label">Tanggal</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control tgl" id="tanggalPinjam" placeholder="Set Tanggal Pinjam">
+                <input type="text" class="form-control tgl" id="tanggalPinjamMinggu" placeholder="Set Tanggal Pinjam">
             </div>
         </div>
     </div>
@@ -106,13 +106,13 @@ $priceString = number_format($price);
         <div class="form-group row">
             <label for="inputEmail3" class="col-sm-3 col-form-label">Bulan</label>
             <div class="col-sm-9">
-                <input type="email" class="form-control" id="durasiJam" placeholder="Berapa Bulan">
+                <input type="number" onchange="hitungDurasiBulan(this)" value="1" class="form-control" id="durasiBulan" placeholder="Berapa Bulan">
             </div>
         </div>
         <div class="form-group row">
             <label for="inputPassword3" class="col-sm-3 col-form-label">Tanggal</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control tgl" id="tanggalPinjam" placeholder="Set Tanggal Pinjam">
+                <input type="text" class="form-control tgl" id="tanggalPinjamBulan" placeholder="Set Tanggal Pinjam">
             </div>
         </div>
     </div>
@@ -174,7 +174,9 @@ $priceString = number_format($price);
         <input name="size" id="l" value="{{ $products['size'] }}" hidden>
         <br>
 
-        <button type="submit" id="submit" class="btn btn-red btn-danger">Lanjut Pembayaran</button>
+        <button type="button" onclick="alert('Under Construction')" class="btn btn-red btn-danger">Under Construction</button>
+
+        <!-- <button type="submit" id="submit" class="btn btn-red btn-danger">Lanjut Pembayaran</button> -->
     </div>
 </form>
 </div>
@@ -198,6 +200,24 @@ $priceString = number_format($price);
         var initPrice = eval($('#priceHour').val()) * eval($('#durasiJam').val());
         $('#harga_xhari').html(initPrice);
         $('#jml_hari').html($('#durasiJam').val() + ' Hour')
+        var initTotalPrice = eval($('#harga_xhari').html()) * eval($('#xjml').html());
+        $('#total_price').html(initTotalPrice);
+    }
+
+    function hitungDurasiMinggu(el) {
+        var initPrice = eval($('#priceWeek').val()) * eval($('#durasiMinggu').val());
+        $('#harga_xhari').html(initPrice);
+        $('#jml_hari').html($('#durasiMinggu').val() + ' Week')
+        var initTotalPrice = eval($('#harga_xhari').html()) * eval($('#xjml').html());
+        $('#total_price').html(initTotalPrice);
+    }
+
+    function hitungDurasiBulan(el) {
+        var initPrice = eval($('#priceMonth').val()) * eval($('#durasiBulan').val());
+        $('#harga_xhari').html(initPrice);
+        $('#jml_hari').html($('#durasiBulan').val() + ' Month')
+        var initTotalPrice = eval($('#harga_xhari').html()) * eval($('#xjml').html());
+        $('#total_price').html(initTotalPrice);
     }
 
     $(function() {
@@ -211,21 +231,37 @@ $priceString = number_format($price);
             console.log(thisValue);
 
             if(thisValue == 'hour') {
+                $('#xjml').html('1');
+                $('#jml_hari').html('1 Hour')
+                $('#harga_xhari').html($('#priceHour').val())
+                $('#total_price').html($('#priceHour').val())
                 $('#formHour').show();
                 $('#formDay').hide();
                 $('#formWeek').hide();
                 $('#formMonth').hide();
             } else if(thisValue == 'day') {
+                $('#xjml').html('1');
+                $('#jml_hari').html('1 Day')
+                $('#harga_xhari').html($('#priceDay').val())
+                $('#total_price').html($('#priceDay').val())
                 $('#formHour').hide();
                 $('#formDay').show();
                 $('#formWeek').hide();
                 $('#formMonth').hide();
             } else if(thisValue == 'week') {
+                $('#xjml').html('1');
+                $('#jml_hari').html('1 Week')
+                $('#harga_xhari').html($('#priceWeek').val())
+                $('#total_price').html($('#priceWeek').val())
                 $('#formHour').hide();
                 $('#formDay').hide();
                 $('#formWeek').show();
                 $('#formMonth').hide();
             } else {
+                $('#xjml').html('1');
+                $('#jml_hari').html('1 Month')
+                $('#harga_xhari').html($('#priceMonth').val())
+                $('#total_price').html($('#priceMonth').val())
                 $('#formHour').hide();
                 $('#formDay').hide();
                 $('#formWeek').hide();
@@ -256,7 +292,8 @@ $priceString = number_format($price);
             var initPrice = eval($('#priceHour').val()) * eval($('#durasiJam').val());
             $('#harga_xhari').html(initPrice);
             $('#jml_hari').html($('#durasiJam').val() + ' Hour')
-            // var initTotalPrice = initPrice * eval($('#'));
+            var initTotalPrice = initPrice * eval($('#xjml').html());
+            $('#total_price').html(initTotalPrice);
         })
     })
 
@@ -268,7 +305,8 @@ $priceString = number_format($price);
         jml++;
         document.getElementById('jml').value = jml;
         $('#xjml').html(jml);
-        hitung_jml();
+        var initTotalPrice = eval($('#harga_xhari').html()) * eval(jml);
+        $('#total_price').html(initTotalPrice);
     }
 
     function kurangi(){
@@ -283,18 +321,26 @@ $priceString = number_format($price);
             document.getElementById('jml').value = jml;
         }
         $('#xjml').html(jml);
-        hitung_jml();
+        var initTotalPrice = eval($('#harga_xhari').html()) * eval(jml);
+        $('#total_price').html(initTotalPrice);
     }
 
     function countDays(){
-        var date_start = document.getElementById('date_start').value;
-        var date_end = document.getElementById('date_end').value;
+        var date_start = document.getElementById('tglPinjam').value;
+        var date_end = document.getElementById('tglKembali').value;
 
         var date1 = new Date(date_start); 
         var date2 = new Date(date_end); 
         
         var Difference_In_Time = date2.getTime() - date1.getTime(); 
         var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+        console.log(Difference_In_Days);
+
+        $('#jml_hari').html(Difference_In_Days + ' Day');
+        $('#harga_xhari').html(eval(Difference_In_Days) * eval($('#priceDay').val()))
+
+        var initTotalPrice = eval($('#harga_xhari').html()) * eval($('#xjml').html());
+        $('#total_price').html(initTotalPrice);
 
         return Difference_In_Days;
     }

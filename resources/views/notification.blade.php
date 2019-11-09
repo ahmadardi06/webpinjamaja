@@ -12,109 +12,35 @@
 
 <div class="container" style="top: 30px;">
     <div id="Diproses" class="tabcontent">
-        <div class="item-category list-for-rent">
-            <a href="#" class="click-link">
-                <div class="one-list-for-rent">
-                    <figure class="pic-for-rent">
-                        <img src="{{ asset('tema/img/img1.jpg') }}">
-                    </figure>
-                    <div class="desc-for-rent">
-                        <span class="title-of-rent">Ahmad Ardiansyah Rental Motor</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="item-category list-for-rent">
-            <a href="#" class="click-link">
-                <div class="one-list-for-rent">
-                    <figure class="pic-for-rent">
-                        <img src="{{ asset('tema/img/img1.jpg') }}" class="">
-                    </figure>
-                    <div class="desc-for-rent">
-                        <span class="title-of-rent">Stik Golf Harga Murah daerah Surabaya</span>
-                        <span class="status-rent" style="font-size: 12px;">Dipinjam</span>
-                        <span class="date-of-rent" style="font-weight: bold">30 Sep 2019 11.06</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="item-category list-for-rent">
-            <a href="#" class="click-link">
-                <div class="one-list-for-rent">
-                    <figure class="pic-for-rent">
-                        <img src="{{ asset('tema/img/img1.jpg') }}" class="">
-                    </figure>
-                    <div class="desc-for-rent">
-                        <span class="title-of-rent">Stik Golf Harga Murah daerah Surabaya</span>
-                        <span class="status-rent" style="font-size: 12px;">Dipinjam</span>
-                        <span class="date-of-rent" style="font-weight: bold">30 Sep 2019 11.06</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="item-category list-for-rent">
-            <a href="#" class="click-link">
-                <div class="one-list-for-rent">
-                    <figure class="pic-for-rent">
-                        <img src="{{ asset('tema/img/img1.jpg') }}" class="">
-                    </figure>
-                    <div class="desc-for-rent">
-                        <span class="title-of-rent">Stik Golf Harga Murah daerah Surabaya</span>
-                        <span class="status-rent" style="font-size: 12px;">Dipinjam</span>
-                        <span class="date-of-rent" style="font-weight: bold">30 Sep 2019 11.06</span>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <span>loading...</span>
     </div>
 
     <div id="Selesai" class="tabcontent">
-        <div class="item-category list-for-rent">
-            <a href="#" class="click-link">
-                <div class="one-list-for-rent">
-                    <figure class="pic-for-rent">
-                        <img src="{{ asset('tema/img/img2.jpg') }}" class="">
-                    </figure>
-                    <div class="desc-for-rent">
-                        <span class="title-of-rent">Stik Golf Harga Murah daerah Surabaya</span>
-                        <span class="status-rent" style="font-size: 12px;">Dipinjam</span>
-                        <span class="date-of-rent" style="font-weight: bold">30 Sep 2019 11.06</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="item-category list-for-rent">
-            <a href="#" class="click-link">
-                <div class="one-list-for-rent">
-                    <figure class="pic-for-rent">
-                        <img src="{{ asset('tema/img/img2.jpg') }}" class="">
-                    </figure>
-                    <div class="desc-for-rent">
-                        <span class="title-of-rent">Stik Golf Harga Murah daerah Surabaya</span>
-                        <span class="status-rent" style="font-size: 12px;">Dipinjam</span>
-                        <span class="date-of-rent" style="font-weight: bold">30 Sep 2019 11.06</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="item-category list-for-rent">
-            <a href="#" class="click-link">
-                <div class="one-list-for-rent">
-                    <figure class="pic-for-rent">
-                        <img src="{{ asset('tema/img/img2.jpg') }}" class="">
-                    </figure>
-                    <div class="desc-for-rent">
-                        <span class="title-of-rent">Stik Golf Harga Murah daerah Surabaya</span>
-                        <span class="status-rent" style="font-size: 12px;">Dipinjam</span>
-                        <span class="date-of-rent" style="font-weight: bold">30 Sep 2019 11.06</span>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <span>loading...</span>
     </div>
 </div>
+@endsection
 
+@section('js')
 <script>
+    function renderDOM(data) {
+        var html = '';
+        html += '<div class="item-category list-for-rent">';
+            html += '<a href="#" class="click-link">';
+                html += '<div class="one-list-for-rent">';
+                    html += '<figure class="pic-for-rent">';
+                        html += '<img src="{{ asset('tema/img/img2.jpg') }}" class="">';
+                    html += '</figure>';
+                    html += '<div class="desc-for-rent">';
+                        html += '<span class="title-of-rent">Stik Golf Harga Murah daerah Surabaya</span>';
+                        html += '<span class="status-rent" style="font-size: 12px;">Dipinjam</span>';
+                        html += '<span class="date-of-rent" style="font-weight: bold">30 Sep 2019 11.06</span>';
+                    html += '</div>';
+                html += '</div>';
+            html += '</a>';
+        html += '</div>';
+        return html;
+    }
     function openCity(evt, cityName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");

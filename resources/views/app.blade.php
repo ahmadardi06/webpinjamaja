@@ -30,7 +30,8 @@
           <!-- Modal body -->
           <div class="modal-body text-center">
             <iframe class="col-lg-12 col-md-12 col-sm-12" style="padding: 0px;" height="500px" src="http://pinjemaja.store/animation/dist/index.html"></iframe>
-            <a href="#" class="btn btn-primary">Download Apps</a>
+            <a href="#" class="btn btn-primary">Download</a>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
           </div>
 
         </div>
@@ -118,7 +119,7 @@
 
         $(function() {
             $('#myFirstModal').modal('show')
-            
+
             // var linkURL = urlOrigin+"/database/category.json";
             var linkURL = "{{ env('APP_API') }}/api/item/category.php";
             $.get(linkURL, function(data) {
