@@ -30,7 +30,7 @@
           <!-- Modal body -->
           <div class="modal-body text-center">
             <iframe class="col-lg-12 col-md-12 col-sm-12" style="padding: 0px;" height="500px" src="http://pinjemaja.store/animation/dist/index.html"></iframe>
-            <a href="http://pinjemaja.store/download" class="btn btn-primary">Download</a>
+            <a href="http://pinjemaja.store/download/pinjemaja.apk" class="btn btn-primary">Download</a>
             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
           </div>
 
