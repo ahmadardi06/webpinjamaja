@@ -1,155 +1,165 @@
 @extends('layouts.app')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('tema/css/app.css') }}">
+@endsection
+
 @section('content')
 <div class="container">
-        <div class="item-category cat">
-            <span>Pilih Kategori</span><br><br>
-            <a href="{{ route('list-item') }}" class="per-category">
-                <div class="menu category-menu" style="width: 100%;">
-                    <div class="menu-icon">
-                        <img src="{{ asset('asset/category/ic_music.png') }}">
-                    </div>
-                    <div class="menu-text">
-                        <span>Alat Musik</span>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('list-item') }}" class="per-category">
-                <div class="menu category-menu" style="width: 100%;">
-                    <div class="menu-icon">
-                        <img src="{{ asset('asset/category/ic_soccer.png') }}">
-                    </div>
-                    <div class="menu-text">
-                        <span>Olahraga</span>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('list-item') }}" class="per-category">
-                <div class="menu category-menu" style="width: 100%;">
-                    <div class="menu-icon">
-                        <img src="{{ asset('asset/category/ic_camera.png') }}">
-                    </div>
-                    <div class="menu-text">
-                        <span>Fotografi</span>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('list-item') }}" class="per-category">
-                <div class="menu category-menu" style="width: 100%;">
-                    <div class="menu-icon">
-                        <img src="{{ asset('asset/category/ic_hiking.png') }}">
-                    </div>
-                    <div class="menu-text">
-                        <span>Hiking</span>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('list-item') }}" class="per-category">
-                <div class="menu category-menu" style="width: 100%;">
-                    <div class="menu-icon">
-                        <img src="{{ asset('asset/category/ic_sepeda.png') }}">
-                    </div>
-                    <div class="menu-text">
-                        <span>Musik</span>
-                    </div>
-                </div>
-            </a>
-            <a href="{{ route('list-item') }}" class="per-category">
-                <div class="menu category-menu" style="width: 100%;">
-                    <div class="menu-icon">
-                        <img src="{{ asset('asset/category/ic_others.png') }}">
-                    </div>
-                    <div class="menu-text">
-                        <span>Lainnya</span>
-                    </div>
-                </div>
-            </a>
-        </div><br>
-        
-        <div class="item-category for-carousel">
-            Item Terbaru<br><br>
-            <div id="demo" class="carousel slide" data-ride="carousel">
-                <ul class="carousel-indicators">
-                    <li data-target="#demo" data-slide-to="0" class="active"></li>
-                    <li data-target="#demo" data-slide-to="1"></li>
-                    <li data-target="#demo" data-slide-to="2"></li>
-                </ul>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="{{ asset('tema/img/img3.jpg') }}" alt="img1">  
-                        <div class="carousel-caption">
-                            <h3>Stik Golf</h3>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('tema/img/img3.jpg') }}" alt="img2">  
-                        <div class="carousel-caption">
-                            <h3>Barang Kedua</h3>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('tema/img/img3.jpg') }}" alt="img2">  
-                        <div class="carousel-caption">
-                            <h3>Barang Ketiga</h3>
-                        </div>
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                </a>
-                <a class="carousel-control-next" href="#demo" data-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                </a>
-            </div>
-        </div>  
+    <div class="item-category" id="menuItem">
+        <span>loading...</span>
+    </div>
 
-
-        <div class="item-category list-for-rent">
-            <a href="{{ route('detail-product') }}?id=1" class="click-link">
-                <div class="one-list-for-rent">
-                    <figure class="pic-for-rent">
-                        <img src="{{ asset('tema/img/img1.jpg') }}" class="">
-                    </figure>
-                    <div class="desc-for-rent">
-                        <span class="title-of-rent">Stik Golf Harga Murah daerah Surabaya</span>
-                        <span style="font-size: 12px;">Rama Store1</span>
-                        <span style="font-size: 18px; font-weight: bold">Rp. 30.000</span>
-                        <button class="btn btn-sm btn-danger">Lihat Item</button>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="item-category list-for-rent">
-            <a href="{{ route('detail-product') }}?id=1" class="click-link">
-                <div class="one-list-for-rent">
-                    <figure class="pic-for-rent">
-                        <img src="{{ asset('tema/img/img1.jpg') }}" class="">
-                    </figure>
-                    <div class="desc-for-rent">
-                        <span class="title-of-rent">Stik Golf</span>
-                        <span style="font-size: 12px;">Rama Store1</span>
-                        <span style="font-size: 18px; font-weight: bold">Rp. 30.000</span>
-                        <button class="btn btn-sm btn-danger">Lihat Item</button>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="item-category list-for-rent">
-            <a href="{{ route('detail-product') }}?id=1" class="click-link">
-                <div class="one-list-for-rent">
-                    <figure class="pic-for-rent">
-                        <img src="{{ asset('tema/img/img1.jpg') }}" class="">
-                    </figure>
-                    <div class="desc-for-rent">
-                        <span class="title-of-rent">Stik Golf</span>
-                        <span style="font-size: 12px;">Rama Store1</span>
-                        <span style="font-size: 18px; font-weight: bold">Rp. 30.000</span>
-                        <button class="btn btn-sm btn-danger">Lihat Item</button>
-                    </div>
-                </div>
-            </a>
+    <div class="item-category for-carousel">
+        <div id="demo" class="carousel slide" data-ride="carousel">
+            <span>loading...</span>
         </div>
     </div>
+
+    <div id="listItem">
+        <div class="text-center">
+            <span>loading...</span>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="myFirstModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+          <!-- Modal body -->
+          <div class="modal-body text-center">
+            <iframe class="col-lg-12 col-md-12 col-sm-12" style="padding: 0px;" height="500px" src="http://pinjemaja.store/animation/dist/index.html"></iframe>
+            <a href="http://pinjemaja.store/download/pinjemAja.apk" class="btn btn-primary">Download</a>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('js')
+    <script>
+        var urlOrigin = window.location.origin;
+
+        function renderMenuDOM(data) {
+            var html = '';
+            html += '<a href="{{ route('list-item') }}?category='+data.id_category+'" class="per-category">';
+                html += '<div class="menu category-menu" style="width: 100%;">';
+                    html += '<div class="menu-icon">';
+                        html += '<img src="'+data.icon+'">';
+                    html += '</div>';
+                    html += '<div class="menu-text">';
+                        html += '<span>'+data.category+'</span>';
+                    html += '</div>';
+                html += '</div>';
+            html += '</a>';
+            return html;
+        }
+
+        function renderSliderDOM(data) {
+            var indicator = ''; var slider = '';
+            for(var i=0; i<data.length; i++) {
+                if(i == 0){
+                    indicator += '<li data-target="#demo" data-slide-to="'+i+'" class="active"></li>';
+                    slider += '<div class="carousel-item active">';
+                        slider += '<img src="'+data[i].img_item+'" alt="'+data[i].item_name+'">';
+                        slider += '<div class="carousel-caption">';
+                            slider += '<h3>'+data[i].item_name+'</h3>';
+                        slider += '</div>';
+                    slider += '</div>';
+                } else {
+                    indicator += '<li data-target="#demo" data-slide-to="'+i+'"></li>';
+                    slider += '<div class="carousel-item">';
+                        slider += '<img src="'+data[i].img_item+'" alt="'+data[i].item_name+'">';
+                        slider += '<div class="carousel-caption">';
+                            slider += '<h3>'+data[i].item_name+'</h3>';
+                        slider += '</div>';
+                    slider += '</div>';
+                }
+            }
+
+            var html = '';
+                html += '<ul class="carousel-indicators">';
+                    html += indicator;
+                html += '</ul>';
+                html += '<div class="carousel-inner">';
+                    html += slider;
+                html += '</div>';
+                html += '<a class="carousel-control-prev" href="#demo" data-slide="prev">';
+                    html += '<span class="carousel-control-prev-icon"></span>';
+                html += '</a>';
+                html += '<a class="carousel-control-next" href="#demo" data-slide="next">';
+                    html += '<span class="carousel-control-next-icon"></span>';
+                html += '</a>';
+            return html;
+        }
+
+        function renderListDOM(data) {
+            var price = 'Rp'+parseInt(data.price_hour).toLocaleString(); 
+            var html = '';
+                html += '<div class="item-category list-for-rent">';
+                html += '<a href="{{ route('detail-product') }}?id='+data.id_item+'" class="click-link">';
+                    html += '<div class="one-list-for-rent">';
+                        html += '<figure class="pic-for-rent">';
+                            html += '<img src="'+data.img_item+'" class="">';
+                        html += '</figure>';
+                        html += '<div class="desc-for-rent">';
+                            html += '<span class="title-of-rent">'+data.item_name+'</span>';
+                            html += '<span style="font-size: 12px;">Stok '+data.stock+'</span>';
+                            html += '<span style="font-size: 18px; font-weight: bold">'+price+'</span>';
+                            html += '<button class="btn btn-sm btn-primary">Pinjam Sekarang</button>';
+                        html += '</div>';
+                    html += '</div>';
+                html += '</a>';
+            html += '</div>';
+            return html;
+        }
+
+        $(function() {
+            $('#myFirstModal').modal('show')
+
+            // var linkURL = urlOrigin+"/database/category.json";
+            var linkURL = "{{ env('APP_API') }}/api/item/category.php";
+            $.get(linkURL, function(data) {
+                if(!data.error){
+                    var html = '';
+                    for(var i=0; i<data.items.length; i++) {
+                        html += renderMenuDOM(data.items[i]);
+                    }
+                    $('#menuItem').html(html);
+                }
+            })
+
+            // var linkURL = urlOrigin+"/database/listitem.json";
+            var linkURL = "{{ env('APP_API') }}/api/item/readPaging.php";
+            $.post(linkURL+'?page=1', function(data) {
+                if(!data.error){
+                    var html = ''; var slider = '';
+                    console.log(data.items.slice(0, 5));
+                    slider += renderSliderDOM(data.items.slice(0, 5));
+                    for(var i=5; i<10; i++) {
+                        html += renderListDOM(data.items[i]);
+                    }
+
+                    $('#demo').html(slider);
+                    $('#listItem').html(html);
+                }
+            })
+
+            $('#btnLogin').on('click', function(){
+                var formData = { user: 'ahmad', pass: 'ardiansyah' };
+                localStorage.setItem('user', JSON.stringify(formData));
+            })
+
+            $('#btnCheck').on('click', function(){
+                console.log(localStorage.getItem('user'));
+            })
+
+            $('#btnLogout').on('click', function(){
+                console.log(localStorage.clear());
+            })
+        })
+    </script>
 @endsection

@@ -26,9 +26,8 @@ class PaymentController extends Controller
         return view('payment');
     }
 
-    public function getDataProduct(request $req){
+    public function getDataProduct(Request $req){
         $products = $req->all();
-        // dd($products);
         return redirect()->route('payment')->with(['products' => $products]);
     }
 

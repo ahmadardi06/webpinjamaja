@@ -1,47 +1,23 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="{{ asset('tema/css/list-item.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css">
 @endsection
 
 @section('content')
     <div class="tab">
         <div class="title-page" >List Item</div>
-        <button class="tablinks" data-toggle="modal" data-target="#myModal">
-            Filter
-        </button>
+        <a href="{{ route('list-item') }}?category=all" class="tablinks btn">All</a>
+        <!-- <button class="tablinks" data-toggle="modal" data-target="#myModal"> -->
+            <!-- All -->
+        <!-- </button> -->
     </div>
 
-    <div class="container">
-        <div class="item-category list-for-rent">
-            <a href="{{ route('detail-product') }}" class="click-link">
-                <div class="one-list-for-rent">
-                    <figure class="pic-for-rent">
-                        <img src="{{ asset('tema/img/img1.jpg') }}" class="">
-                    </figure>
-                    <div class="desc-for-rent">
-                        <span class="title-of-rent">Stik Golf Harga Murah daerah Surabaya</span>
-                        <span style="font-size: 12px;">Rama Store1</span>
-                        <span style="font-size: 18px; font-weight: bold">Rp. 30.000</span>
-                        <button class="btn btn-sm btn-primary">Pinjam Sekarang</button>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="item-category list-for-rent">
-            <a href="{{ route('detail-product') }}" class="click-link">
-                <div class="one-list-for-rent">
-                    <figure class="pic-for-rent">
-                        <img src="{{ asset('tema/img/img1.jpg') }}" class="">
-                    </figure>
-                    <div class="desc-for-rent">
-                        <span class="title-of-rent">Stik Golf</span>
-                        <span style="font-size: 12px;">Rama Store1</span>
-                        <span style="font-size: 18px; font-weight: bold">Rp. 30.000</span>
-                        <button class="btn btn-sm btn-primary">Pinjam Sekarang</button>
-                    </div>
-                </div>
-            </a>
+    <div class="container" id="listItem">
+
+        <div class="text-center">
+            <span>loading...</span>
         </div>
 
         <!-- The Modal -->
@@ -85,16 +61,55 @@
 @endsection
 
 @section('js')
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<script>
+    var urlOrigin = window.location.origin;
+    var urlParams = new URLSearchParams(window.location.search);
+    var myParam = urlParams.get('category');
 
-    <script>
-        $('.tgl').datepicker({
-            format: 'dd-mm-yyyy'
-            }).on('hide', function(event) {
-                event.preventDefault();
-                event.stopPropagation();
-        });
-    </script>
+    function renderDOM(data) {
+        var price = 'Rp'+parseInt(data.price_hour).toLocaleString(); 
+        var html = '';
+            html += '<div class="item-category list-for-rent">';
+            html += '<a href="{{ route('detail-product') }}?id='+data.id_item+'" class="click-link">';
+                html += '<div class="one-list-for-rent">';
+                    html += '<figure class="pic-for-rent">';
+                        html += '<img src="'+data.img_item+'" class="">';
+                    html += '</figure>';
+                    html += '<div class="desc-for-rent">';
+                        html += '<span class="title-of-rent">'+data.item_name+'</span>';
+                        html += '<span style="font-size: 12px;">Stok '+data.stock+'</span>';
+                        html += '<span style="font-size: 18px; font-weight: bold">'+price+'</span>';
+                        html += '<button class="btn btn-sm btn-primary">Pinjam Sekarang</button>';
+                    html += '</div>';
+                html += '</div>';
+            html += '</a>';
+        html += '</div>';
+        return html;
+    }
 
+    $(function() {
+        // $('.tgl').datepicker({ format: 'dd-mm-yyyy' }).on('hide', function(event) {
+            // event.preventDefault();
+            // event.stopPropagation();
+        // });
+
+        if(myParam != 'all') {
+            var linkURL = "{{ env('APP_API') }}/api/item/itemCategory.php";
+            var formData = {id_category: myParam};
+        } else {
+            var linkURL = "{{ env('APP_API') }}/api/item/readPaging.php?page=1";
+            var formData = {};
+        }
+        $.post(linkURL, {id_category: myParam}, function(data) {
+            if(!data.error){
+                var html = '';
+                for(var i=0; i<data.items.length; i++) {
+                    html += renderDOM(data.items[i]);
+                }
+                $('#listItem').html(html);
+            }
+        })
+    })
+</script>
 @endsection

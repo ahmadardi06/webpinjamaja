@@ -3,78 +3,68 @@ $id = $_GET['id'];
 ?>
 @extends('layouts.app')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('tema/css/detail-product.css') }}">
+@endsection
+
 @section('content')
 <div class="product-pic">
-    <img id="img_item" src="{{ asset('tema/img/img1.jpg') }}">
+    <img id="imgItem" src="{{ asset('tema/img/img1.jpg') }}">
 </div>
 
 <div class="container">
     <div class="product-name">
         <div class="name ">
-            <span id="nama_item">-</span><br>
+            <span id="nameItem">loading...</span><br>
         </div>
         <div class="price">
-            <span>Rp. <span id="harga">-</span> / hari</span>
+            <span style="font-size: 12px;" id="priceItem">loading...</span>
         </div>
     </div>
     <div class="product-store item-margin">
         <div class="store-pic">
-        <img id="img_store" src="{{ asset('tema/img/img1.jpg') }}" alt="Store">
+            <img id="imgStore" src="{{ asset('tema/img/img1.jpg') }}" alt="Store">
         </div>
         <div class="store-name">
-            <span id="store_name">-</span>
+            <a id="linkInvestor" href="{{ route('rent-product') }}" style="text-decoration: none;">
+                <span id="nameStore">loading...</span>
+            </a>
         </div>
-        <div class="store-address">
-            <span id="store_address">-</span>, <span id="city_address">-</span>
+        <div id="addressStore" class="store-address">
+            loading...
         </div>
     </div>
     <div class="product-description item-margin">
         <h6 style="font-weight: bold;">Deskripsi</h6>
-        <span id="item_desc">-</span>
+        <span id="descriptionItem">loading...</span>
     </div>
     <div class="product-spec item-margin">
         <h6 style="font-weight: bold;">Spesifikasi</h6>
         <div class="specs">
             <div class="spec">
                 <img src="{{ asset('tema/img/merk.png') }}" alt="">
-                <span id="merek">-</span>
+                <span id="merkItem">loading...</span>
             </div>
             <div class="spec">
                 <img src="{{ asset('tema/img/sent.png') }}" alt="">
-                <span id="kirim">-</span>
+                <span id="itemStatusItem">loading...</span>
             </div>
             <div class="spec">
                 <img src="{{ asset('tema/img/color.png') }}" alt="">
-                <span id="color">-</span>
+                <span id="colorItem">loading...</span>
             </div>
             <div class="spec">
                 <img src="{{ asset('tema/img/size.png') }}" alt="">
-                <span id="size">-</span>
+                <span id="sizeItem">loading...</span>
             </div>
         </div>
     </div>
-    <form action="order-now" method="post">
-        @csrf
-        <input name="item_id" value="{{ $id }}" hidden>
-        <input name="item_name" id="a" value="" hidden>
-        <input name="price" id="b" value="" hidden>
-        <input name="img_store" id="c" value="" hidden>
-        <input name="img_item" id="d" value="" hidden>
-        <input name="store_name" id="e" value="" hidden>
-        <input name="address" id="f" value="" hidden>
-        <input name="city" id="g" value="" hidden>
-        <input name="description" id="h" value="" hidden>
-        <input name="merk" id="i" value="" hidden>
-        <input name="delivery" id="j" value="" hidden>
-        <input name="color" id="k" value="" hidden>
-        <input name="size" id="l" value="" hidden>
-        
-        <button type="submit" id="button" class="btn btn-red btn-danger">Order Sekarang</button>
-    </form>
+    <a id="orderItem" href="{{ route('form-order') }}" class="btn btn-red btn-danger">Order Sekarang</a>
 </div>
 @endsection
 
 @section('js')
+<<<<<<< HEAD
 <script>
     function formatNumber(num) {
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
@@ -109,22 +99,41 @@ $id = $_GET['id'];
             $("#kirim").html(result.delivery);
             $("#color").html(result.color);
             $("#size").html(result.size);
+=======
+    <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        var myParam = urlParams.get('id');
+        var urlOrigin = window.location.origin;
+>>>>>>> cc504982413554e35bd2e8322d93c47c491c1830
 
+        function formatRP(data) {
+            return 'Rp'+parseInt(data).toLocaleString(); 
+        }
 
-            $("#a").val(result.item_name);
-            $("#b").val(result.price);
-            $("#c").val(result.store.img_store);
-            $("#d").val(result.img_item);
-            $("#e").val(result.store.store_name);
-            $("#f").val(result.store.address);
-            $("#g").val(result.store.city);
-            $("#h").val(result.description);
-            $("#i").val(result.merk);
-            $("#j").val(result.delivery);
-            $("#k").val(result.color);
-            $("#l").val(result.size);
-        });
-    });
-    
-</script>
+        $(function(){
+            $('#orderItem').attr('href', $('#orderItem').attr('href')+'?id='+myParam);
+
+            // var linkURL = urlOrigin+"/database/item.json";
+            var linkURL = "{{ env('APP_API') }}/api/item/itemDetail.php";
+            $.post(linkURL, {id_item: myParam}, function(data) {
+                $('#imgItem').attr('src', data.img_item)
+                $('#nameItem').html(data.item_name)
+                var priceHtml = formatRP(data.price_hour)+'/Hour<br>';
+                priceHtml += formatRP(data.price_day)+'/Day<br>';
+                priceHtml += formatRP(data.price_week)+'/Week<br>';
+                priceHtml += formatRP(data.price_month)+'/Month';
+                $('#priceItem').html(priceHtml)
+                $('#descriptionItem').html(data.description)
+                $('#merkItem').html(data.merk)
+                $('#sizeItem').html(data.size)
+                $('#itemStatusItem').html(data.item_status)
+                $('#colorItem').html(data.color)
+                $('#linkInvestor').attr('href', $('#linkInvestor').attr('href')+'?id='+data.store.id_store)
+
+                $('#imgStore').attr('src', data.store.img_store)
+                $('#nameStore').html(data.store.store_name)
+                $('#addressStore').html(data.store.address)
+            })
+        })
+    </script>
 @endsection

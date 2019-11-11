@@ -5,7 +5,7 @@ stages:
 build_project:
   stage: build
   only:
-    - master
+    - ahmad
   tags:
     - dockerbuilder
   script:
@@ -16,7 +16,7 @@ build_project:
 deploy_project:
   stage: deploy
   only:
-    - master
+    - ahmad
   tags:
     - dockerbuilder
   script:

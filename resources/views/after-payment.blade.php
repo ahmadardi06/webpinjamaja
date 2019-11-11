@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('tema/css/after-payment.css') }}">
+@endsection
+
 @section('content')
 <div class="container">
     <div class="form item-margin">

@@ -1,17 +1,23 @@
 @extends('layouts.app')
 
+@section('css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('tema/css/add-item.css') }}">
+@endsection
+
 @section('content')
 <div class="container">
     <h4>Tambah Barang</h4>
     <hr>
     <div class="item-margin">
-        <form action="{{ route('rent-product') }}">
-            @csrf
-            <div class="form-group" style="text-align: left; font-size: 18px;">
-                <label>Pilih Gambar</label>
-                <div class="custom-file mb-3">
-                    <input type="file" class="custom-file-input" id="customFile" name="foto-kartu">
-                    <label class="custom-file-label" for="customFile">Pilih File</label>
+        <!-- <form action="{{ route('rent-product') }}"> -->
+        <div class="form">
+            <div class="input-item">
+                <div class="input-icon">
+                    <img src="{{ asset('tema/img/photography-icon.png') }}" alt="Gambar Produk">
+                </div>
+                <div class="input-text">
+                    <input type="file" name="imgItem" id="imgItem" class="form-group" onchange="encodeImageFileAsURL(this)">
+                    <div id="imgPreview" class="form-group" style="text-align: left; margin-left: 20px;"></div>
                 </div>
             </div>
             <div class="input-item">
@@ -19,7 +25,7 @@
                     <img src="{{ asset('tema/img/product-name.png') }}" alt="Nama Produk">
                 </div>
                 <div class="input-text">
-                    <input type="text" class="form-group" placeholder="Max. 80 Karakter">
+                    <input type="text" id="nameItem" class="form-group" placeholder="Name Max. 80 Karakter">
                 </div>
             </div>
             <div class="input-item">
@@ -27,7 +33,7 @@
                     <img src="{{ asset('tema/img/product-desc.png') }}" alt="Deskripsi Produk">
                 </div>
                 <div class="input-text">
-                    <input type="text" class="form-group" placeholder="Deskripsi Produk">
+                    <input type="text" id="descriptionItem" class="form-group" placeholder="Deskripsi Produk">
                 </div>
             </div>
             <div class="input-item">
@@ -35,7 +41,7 @@
                     <img src="{{ asset('tema/img/merk.png') }}" alt="Merek Produk">
                 </div>
                 <div class="input-text">
-                    <input type="text" class="form-group" placeholder="Merek">
+                    <input type="text" id="merkItem" class="form-group" placeholder="Merek">
                 </div>
             </div>
             <div class="input-item">
@@ -71,7 +77,15 @@
                     <img src="{{ asset('tema/img/stock.png') }}" alt="Stock Produk">
                 </div>
                 <div class="input-text">
-                    <input type="text" class="form-group" placeholder="Stock">
+                    <input type="text" id="stockItem" class="form-group" placeholder="Stock">
+                </div>
+            </div>
+            <div class="input-item">
+                <div class="input-icon">
+                    <img src="{{ asset('tema/img/color.png') }}" alt="Color Produk">
+                </div>
+                <div class="input-text">
+                    <input type="text" id="warnaItem" class="form-group" placeholder="Warna">
                 </div>
             </div>
 
@@ -80,57 +94,41 @@
                     <img src="{{ asset('tema/img/category.png') }}" alt="Category">
                 </div>
                 <div class="input-text">
-                    <select name="category" class="custom-select mb-3">
-                        <option disabled value="Olahraga" selected>Pilih Kategori</option>
-                        <option value="Olahraga">Olahraga</option>
-                        <option value="Fotografi">Fotografi</option>
-                        <option value="Hiking">Hiking</option>
-                        <option value="Sepeda">Sepeda</option>
-                        <option value="Alat Musik">Alat Musik</option>
+                    <select id="categoryItem" name="category" class="custom-select mb-3">
                         <option value="Lainnya">Lainnya</option>
                     </select>
                 </div>
             </div>
-            <div class="input-item">            
+            <div class="input-item">
                 <div class="input-icon">
-                    <img src="{{ asset('tema/img/condition.png') }}" alt="Stock Produk">
+                    <img src="{{ asset('tema/img/others-icon.png') }}" alt="Category">
                 </div>
-                <div class="input-text" style="text-align: left;">
-                    <span style="margin-left: 24px;">Bisa Dibeli</span><br>  
-                    <div class="custom-control custom-radio" style="margin-left: 24px;">
-                        <input type="radio" class="custom-control-input" id="iya" name="bisa-dibeli">
-                        <label class="custom-control-label" for="iya">Iya</label>
-                    </div>
-                    <div class="custom-control custom-radio" style="margin-left: 24px;">
-                        <input type="radio" class="custom-control-input" id="tidak" name="bisa-dibeli">
-                        <label class="custom-control-label" for="tidak">Tidak</label>
-                    </div>
-                </div><br>
+                <div class="input-text">
+                    <select id="beliItem" name="kondisi" class="custom-select mb-3">
+                        <option value="">Bisa Dibeli</option>
+                        <option value="Ya">Ya</option>
+                        <option value="Tidak">Tidak</option>
+                    </select>
+                </div>
             </div>
-
-            <div class="input-item">            
+            <div class="input-item">
                 <div class="input-icon">
-                    <img src="{{ asset('tema/img/condition.png') }}" alt="Stock Produk">
+                    <img src="{{ asset('tema/img/sent.png') }}" alt="Category">
                 </div>
-                <div class="input-text" style="text-align: left;">
-                    <span style="margin-left: 24px;">Pengiriman</span><br>  
-                    <div class="custom-control custom-radio" style="margin-left: 24px;">
-                        <input type="radio" class="custom-control-input" id="dikirim" name="pengiriman">
-                        <label class="custom-control-label" for="dikirim">Bisa Dikirm</label>
-                    </div>
-                    <div class="custom-control custom-radio" style="margin-left: 24px;">
-                        <input type="radio" class="custom-control-input" id="ditempat" name="pengiriman">
-                        <label class="custom-control-label" for="ditempat">Ambil di tempat</label>
-                    </div>
-                </div><br>
+                <div class="input-text">
+                    <select id="deliveryItem" name="delivery" class="custom-select mb-3">
+                        <option value="">Pengiriman</option>
+                        <option value="Bisa Dikirim">Bisa Dikirim</option>
+                        <option value="Ambil Ditempat">Ambil Ditempat</option>
+                    </select>
+                </div>
             </div>
             
             <div class="btnbtn">
-                <button type='submit' class="btn btn-red btn-danger">Simpan</button>
-            </div>
-            
-            <hr>
-        </form>
+                <button type='button' id="btnSimpan" class="btn btn-red btn-danger">Simpan</button>
+            </div>            
+        </div>            
+        <!-- </form> -->
     </div>
 </div>
 @endsection
@@ -184,5 +182,63 @@
             $(data).attr("checked",'checked');
         }
     }
+
+    function encodeImageFileAsURL(element) {
+        var file = element.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function() {
+            console.log('RESULT', reader.result)
+            $('#imgPreview').html('<img src="'+reader.result+'" class="img-thumbnail" width="100px"/>');
+        }
+    
+        reader.readAsDataURL(file);
+    }
+
+    $(function(){
+        var myOrigin = window.location.origin;
+        var urlParams = new URLSearchParams(window.location.search);
+        var myParam = urlParams.get('id');
+        
+        var linkURL = "{{ env('APP_API') }}/api/item/category.php";
+        $.get(linkURL, function(data) {
+            if(!data.error){
+                var html = '<option value="">Pilih Kategori</option>';
+                for(var i=0; i<data.items.length; i++) {
+                    html += '<option value="'+data.items[i].id_category+'">'+data.items[i].category+'</option>';
+                }
+                $('#categoryItem').html(html);
+            }
+        })
+
+        $('#btnSimpan').on('click', function(){
+            var kondisiBarang = $('#kondisiBarang');
+            var formData = {
+                id_store: myParam,
+                item_name: $('#nameItem').val(),
+                description: $('#descriptionItem').val(),
+                category: $('#categoryItem').val(),
+                stock: $('#stockItem').val(),
+                merk: $('#merkItem').val(),
+                img_item: $('#imgPreview img').attr('src'),
+                selling: $('#beliItem').val(),
+                color: $('#warnaItem').val(),
+                delivery: $('#deliveryItem').val(),
+                price_hour: $('#form_price_jam').val(),
+                price_day: $('#form_price_hari').val(),
+                price_week: $('#form_price_minggu').val(),
+                price_month: $('#form_price_bulan').val(),
+            };
+
+            console.log(formData);
+
+            var linkURL = "{{ env('APP_API') }}/api/item/addItem.php";
+            $.post(linkURL, formData, function(data) {
+                console.log(data);
+                if(!data.error) {
+                    window.location.href = myOrigin+'/rent-product?id='+myParam;
+                }
+            })
+        })
+    })
 </script>
 @endsection

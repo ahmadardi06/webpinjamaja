@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('tema/css/detail-product.css') }}">
+@endsection
+
 @section('content')
 <div class="product-pic">
     <img src="{{ asset('tema/img/img1.jpg') }}">

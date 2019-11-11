@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+	<link rel="stylesheet" href="{{ asset('tema/css/account-verification.css') }}">
+@endsection
+
 @section('content')
 <div class="container">
     <a href="{{ route('email-verification') }}" class="btn  btn-list">Email</a>
