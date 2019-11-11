@@ -52,14 +52,16 @@
                 </div>
             </div>
             
+            <!-- <button id="buttonBayar" type="submit" class="btn btn-red btn-danger">Bayar Sekarang</button> -->
+            <button id="buttonBayarMidtrans" type="submit" class="btn btn-red btn-danger">Bayar Sekarang</button>
 
-            <button id="buttonBayar" type="submit" class="btn btn-red btn-danger">Bayar Sekarang</button>
         </div>
     </div>
 </div>
 @endsection
 
 @section('js')
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-lOOPKaHMI2vqnvNJ"></script>
 <script>
     var urlParams = new URLSearchParams(window.location.search);
     var search = location.search.substring(1);
@@ -101,5 +103,45 @@
             }
         })
     })
+
+    function randomRange(min, max) {
+      return ~~(Math.random() * (max - min + 1)) + min
+    }
+
+    document.getElementById('buttonBayarMidtrans').onclick = function(){
+      // This is minimal request body as example.
+      // Please refer to docs for all available options: https://snap-docs.midtrans.com/#json-parameter-request-body
+      // TODO: you should change this gross_amount and order_id to your desire. 
+      var requestBody = 
+      {
+        transaction_details: {
+          gross_amount: Number(urlParams.get('total')) + randomRange(300, 501),
+          // as example we use timestamp as order ID
+          order_id: 'INV-'+Math.round((new Date()).getTime() / 1000) 
+        }
+      }
+      
+      getSnapToken(requestBody, function(response){
+        var response = JSON.parse(response);
+        console.log("new token response", response);
+        // Open SNAP payment popup, please refer to docs for all available options: https://snap-docs.midtrans.com/#snap-js
+        snap.pay(response.token);
+      })
+    };
+    /**
+    * Send AJAX POST request to checkout.php, then call callback with the API response
+    * @param {object} requestBody: request body to be sent to SNAP API
+    * @param {function} callback: callback function to pass the response
+    */
+    function getSnapToken(requestBody, callback) {
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.onreadystatechange = function() {
+        if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+          callback(xmlHttp.responseText);
+        }
+      }
+      xmlHttp.open("post", "http://pinjemaja.store/webpayment/checkout.php");
+      xmlHttp.send(JSON.stringify(requestBody));
+    }
 </script>
 @endsection
