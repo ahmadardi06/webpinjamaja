@@ -87,8 +87,11 @@ $id = $_GET['id'];
             });
         });
         $.ajax({
-            method: "GET",
-            url: "https://localhost/freelance/webpinjamaja/public/api/detilItem",
+            // method: "GET",
+            // url: "https://localhost/freelance/webpinjamaja/public/api/detilItem",
+            // data: { id_item: "{{ $id }}" }
+            method: "POST",
+            url: "http://194.31.53.14/pinjem/api/item/itemDetail.php",
             data: { id_item: "{{ $id }}" }
         })
         .done(function( items ) {                
