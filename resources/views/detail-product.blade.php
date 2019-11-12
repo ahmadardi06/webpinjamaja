@@ -60,51 +60,24 @@ $id = $_GET['id'];
         </div>
     </div>
     <a id="orderItem" href="{{ route('form-order') }}" class="btn btn-red btn-danger">Order Sekarang</a>
+    <hr>
+    
+    <div class="ready-item item-margin" style="text-align: left;">
+        <h6 style="font-weight: bold;">Item pada toko yang sama</h6><br>
+        <div class="row" id="listItems">
+            <p class="text-center">loading...</p>
+        </div>
+    </div>
+
+
 </div>
 @endsection
 
 @section('js')
-<<<<<<< HEAD
-<script>
-    function formatNumber(num) {
-        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-    }
-    $(document).ready(function(){
-        $("#button").click(function(){
-            $.post("order-now/",
-            {
-                datas: "result"
-            });
-        });
-        $.ajax({
-            // method: "GET",
-            // url: "https://localhost/freelance/webpinjamaja/public/api/detilItem",
-            // data: { id_item: "{{ $id }}" }
-            method: "POST",
-            url: "http://194.31.53.14/pinjem/api/item/itemDetail.php",
-            data: { id_item: "{{ $id }}" }
-        })
-        .done(function( items ) {                
-            var result = JSON.parse(items);
-            $("#nama_item").html(result.item_name);
-            var price = formatNumber(result.price);
-            $("#harga").html(price);
-            $("#img_store").attr("src",result.store.img_store);
-            $("#img_item").attr("src",result.img_item);
-            $("#store_name").html(result.store.store_name);
-            $("#store_address").html(result.store.address);
-            $("#city_address").html(result.store.city);
-            $("#item_desc").html(result.description);
-            $("#merek").html(result.merk);
-            $("#kirim").html(result.delivery);
-            $("#color").html(result.color);
-            $("#size").html(result.size);
-=======
     <script>
         var urlParams = new URLSearchParams(window.location.search);
         var myParam = urlParams.get('id');
         var urlOrigin = window.location.origin;
->>>>>>> cc504982413554e35bd2e8322d93c47c491c1830
 
         function formatRP(data) {
             return 'Rp'+parseInt(data).toLocaleString(); 
@@ -133,6 +106,34 @@ $id = $_GET['id'];
                 $('#imgStore').attr('src', data.store.img_store)
                 $('#nameStore').html(data.store.store_name)
                 $('#addressStore').html(data.store.address)
+            })
+        });
+
+        function renderDOMItems(data) {
+            var html = '';
+            html += '<div class="col col-6">';
+                html += '<a href="{{ route('preview-item') }}" class="thumbnail">';
+                    html += '<img src="'+data.img_item+'" alt="Lights" style="width:100%">';
+                    html += '<div class="caption">';
+                        html += '<a style="text-decoration: none;" href="{{ route('detail-product') }}?id='+data.id_item+'"><p style="margin: 0; font-weight: bold;">'+data.item_name+'</p></a>';
+                        html += '<p>'+formatRP(data.price_hour)+'</p>';
+                    html += '</div>';
+                    html += '</a>';
+                html += '</a>';
+            html += '</div>';
+            return html;
+        }
+
+        $(function(){
+            var linkURLItems = "{{ env('APP_API') }}/api/store/readItemStore.php";
+            $.post(linkURLItems, {id_store: myParam}, function(data) {
+                if(!data.error) {
+                    var html = '';
+                    for(var i=0; i<data.items.length; i++) {
+                        html += renderDOMItems(data.items[i]);
+                    }
+                    $('#listItems').html(html);
+                }
             })
         })
     </script>
