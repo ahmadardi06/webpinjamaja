@@ -68,8 +68,6 @@ $id = $_GET['id'];
             <p class="text-center">loading...</p>
         </div>
     </div>
-
-
 </div>
 <div class="btn-fixed">
     <div class="row">

@@ -122,3 +122,23 @@
     text-align: right;
     width: 49%;
 }
+
+.row{
+    text-align: left;
+    margin: 0;
+    padding: 10px;
+}
+
+.form-icon{
+    width: 20%;
+    padding: 10px;
+}
+
+.form-icon img{
+    width: 80%;
+}
+
+.form-input{
+    width: 75%;
+    padding: 5px;
+}
