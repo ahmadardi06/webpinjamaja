@@ -162,3 +162,14 @@ body{
     background-color: white;
     color: black;
 }
+
+.btn-fixed{
+    padding: 10px 10px;
+    width: 100%;
+    position: fixed;
+    background-color: white;
+    bottom: 0;
+    max-width: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+}
