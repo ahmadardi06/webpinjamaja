@@ -89,7 +89,7 @@
 }
 .store-address{
     display: inline-block;
-    width: 40%;
+    width: 30%;
     font-size: 16px;
     text-align: left;
     vertical-align: middle;
@@ -115,4 +115,10 @@
 .spec img{
     width: 70%;
     margin-bottom: 10px;
+}
+
+.row{
+    text-align: left;
+    margin: 0;
+    padding: 10px;
 }

@@ -71,13 +71,13 @@ $id = $_GET['id'];
 </div>
 <div class="btn-fixed">
     <div class="row">
-        <div class="col-sm-3" style="text-align: center; border-right: solid silver 1px">
+        <div style="text-align: center; border-right: solid silver 1px; width: 30%">
             <a href="#">
                 <img src="{{ asset('tema/img/chat.png') }}" alt="" style="width: 40px;">
             </a>
         </div>
 
-        <div class="col-sm-9" style="text-align: center;">
+        <div style="text-align: center; width: 68%;">
             <a id="orderItem" href="{{ route('form-order') }}" class="btn btn-red btn-danger" style=" width: 80%;">Order Sekarang</a>
         </div>
     </div>
