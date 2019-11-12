@@ -28,21 +28,21 @@ $priceString = number_format($price);
         <div class="product-name">
             <div class="name ">
                 <span id="nameItem">loading...</span><br>
-                <span id="priceHourItem" style="font-size: 12px;color: red;">loading...</span><br>
-                <span id="priceDayItem" style="font-size: 12px;color: red;">loading...</span><br>
-                <span id="priceWeekItem" style="font-size: 12px; color: red;">loading...</span><br>
-                <span id="priceMonthItem" style="font-size: 12px;color: red;">loading...</span><br>
+                
             </div>
             <a href="#">
                 <div class="chat-button">
-                    <img src="{{ asset('tema/img/chat.png') }}" alt=""><br>
-                    <span>Tanya Penjual</span>
+                    <span id="priceHourItem" style="font-size: 12px;color: red;">loading...</span><br>
+                    <span id="priceDayItem" style="font-size: 12px;color: red;">loading...</span><br>
+                    <span id="priceWeekItem" style="font-size: 12px; color: red;">loading...</span><br>
+                    <span id="priceMonthItem" style="font-size: 12px;color: red;">loading...</span><br>
                 </div>
             </a>
         </div>
 
         <div class="row">
-            <div class="form-group" style="margin-left: 20px; margin-top: 10px;">
+            <label class="col-sm-3" style="width: 200px; margin: 10px 20px 0 0; padding-left: 0">Lama Sewa</label>
+            <div class="form-group" style="margin-left: ; margin-top: 10px; ">    
                 <input checked type="radio" class="radioButton" name="radioButton" value="hour"> Hour
                 <input type="hidden" name="priceHour" id="priceHour">
                 &nbsp;&nbsp;
@@ -59,14 +59,21 @@ $priceString = number_format($price);
 
         <div id="formHour" style="text-align: left;">
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-3 col-form-label">Durasi Jam</label>
-                <div class="col-sm-9">
+                <div class="col-sm-2" style="text-align: center;">
+                    <img src="{{ asset('tema/img/clock.png') }}" alt="" style="width: 80%; padding-top: 10px;">
+                </div>
+                <div class="col-sm-10">
+                    <label for="inputEmail3" class="form-label">Durasi Jam</label>
                     <input onchange="hitungDurasiJam(this)" type="number" class="form-control" id="durasiJam" value="1" placeholder="Berapa Jam">
                 </div>
+                
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Tanggal</label>
-                <div class="col-sm-9">
+                <div class="col-sm-2" style="text-align: center;">
+                    <img src="{{ asset('tema/img/date.png') }}" alt="" style="width: 80%; padding-top: 10px;">
+                </div>
+                <div class="col-sm-10">
+                    <label for="inputPassword3" class="form-label">Tanggal</label>
                     <input type="text" class="form-control tgl" id="tanggalPinjamJam" placeholder="Set Tanggal Pinjam">
                 </div>
             </div>
@@ -74,29 +81,42 @@ $priceString = number_format($price);
 
         <div id="formDay" style="text-align: left;">
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-3 col-form-label">Pinjam</label>
-                <div class="col-sm-9">
+                <div class="col-sm-2" style="text-align: center;">
+                    <img src="{{ asset('tema/img/date.png') }}" alt="" style="width: 80%; padding-top: 10px;">
+                </div>
+                <div class="col-sm-10">
+                    <label for="inputEmail3" class="col-form-label">Pinjam</label>
                     <input type="email" class="form-control tgl" id="tglPinjam" placeholder="Set Tanggal Pinjam">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Kembali</label>
-                <div class="col-sm-9">
+                <div class="col-sm-2" style="text-align: center;">
+                    <img src="{{ asset('tema/img/date.png') }}" alt="" style="width: 80%; padding-top: 10px;">
+                </div>
+                <div class="col-sm-10">
+                    <label for="inputPassword3" class="col-form-label">Kembali</label>
                     <input type="text" onchange="countDays()" class="form-control tgl" id="tglKembali" placeholder="Set Tanggal Kembali">
                 </div>
+                
             </div>
         </div>
 
         <div id="formWeek" style="text-align: left;">
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-3 col-form-label">Minggu</label>
-                <div class="col-sm-9">
+                <div class="col-sm-2" style="text-align: center;">
+                    <img src="{{ asset('tema/img/week.png') }}" alt="" style="width: 80%; padding-top: 10px;">
+                </div>
+                <div class="col-sm-10">
+                    <label for="inputEmail3" class="col-form-label">Minggu</label>
                     <input type="number" onchange="hitungDurasiMinggu(this)" value="1" class="form-control" id="durasiMinggu" placeholder="Berapa Minggu">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Tanggal</label>
-                <div class="col-sm-9">
+                <div class="col-sm-2" style="text-align: center;">
+                    <img src="{{ asset('tema/img/date.png') }}" alt="" style="width: 80%; padding-top: 10px;">
+                </div>
+                <div class="col-sm-10">
+                    <label for="inputPassword3" class="col-form-label">Tanggal</label>
                     <input type="text" class="form-control tgl" id="tanggalPinjamMinggu" placeholder="Set Tanggal Pinjam">
                 </div>
             </div>
@@ -104,22 +124,31 @@ $priceString = number_format($price);
 
         <div id="formMonth" style="text-align: left;">
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-3 col-form-label">Bulan</label>
-                <div class="col-sm-9">
+                <div class="col-sm-2" style="text-align: center;">
+                    <img src="{{ asset('tema/img/month.png') }}" alt="" style="width: 80%; padding-top: 10px;">
+                </div>
+                <div class="col-sm-10">
+                    <label for="inputEmail3" class="col-form-label">Bulan</label>
                     <input type="number" onchange="hitungDurasiBulan(this)" value="1" class="form-control" id="durasiBulan" placeholder="Berapa Bulan">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Tanggal</label>
-                <div class="col-sm-9">
+                <div class="col-sm-2" style="text-align: center;">
+                    <img src="{{ asset('tema/img/date.png') }}" alt="" style="width: 80%; padding-top: 10px;">
+                </div>
+                <div class="col-sm-10">
+                    <label for="inputPassword3" class="col-form-label">Tanggal</label>
                     <input type="text" class="form-control tgl" id="tanggalPinjamBulan" placeholder="Set Tanggal Pinjam">
                 </div>
             </div>
         </div>
 
         <div class="form-group row" style="text-align: left;">
-            <label for="inputEmail3" class="col-sm-3 col-form-label">Jumlah</label>
-            <div class="col-sm-9">
+            <div class="col-sm-2" style="text-align: center;">
+                <img src="{{ asset('tema/img/plank.png') }}" alt="" style="width: 80%; padding-top: 10px;">
+            </div>
+            <div class="col-sm-10" style="padding-top: 10px;">
+                <label for="inputEmail3" class="col-form-label">Jumlah</label>
                 <a class="btn btn-default btn-min" id="min" onclick="kurangi()">-</a>
                 <input type="text" id="jml" name="ammount" class="form-control jml" value="1" onchange="hitung_jml()">
                 <a class="btn btn-default btn-plus" id="plus" onclick="tambahi()">+</a>
@@ -127,12 +156,30 @@ $priceString = number_format($price);
         </div>
 
         <div class="form-group row" style="text-align: left;">
-            <label for="inputEmail3" class="col-sm-3 col-form-label">Pengiriman</label>
-            <div class="col-sm-9">
+            <div class="col-sm-2" style="text-align: center;">
+                <img src="{{ asset('tema/img/sent.png') }}" alt="" style="width: 80%; padding-top: 10px;">
+            </div>
+            <div class="col-sm-10">
+                <label for="inputEmail3" class="col-form-label">Pengiriman</label>
                 <select name="pengiriman" id="pengiriman" class="custom-select mb-3">
                     <option selected disabled>Opsi Pengiriman</option>
                     <option value="Ambil Sendiri">Ambil Sendiri</option>
                     <option value="Diantar">Diantar</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row" style="text-align: left;">
+            <div class="col-sm-2" style="text-align: center;">
+                <img src="{{ asset('tema/img/pay.png') }}" alt="" style="width: 80%; padding-top: 10px;">
+            </div>
+            <div class="col-sm-10">
+                <label for="inputEmail3" class="col-form-label">Metode Pembayaran</label>
+                <select name="pengiriman" id="pengiriman" class="custom-select mb-3">
+                    <option selected disabled>Metode Pembayaran</option>
+                    <option value="LinkAja">LinkAja</option>
+                    <option value="Midtrans">Midtrans</option>
+                    <option value="Bayar Langsung">Bayar Langsung</option>
                 </select>
             </div>
         </div>
@@ -143,21 +190,21 @@ $priceString = number_format($price);
             <div class="align-left">
                 <div class="total-price">
                     <div class="price-desc">
-                        <span>Harga Sewa x <span id="jml_hari">1 Hour</span></span><br>
-                        <span>Jumlah Barang</span>
+                        <span>Banyaknya Item</span><br>
+                        <span>Harga Sewa x <span id="jml_hari">1 Hour</span></span>
                     </div>
                     <div class="price">
-                        <span>Rp<span id="harga_xhari">{{ $priceString }}</span></span><br>
-                        <span>x<span id="xjml">1</span></span>
+                        <span>x <span id="xjml">1</span></span><br>
+                        <span>Rp <span id="harga_xhari">{{ $priceString }}</span></span>
                     </div><hr>
                     <div class="price-desc">
-                        <span>Total<br>
+                        <span>Estimasi Pembayaran<br>
                     </div>
                     <div class="price">
-                        <span style="color: red; font-weight: bold;">Rp<span id="total_price">{{ $priceString }}</span></span><br>
+                        <span style="color: red; font-weight: bold;">Rp <span id="total_price">{{ $priceString }}</span></span><br>
                         <input name="total" id="total" value="{{ $price }}" hidden="hidden">
                     </div>
-                </div>
+                </div><br><br>
             </div>
 
             <div id="btnLanjutPembayaran">
