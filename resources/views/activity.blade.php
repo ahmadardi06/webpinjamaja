@@ -59,7 +59,7 @@
         var tgl = tglIndo(data.date_transaction_end);
         var html = '';
         html += '<div class="item-category list-for-rent">';
-            html += '<a href="#" class="click-link">';
+            html += '<a href="{{ route('tracking-order') }}" class="click-link">';
                 html += '<div class="one-list-for-rent">';
                     html += '<figure class="pic-for-rent">';
                         html += '<img src="'+data.items.img_item+'" class="">';
@@ -80,31 +80,35 @@
     var user = JSON.parse(userInfo);
 
     $(function(){
-        var linkDiProses = "{{ env('APP_API') }}/api/transaction/user/orderActivity.php";
-        var formDataProses = {id_user: user.id_user, status_order: 'diproses'};
-        var formDataSelesai = {id_user: user.id_user, status_order: 'selesai'};
+        if(userInfo == null) {
+            window.location.href = "{{ route('login') }}";
+        } else {
+            var linkDiProses = "{{ env('APP_API') }}/api/transaction/user/orderActivity.php";
+            var formDataProses = {id_user: user.id_user, status_order: 'diproses'};
+            var formDataSelesai = {id_user: user.id_user, status_order: 'selesai'};
 
-        $.post(linkDiProses, formDataProses, function(data){
-            console.log('proses: ', data)
-            if(!data.error){
-                var html = '';
-                for(var i=0; i<data.transactions.length; i++){
-                    html += renderDOM(data.transactions[i]);
+            $.post(linkDiProses, formDataProses, function(data){
+                console.log('proses: ', data)
+                if(!data.error){
+                    var html = '';
+                    for(var i=0; i<data.transactions.length; i++){
+                        html += renderDOM(data.transactions[i]);
+                    }
+                    $('#Diproses').html(html);
                 }
-                $('#Diproses').html(html);
-            }
-        })
+            })
 
-        $.post(linkDiProses, formDataSelesai, function(data){
-            console.log('selesai: ', data)
-            if(!data.error){
-                var html = '';
-                for(var i=0; i<data.transactions.length; i++){
-                    html += renderDOM(data.transactions[i]);
+            $.post(linkDiProses, formDataSelesai, function(data){
+                console.log('selesai: ', data)
+                if(!data.error){
+                    var html = '';
+                    for(var i=0; i<data.transactions.length; i++){
+                        html += renderDOM(data.transactions[i]);
+                    }
+                    $('#Selesai').html(html);
                 }
-                $('#Selesai').html(html);
-            }
-        })
+            })
+        }
     })
 </script>
 @endsection

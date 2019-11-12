@@ -23,6 +23,9 @@
 
 @section('js')
 <script>
+    var userInfo = localStorage.getItem('user');
+    var user = JSON.parse(userInfo);
+
     function renderDOM(data) {
         var html = '';
         html += '<div class="item-category list-for-rent">';
@@ -41,6 +44,7 @@
         html += '</div>';
         return html;
     }
+
     function openCity(evt, cityName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
@@ -55,7 +59,14 @@
         evt.currentTarget.className += " active";
     }
     
-    // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
+
+    $(function(){
+        if(userInfo == null) {
+            window.location.href = "{{ route('login') }}";
+        } else {
+
+        }
+    })
 </script>
 @endsection

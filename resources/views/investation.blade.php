@@ -24,7 +24,7 @@
 
 		$(function(){
 			if(userInfo == null){
-				window.location.href = window.location.origin;
+				window.location.href = "{{ route('login') }}";
 			} else {
 				$('#linkInvestor').on('click', function(){
 					var linkURL = "{{ env('APP_API') }}/api/store/addStore.php";
