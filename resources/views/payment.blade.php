@@ -6,17 +6,9 @@
 
 @section('content')
 <div class="container">
-    <div class="form item-margin">
+    <div class="form item-margin" style="border: none;">
         <div class="form">
             <div class="align-left">
-                <label>Metode Pembayaran</label>
-                <select id="payment" name="payment" class="custom-select mb-3">
-                    <option selected disabled>Metode Pembayaran</option>
-                    <option value="linkaja">Link Aja</option>
-                    <option value="bayarditempat">Bayar Di Tempat</option>
-                    <option value="transfer">Transfer Bank</option>
-                </select>
-                <hr>
                 <h5>Daftar Belanja</h5>
 
                 <div class="product-store item-margin">
@@ -38,23 +30,43 @@
                         <span id="dateItem">loading... s/d loading...</span>
                     </div>
                 </div>
+                <hr>
                 
-                <label>Catatan Tambahan</label>
-                <input type="text" name="note" id="note" class="form-control">
+                <div class="row">
+                    <div style="width: 15%; display: inline-block;">
+                        <img src="{{ asset('tema/img/note.png') }}" alt="" style="width: 70%; margin-top: 10px;">
+                    </div>
+                    <div style="width: 80%; display: inline-block;">
+                        <label>Catatan Tambahan</label>
+                        <input type="text" name="note" id="note" class="form-control">
+                    </div>
+                </div>
+                
+                <br>
+                <hr>
+
+                <span><b>Alamat Pengiriman</b></span><br><br>
+                <p style="padding: 10px; color: rgb(160, 156, 156);">Jl. Bla bla bla</p>
+
+                <hr>
 
                 <div class="total-price item-margin">
+                    <span><b>Rincian Harga</b></span><br><br>
                     <div class="price-desc">
-                        <span>Total yang harus dibayar<br>
+                        <span>Estimasi Biaya<br>
                     </div>
                     <div class="price">
                         <span id="totalPrice" style="color: red; font-weight: bold;">loading...</span><br>
                     </div>
                 </div>
             </div>
-            
-            <!-- <button id="buttonBayar" type="submit" class="btn btn-red btn-danger">Bayar Sekarang</button> -->
-            <button id="buttonBayarMidtrans" type="submit" class="btn btn-red btn-danger">Bayar Sekarang</button>
 
+            <hr>
+            <div class="btn-fixed">
+                <!-- <button id="buttonBayar" type="submit" class="btn btn-red btn-danger">Bayar Sekarang</button> -->
+                <button id="buttonBayarMidtrans" type="submit" class="btn btn-sm btn-red btn-danger">Bayar Sekarang</button>
+            </div>
+            
         </div>
     </div>
 </div>
