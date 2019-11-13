@@ -27,7 +27,7 @@
             <input type="text" class="form-control" id="address" placeholder="Alamat">
         </div>
         <!-- <button type="submit" style="width: 50%; background-color: red;" class="btn  btn-danger">Update</button> -->
-        <button id="btnUpdate" type="button" style="width: 50%; background-color: red;" class="btn btn-danger">Update</button>
+        <button id="btnUpdate" type="button" style="width: 50%; background-color: red;" class="btn btn-danger">Edit Toko</button>
     </div>
     <!-- </form> -->
 </div>

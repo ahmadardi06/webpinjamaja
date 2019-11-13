@@ -5,25 +5,25 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header"><span id="msgLogin">Change Password</span></div>
+                <div class="card-header"><span id="msgLogin">Ganti Password</span></div>
 
                 <div class="card-body">
                     <div class="form-vertical">
                         <div class="form-group">
-                            <label>Current Password:</label>
+                            <label>Password Sekarang:</label>
                             <input type="password" id="currpass" name="user" class="form-control" placeholder="Password...">
                         </div>
                         <div class="form-group">
-                            <label>New Password:</label>
+                            <label>Password Baru:</label>
                             <input type="password" id="newpass" name="newpass" class="form-control" placeholder="Password...">
                         </div>
                         <div class="form-group">
-                            <label>Confirm Password:</label>
+                            <label>Ketik Ulang Password:</label>
                             <input type="password" id="confirmpass" name="confirmpass" class="form-control" placeholder="Password...">
                         </div>
                         <div class="form-group">
-                            <button id="idLogin" class="btn" style="background-color: red; color: white; border-radius: 20px;">Change</button>
-                            <a href="{{ route('account') }}" style="margin-left: 20px; text-decoration: none;">back</a>
+                            <button id="idLogin" class="btn" style="background-color: red; color: white; border-radius: 20px;">Changubah</button>
+                            <a href="{{ route('account') }}" style="margin-left: 20px; text-decoration: none;">kembali</a>
                         </div>
                     </div>
                 </div>
