@@ -15,7 +15,6 @@
             <span id="emailStore">loading...</span><br>
             <span id="phoneStore">loading...</span>
         </div>
-        <button id="btnEditStore" class="btn btn-block btn-danger" style="margin-top: 10px; background-color: #fe0000; border-color: #fe0000; color: white;">Edit Store</button>
     </div>
 
     <div id="userLogin">
@@ -43,7 +42,7 @@
         </div>
 
         <div class="btn-link">
-            <a href="#" class="btn-list">
+            <a id="btnEditStore" href="#" class="btn-list">
                 <div class="btn-icon">
                     <img src="{{ asset('tema/img/identity-store.png') }}" alt="Identitas Toko">
                 </div>

@@ -67,7 +67,7 @@
 
 		    $('#btnVerifikasi').on('click', function(){
                 var token = randomFixedInteger(6);
-                var linkURL = "{{ route('email-verification') }}";
+                var linkURL = "{{ route('message') }}";
                 var formData = { 
                     token: token, 
                     name: user.name, 

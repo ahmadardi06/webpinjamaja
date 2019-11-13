@@ -71,7 +71,7 @@
 
 		    $('#btnVerifikasi').on('click', function(){
                 var token = randomFixedInteger(6);
-                var linkURL = "{{ route('phone-verification') }}";
+                var linkURL = "{{ route('phone') }}";
                 var formData = { 
                     token: token, 
                     phone: $('#txtPhone').val(), 
