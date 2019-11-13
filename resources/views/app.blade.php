@@ -97,7 +97,7 @@
         }
 
         function renderListDOM(data) {
-            var price = 'Rp'+parseInt(data.price_day).toLocaleString(); 
+            var price = 'Rp'+parseInt(data.price_day).toLocaleString()+'/hari'; 
             var html = '';
                 html += '<div class="item-category list-for-rent">';
                 html += '<a href="{{ route('detail-product') }}?id='+data.id_item+'" class="click-link">';

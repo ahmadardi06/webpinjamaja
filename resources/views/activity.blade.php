@@ -57,6 +57,21 @@
     function renderDOM(data){
         var price = 'Rp'+parseInt(data.order_total).toLocaleString(); 
         var tgl = tglIndo(data.date_transaction_end);
+        if(data.status_order == 'pending') {
+            var statusOrder = 'Menunggu Pembayaran';
+        } else if(data.status_order == 'settlement') {
+            var statusOrder = 'Sudah Dikonfirmasi';
+        } else if(data.status_order == 'dikirim') {
+            var statusOrder = 'Sedang Dikirim';
+        } else if(data.status_order == 'dipinjam') {
+            var statusOrder = 'Dipinjam';
+        } else if(data.status_order == 'selesai') {
+            var statusOrder = 'Selesai';
+        } else if(data.status_order == 'expire') {
+            var statusOrder = 'Batal';
+        } else {
+            var statusOrder = 'Status Tidak Tersedia';
+        }
         var html = '';
         html += '<div class="item-category list-for-rent">';
             html += '<a href="{{ route('tracking-order') }}" class="click-link">';
@@ -67,7 +82,7 @@
                     html += '<div class="desc-for-rent">';
                         html += '<span class="title-of-rent">'+data.items.item_name+'</span>';
                         html += '<span class="">'+price+'</span>';
-                        html += '<span class="status-rent" style="font-size: 12px;">'+data.status_order+'</span>';
+                        html += '<span class="status-rent" style="font-size: 12px;">'+statusOrder+'</span>';
                         html += '<span class="date-of-rent" style="font-weight: bold">'+tgl+'</span>';
                     html += '</div>';
                 html += '</div>';
