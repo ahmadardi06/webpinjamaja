@@ -30,7 +30,7 @@
 			  </tr>
 			  <tr>
 			   <td style="padding: 5px;">
-			    Thank you for registering on eFlats.com with your account. To finally activate your account please click the following link.
+			    Thank you for registering on pinjemaja.store with your account. To finally activate your account please click the following link.
 			    <br>
 			    <div style="margin: 5px;">
 			    	Your Token : {{ $body }}
@@ -45,8 +45,9 @@
 		  <td style="margin: 5px">
 		  	<div style="border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border: 1px solid #e9e9e9; padding: 10px; background-color: red; color: white;">
 			  	Copyright © 2019 PinjamAja<br>
-			   	Jl. Kutisari, No. 34 Sukolilo, Surabaya <br>
-			   	Indonesia
+			   	Kantor (Telkom Indonesia Divisi Regional 5) <br>
+			   	Jl. Ketintang No.156, Ketintang, Kec. Gayungan, <br>Kota Surabaya, Jawa Timur <br>
+			   	60231 Indonesia.
 		   	</div>
 		  </td>
 		 </tr>
