@@ -221,7 +221,7 @@ $priceString = number_format($price);
             </div>
 
             <div id="btnLanjutPembayaran">
-                <button type="button" onclick="btnLanjutPembayaranHour()" class="btn btn-red btn-danger">Lanjut Pembayaran</button>
+                <button type="button" id="btnBayarHour" onclick="btnLanjutPembayaranHour()" class="btn btn-red btn-danger">Lanjut Pembayaran</button>
             </div>
 
         </div>
@@ -280,7 +280,7 @@ $priceString = number_format($price);
             console.log(thisValue);
 
             if(thisValue == 'hour') {
-                $('#btnLanjutPembayaran').html('<button type="button" onfocus="btnLanjutPembayaranHour()" class="btn btn-red btn-danger">Lanjut Pembayaran</button>');
+                $('#btnLanjutPembayaran').html('<button type="button" id="btnBayarHour" class="btn btn-red btn-danger">Lanjut Pembayaran</button>').bind('click', btnLanjutPembayaranHour);
                 $('#xjml').html('1');
                 $('#jml_hari').html('1 Hour')
                 $('#harga_xhari').html($('#priceHour').val())
@@ -290,7 +290,7 @@ $priceString = number_format($price);
                 $('#formWeek').hide();
                 $('#formMonth').hide();
             } else if(thisValue == 'day') {
-                $('#btnLanjutPembayaran').html('<button type="button" onfocus="btnLanjutPembayaranDay()" class="btn btn-red btn-danger">Lanjut Pembayaran</button>');
+                $('#btnLanjutPembayaran').html('<button type="button" id="btnBayarDay" class="btn btn-red btn-danger">Lanjut Pembayaran</button>').bind('click', btnLanjutPembayaranDay);
                 $('#xjml').html('1');
                 $('#jml_hari').html('1 Day')
                 $('#harga_xhari').html($('#priceDay').val())
@@ -300,7 +300,7 @@ $priceString = number_format($price);
                 $('#formWeek').hide();
                 $('#formMonth').hide();
             } else if(thisValue == 'week') {
-                $('#btnLanjutPembayaran').html('<button type="button" onfocus="btnLanjutPembayaranWeek()" class="btn btn-red btn-danger">Lanjut Pembayaran</button>');
+                $('#btnLanjutPembayaran').html('<button type="button" id="btnBayarWeek" class="btn btn-red btn-danger">Lanjut Pembayaran</button>').bind('click', btnLanjutPembayaranWeek);
                 $('#xjml').html('1');
                 $('#jml_hari').html('1 Week')
                 $('#harga_xhari').html($('#priceWeek').val())
@@ -310,7 +310,7 @@ $priceString = number_format($price);
                 $('#formWeek').show();
                 $('#formMonth').hide();
             } else {
-                $('#btnLanjutPembayaran').html('<button type="button" onfocus="btnLanjutPembayaranMonth()" class="btn btn-red btn-danger">Lanjut Pembayaran</button>');
+                $('#btnLanjutPembayaran').html('<button type="button" id="btnBayarMonth" class="btn btn-red btn-danger">Lanjut Pembayaran</button>').bind('click', btnLanjutPembayaranMonth);
                 $('#xjml').html('1');
                 $('#jml_hari').html('1 Month')
                 $('#harga_xhari').html($('#priceMonth').val())
