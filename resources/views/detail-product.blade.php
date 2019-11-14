@@ -78,13 +78,14 @@ $id = $_GET['id'];
 
             // var linkURL = urlOrigin+"/database/item.json";
             var linkURL = "{{ env('APP_API') }}/api/item/itemDetail.php";
+            var priceHtml = '';
             $.post(linkURL, {id_item: myParam}, function(data) {
                 $('#imgItem').attr('src', data.img_item)
                 $('#nameItem').html(data.item_name)
-                var priceHtml = formatRP(data.price_hour)+'/Hour<br>';
-                priceHtml += formatRP(data.price_day)+'/Day<br>';
-                priceHtml += formatRP(data.price_week)+'/Week<br>';
-                priceHtml += formatRP(data.price_month)+'/Month';
+                if(data.price_hour != 0) priceHtml += formatRP(data.price_hour)+'/Hour<br>';
+                if(data.price_day != 0) priceHtml += formatRP(data.price_day)+'/Day<br>';
+                if(data.price_week != 0) priceHtml += formatRP(data.price_week)+'/Week<br>';
+                if(data.price_month != 0) priceHtml += formatRP(data.price_month)+'/Month';
                 $('#priceItem').html(priceHtml)
                 $('#descriptionItem').html(data.description)
                 $('#merkItem').html(data.merk)

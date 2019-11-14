@@ -26,12 +26,11 @@ $priceString = number_format($price);
         <input name="id_item" value="{{ $id }}" hidden>
         <input name="idStore" id="idStore" type="hidden">
         <div class="product-name">
-            <div class="name ">
+            <div class="name">
                 <span id="nameItem">loading...</span><br>
-                <span id="priceHourItem" style="font-size: 12px;color: red;">loading...</span><br>
-                <span id="priceDayItem" style="font-size: 12px;color: red;">loading...</span><br>
-                <span id="priceWeekItem" style="font-size: 12px; color: red;">loading...</span><br>
-                <span id="priceMonthItem" style="font-size: 12px;color: red;">loading...</span><br>
+                <div id="priceHtml" style="font-size: 12px; color: red;">
+                    <span>loading...</span>
+                </div>
             </div>
             <a href="#">
                 <div class="chat-button">
@@ -270,18 +269,21 @@ $priceString = number_format($price);
         });
 
         var linkURL = "{{ env('APP_API') }}/api/item/itemDetail.php";
+        var priceHtml = '';
         $.post(linkURL, {id_item: myParam}, function(data) {
-            $('#imgItem').attr('src', data.img_item)
-            $('#nameItem').html(data.item_name)
-            $('#priceHourItem').html(formatRP(data.price_hour) + '/Hour')
-            $('#priceHour').val(data.price_hour)
-            $('#priceDayItem').html(formatRP(data.price_day) + '/Day')
-            $('#priceDay').val(data.price_day)
-            $('#priceWeekItem').html(formatRP(data.price_week) + '/Week')
-            $('#priceWeek').val(data.price_week)
-            $('#priceMonthItem').html(formatRP(data.price_month) + '/Month')
-            $('#priceMonth').val(data.price_month)
-            $('#idStore').val(data.store.id_store)
+            if(data.price_hour != 0) priceHtml += formatRP(data.price_hour)+'/Hour<br>';
+            if(data.price_day != 0) priceHtml += formatRP(data.price_day)+'/Day<br>';
+            if(data.price_week != 0) priceHtml += formatRP(data.price_week)+'/Week<br>';
+            if(data.price_month != 0) priceHtml += formatRP(data.price_month)+'/Month';
+            $('#priceHtml').html(priceHtml);
+            
+            $('#imgItem').attr('src', data.img_item);
+            $('#nameItem').html(data.item_name);
+            $('#priceHour').val(data.price_hour);
+            $('#priceDay').val(data.price_day);
+            $('#priceWeek').val(data.price_week);
+            $('#priceMonth').val(data.price_month);
+            $('#idStore').val(data.store.id_store);
 
             var initPrice = eval($('#priceHour').val()) * eval($('#durasiJam').val());
             $('#harga_xhari').html(initPrice);
@@ -303,29 +305,37 @@ $priceString = number_format($price);
             total: $('#total_price').html(),
             delivery: $('#pengiriman').val(),
             id_store: $('#idStore').val(),
-            _token: "{{ csrf_token() }}"
+            user_id: user.id_user, item_id: myParam,
+            _token: "{{ csrf_token() }}",
         };
 
-        var linkURLPost = "{{ route('payment') }}";
-        window.location.href = linkURLPost+'?'+serialize(formData);
+        var linkAPICheckout = "{{ env('APP_API') }}/api/baskets/checkout.php";
+        $.post(linkAPICheckout, formData, function(data) {
+            console.log(data);
+            if(!data.error){
+                window.location.href = "{{ route('payment') }}";
+            }
+        })
     }
 
     function btnLanjutPembayaranDay() {
         var formData = {
-            pinjam: 'day',
-            id_user: user.id_user,
-            id_item: myParam,
+            pinjam: 'day', id_user: user.id_user, id_item: myParam,
             date_start: convertTglIndo($('#tglPinjam').val()),
             date_end: convertTglIndo($('#tglKembali').val()),
-            amount: $('#jml').val(),
-            total: $('#total_price').html(),
-            delivery: $('#pengiriman').val(),
-            id_store: $('#idStore').val(),
-            _token: "{{ csrf_token() }}"
+            amount: $('#jml').val(), total: $('#total_price').html(),
+            delivery: $('#pengiriman').val(), id_store: $('#idStore').val(),
+            user_id: user.id_user, item_id: myParam,
+            _token: "{{ csrf_token() }}",
         };
 
-        var linkURLPost = "{{ route('payment') }}";
-        window.location.href = linkURLPost+'?'+serialize(formData);
+        var linkAPICheckout = "{{ env('APP_API') }}/api/baskets/checkout.php";
+        $.post(linkAPICheckout, formData, function(data) {
+            console.log(data);
+            if(!data.error){
+                window.location.href = "{{ route('payment') }}";
+            }
+        })
     }
 
     function btnLanjutPembayaranWeek() {
@@ -339,11 +349,17 @@ $priceString = number_format($price);
             total: $('#total_price').html(),
             delivery: $('#pengiriman').val(),
             id_store: $('#idStore').val(),
-            _token: "{{ csrf_token() }}"
+            user_id: user.id_user, item_id: myParam,
+            _token: "{{ csrf_token() }}",
         };
 
-        var linkURLPost = "{{ route('payment') }}";
-        window.location.href = linkURLPost+'?'+serialize(formData);
+        var linkAPICheckout = "{{ env('APP_API') }}/api/baskets/checkout.php";
+        $.post(linkAPICheckout, formData, function(data) {
+            console.log(data);
+            if(!data.error){
+                window.location.href = "{{ route('payment') }}";
+            }
+        })
     }
 
     function btnLanjutPembayaranMonth() {
@@ -357,11 +373,17 @@ $priceString = number_format($price);
             total: $('#total_price').html(),
             delivery: $('#pengiriman').val(),
             id_store: $('#idStore').val(),
-            _token: "{{ csrf_token() }}"
+            user_id: user.id_user, item_id: myParam,
+            _token: "{{ csrf_token() }}",
         };
 
-        var linkURLPost = "{{ route('payment') }}";
-        window.location.href = linkURLPost+'?'+serialize(formData);
+        var linkAPICheckout = "{{ env('APP_API') }}/api/baskets/checkout.php";
+        $.post(linkAPICheckout, formData, function(data) {
+            console.log(data);
+            if(!data.error){
+                window.location.href = "{{ route('payment') }}";
+            }
+        })
     }
 
     function tambahi(){
@@ -413,7 +435,7 @@ $priceString = number_format($price);
 
     function convertTglIndo(data) {
         var split = data.split('-');
-        return split[1]+'-'+split[0]+'-'+split[2];
+        return split[2]+'-'+split[0]+'-'+split[1];
     }
 
     function serialize(obj) {
