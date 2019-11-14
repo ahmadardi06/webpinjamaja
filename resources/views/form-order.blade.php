@@ -57,6 +57,8 @@ $priceString = number_format($price);
             </div>
         </div>
 
+
+
         <div id="formHour" style="text-align: left;">
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-3 col-form-label">Durasi Jam</label>
@@ -67,11 +69,70 @@ $priceString = number_format($price);
             <div class="form-group row">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Tanggal</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control tgl" id="tanggalPinjamJam" placeholder="Set Tanggal Pinjam">
+                    <input type="text" class="form-control tgl" id="tanggalPinjamJam" placeholder="Set Tanggal Pinjam" onchange="cekJadwal()">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-3 col-form-label">Jadwal</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="Jam Berapa"  id="jadwalJam">
                 </div>
             </div>
         </div>
 
+<div class="modal fade" id="modalJadwal" tabindex="-1" role="dialog" aria-labelledby="modalJadwalTitle"
+    aria-hidden="true"  data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card card-default">
+                    <div class="card-header">Jadwal</div>
+                    <div class="card-body">
+                        <div class="align-left">
+                            <center>
+                                <button class="btn btn-primary">Dipilih</button>
+                                <button class="btn btn-secondary">Tersedia</button>
+                                <button class="btn btn-danger">Terisi</button>
+                            </center>
+                            <hr style="border-top: 0px">
+                            <button class="btn btn-secondary" id="btnJadwal0" onclick="set(this, 0)"><small>00.00 -<br>01.00</small></button>
+                            <button class="btn btn-secondary" id="btnJadwal1" onclick="set(this, 1)"><small>01.00 -<br>02.00</small></button>
+                            <button class="btn btn-secondary" id="btnJadwal2" onclick="set(this, 2)"><small>02.00 -<br>03.00</small></button>
+                            <button class="btn btn-secondary" id="btnJadwal3" onclick="set(this, 3)"><small>03.00 -<br>04.00</small></button>
+                            <button class="btn btn-secondary" id="btnJadwal4" onclick="set(this, 4)"><small>04.00 -<br>05.00</small></button>
+                            <button class="btn btn-secondary" id="btnJadwal5" onclick="set(this, 5)"><small>05.00 -<br>06.00</small></button>
+                            <hr style="border-top: 0px">
+                            <button class="btn btn-secondary" id="btnJadwal6" onclick="set(this, 6)"><small>06.00 -<br>07.00</small></button>
+                            <button class="btn btn-secondary" id="btnJadwal7" onclick="set(this, 7)"><small>07.00 -<br>08.00</small></button>
+                            <button class="btn btn-secondary" id="btnJadwal8" onclick="set(this, 8)"><small>08.00 -<br>09.00</small></button>
+                            <button class="btn btn-secondary" id="btnJadwal9" onclick="set(this, 9)"><small>09.00 -<br>10.00</small></button>
+                            <button class="btn btn-secondary" id="btnJadwal10" onclick="set(this, 10)"><small>10.00 -<br>11.00</small></button>
+                            <button class="btn btn-secondary" id="btnJadwal11" onclick="set(this, 11)"><small>11.00 -<br>12.00</small></button>
+                            <hr style="border-top: 0px">
+                            <button class="btn btn-secondary" id="btnJadwal12" onclick="set(this, 12)"><small>12.00 -<br>13.00</small></button>
+                            <button class="btn btn-secondary" id="btnJadwal13" onclick="set(this, 13)"><small>13.00 -<br>14.00</small></button>
+                            <button class="btn btn-secondary" id="btnJadwal14" onclick="set(this, 14)"><small>14.00 -<br>15.00</small></button>
+                            <button class="btn btn-secondary" id="btnJadwal15" onclick="set(this, 15)"><small>15.00 -<br>16.00</small></button>
+                            <button class="btn btn-secondary" id="btnJadwal16" onclick="set(this, 16)"><small>16.00 -<br>17.00</small></button>
+                            <button class="btn btn-secondary" id="btnJadwal17" onclick="set(this, 17)"><small>17.00 -<br>18.00</small></button>
+                            <hr style="border-top: 0px">
+                            <button class="btn btn-secondary" id="btnJadwal18" onclick="set(this, 18)"><small>18.00 -<br>19.00</small></button>
+                            <button class="btn btn-secondary" id="btnJadwal19" onclick="set(this, 19)"><small>19.00 -<br>20.00</small></button>
+                            <button class="btn btn-secondary" id="btnJadwal20" onclick="set(this, 20)"><small>20.00 -<br>21.00</small></button>
+                            <button class="btn btn-secondary" id="btnJadwal21" onclick="set(this, 21)"><small>21.00 -<br>22.00</small></button>
+                            <button class="btn btn-secondary" id="btnJadwal22" onclick="set(this, 22)"><small>22.00 -<br>23.00</small></button>
+                            <button class="btn btn-secondary" id="btnJadwal23" onclick="set(this, 23)"><small>23.00 -<br>24.00</small></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="setJam()">Save</button>
+            </div> 
+        </div>
+    </div>
+</div>
         <div id="formDay" style="text-align: left;">
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-3 col-form-label">Pinjam</label>
@@ -289,11 +350,13 @@ $priceString = number_format($price);
             var initTotalPrice = initPrice * eval($('#xjml').html());
             $('#total_price').html(initTotalPrice);
         })
-
     })
 
     function btnLanjutPembayaranHour() {
         var formData = {
+            pinjam: 'hour',
+            time_rent: 'jam',
+            duration_rent: jamTotal,
             pinjam: 'hour',
             id_user: user.id_user,
             id_item: myParam,
@@ -425,5 +488,69 @@ $priceString = number_format($price);
       return str.join("&");
     }
 
+</script>
+
+<script type="text/javascript">
+    jamValue = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    function set(btn, jam) {
+        if(jamValue[jam] == 0){
+            jamValue[jam] = 1;
+            // btn.style.backgroundColor = '#007bff';
+            $(btn).removeClass("btn-secondary");
+            $(btn).addClass("btn-primary");
+        } else {
+            jamValue[jam] = 0;
+            // btn.style.backgroundColor = 'grey';
+            $(btn).removeClass("btn-primary");
+            $(btn).addClass("btn-secondary");
+        }
+    }
+    function setJam() {
+        jamTotal = '';
+        durasi = 0;
+        for (var i = 0; i < jamValue.length; i++) {
+            if(jamValue[i] == 1) {
+                jamTotal = jamTotal + '' + i + '-' + (i+1) + ';';
+                durasi+=1;
+            }
+        }
+        $('#durasiJam').val(durasi);
+        hitungDurasiJam();
+        $('#jadwalJam').val(jamTotal);
+        $('#modalJadwal').modal('hide');
+    }
+
+    $('#jadwalJam').on('click', function () {
+        if($('#tanggalPinjamJam').val() == '')
+            alert('isi tanggal terlebih dahulu');
+        else
+            $('#modalJadwal').modal('show');   
+    });
+ 
+    function cekJadwal() {
+        $('#jadwalJam').val('');
+        jamValue = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        for (var i = 0; i < jamValue.length; i++) {
+            if($('#btnJadwal'+i).hasClass('btn-danger') == true){
+                $('#btnJadwal'+i).removeClass("btn-danger");
+                $('#btnJadwal'+i).addClass("btn-secondary");
+                $('#btnJadwal'+i).attr("disabled", false);
+            }
+        }
+
+        var linkGetJadwal = "{{ env('APP_API') }}/api/item/schedule/getJadwal.php";
+        var tgl = $('#tanggalPinjamJam').val();
+        $.post(linkGetJadwal, {id_item: myParam, date_transaction_start: tgl}, function(data) {
+            for (var i = 0; i < data.length; i++) {
+                var arrayJam = data[i].split(';');
+                for (var j = 0; j < arrayJam.length; j++) {
+                    var jamAwal = arrayJam[j].split('-');
+                    $('#btnJadwal'+jamAwal[0]).removeClass("btn-secondary");
+                    $('#btnJadwal'+jamAwal[0]).addClass("btn-danger");
+                    $("#btnJadwal"+jamAwal[0]).attr("disabled", true);
+                }
+            }
+        })
+    }
 </script>
 @endsection
