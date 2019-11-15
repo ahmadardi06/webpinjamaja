@@ -94,6 +94,10 @@
 		    		} else {
 		    			if(tokenOTP == localStorage.getItem('tokenPhone')) {
                             $('#msgVerfikasi').html('Phone successfully verified.').attr('style', 'color: green;');
+                            var linkUpdate = "{{ env('APP_API') }}/api/baskets/updateverifikasi.php";
+                            $.post(linkUpdate, {action: 'verifikasi-telepon', id_user: user.id_user, email: formData.phone}, function(data){
+                                console.log(data);
+                            })
                         } else {
                             $('#msgVerfikasi').html('Token mismatch!').attr('style', 'color: red;');
                         }

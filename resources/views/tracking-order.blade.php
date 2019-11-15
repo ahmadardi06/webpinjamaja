@@ -105,9 +105,6 @@
                 html += '</div>';
                 html += '<hr>';
                 html += '<div class="row">';
-                    html += '<div class="col col-sm-6" style="font-size: 16px; font-weight: bold;">';
-                        html += 'Total: '+price;
-                    html += '</div>';
                     html += '<div class="col col-sm-6" style="text-align: right;">';
                         if(data.status_order == 'pending') {
                             if(data.payment == 'LinkAja') {

@@ -26,6 +26,17 @@
 			if(userInfo == null){
 				window.location.href = "{{ route('login') }}";
 			} else {
+				var linkUser = "{{ env('APP_API') }}/api/baskets/updateverifikasi.php?id_user="+user.id_user;
+				$.get(linkUser, function(data){
+					if(!data.error){
+						if(data.data.email_verified == 'false') {
+							$('#linkInvestor').html('Sewakan Barang');
+						} else {
+							$('#linkInvestor').html('Toko Saya');
+						}
+					}
+				})
+
 				$('#linkInvestor').on('click', function(){
 					var linkURL = "{{ env('APP_API') }}/api/store/addStore.php";
 					$.post(linkURL, {id_user: user.id_user}, function(data){
