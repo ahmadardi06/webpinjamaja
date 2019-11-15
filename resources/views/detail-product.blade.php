@@ -60,6 +60,15 @@ $id = $_GET['id'];
         </div>
     </div>
     <a id="orderItem" href="{{ route('form-order') }}" class="btn btn-red btn-danger">Order Sekarang</a>
+    <hr>
+    <div style="margin: 3px; padding: 3px;">
+        <div class="text-left">
+            <h6 style="font-weight: bold;">Item pada toko yang sama</h6>
+        </div>
+        <div id="listItems" class="text-left">
+            <span>loading...</span>
+        </div>
+    </div>
 </div>
 @endsection
 
@@ -68,9 +77,31 @@ $id = $_GET['id'];
         var urlParams = new URLSearchParams(window.location.search);
         var myParam = urlParams.get('id');
         var urlOrigin = window.location.origin;
+        var storeId;
 
         function formatRP(data) {
             return 'Rp'+parseInt(data).toLocaleString(); 
+        }
+
+        function renderListDOM(data) {
+            var price = 'Rp'+parseInt(data.price_day).toLocaleString()+'/hari'; 
+            var html = '';
+                html += '<div class="item-category list-for-rent">';
+                html += '<a href="{{ route('detail-product') }}?id='+data.id_item+'" class="click-link">';
+                    html += '<div class="one-list-for-rent">';
+                        html += '<figure class="pic-for-rent">';
+                            html += '<img src="'+data.img_item+'" class="">';
+                        html += '</figure>';
+                        html += '<div class="desc-for-rent">';
+                            html += '<span class="title-of-rent">'+data.item_name+'</span>';
+                            html += '<span style="font-size: 12px;">Stok '+data.stock+'</span>';
+                            html += '<span style="font-size: 18px; font-weight: bold">'+price+'</span>';
+                            html += '<button class="btn btn-sm btn-primary">Pinjam Sekarang</button>';
+                        html += '</div>';
+                    html += '</div>';
+                html += '</a>';
+            html += '</div>';
+            return html;
         }
 
         $(function(){
@@ -88,16 +119,36 @@ $id = $_GET['id'];
                 if(data.price_month != 0) priceHtml += formatRP(data.price_month)+'/Month';
                 $('#priceItem').html(priceHtml)
                 $('#descriptionItem').html(data.description)
-                $('#merkItem').html(data.merk)
-                $('#sizeItem').html(data.size)
-                $('#itemStatusItem').html(data.item_status)
-                $('#colorItem').html(data.color)
+                
+                $('#merkItem').html('Merk '+data.merk)
+                $('#itemStatusItem').html(data.delivery)
+                if(data.selling == 'Ya') {
+                    $('#colorItem').html('Bisa Dibeli');
+                } else {
+                    $('#colorItem').html('Tidak Dibeli');
+                }
+                $('#sizeItem').html('Sisa Stock '+data.stock)
+                
                 $('#linkInvestor').attr('href', $('#linkInvestor').attr('href')+'?id='+data.store.id_store)
 
                 $('#imgStore').attr('src', data.store.img_store)
                 $('#nameStore').html(data.store.store_name)
                 $('#addressStore').html(data.store.address)
+
+                var linkURLItems = "{{ env('APP_API') }}/api/store/readItemStore.php";
+                $.post(linkURLItems, {id_store: data.store.id_store}, function(data) {
+                    if(!data.error) {
+                        var html = '';
+                        for(var i=0; i<data.items.length; i++) {
+                            if(i < 3) {
+                                html += renderListDOM(data.items[i]);
+                            }
+                        }
+                        $('#listItems').html(html);
+                    }
+                })
             })
+
         })
     </script>
 @endsection
