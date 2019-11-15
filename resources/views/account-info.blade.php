@@ -28,6 +28,9 @@
         </div>
         <!-- <button type="submit" style="width: 50%; background-color: red;" class="btn  btn-danger">Update</button> -->
         <button id="btnUpdate" type="button" style="width: 50%; background-color: red;" class="btn btn-danger">Edit Toko</button>
+        <br>
+        <br>
+        <a href="{{ route('account') }}" style="margin-left: 20px; text-decoration: none;">kembali</a>
     </div>
     <!-- </form> -->
 </div>
@@ -67,7 +70,7 @@
                 var linkURL = "{{ env('APP_API') }}/api/user/editUser.php";
                 $.post(linkURL, formData, function(data){
                     if(!data.error) {
-                        window.location.reload();
+                        window.location.href = "{{ route('account') }}";
                     }
                     $('#message').html(data.message);
                 })

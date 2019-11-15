@@ -39,6 +39,7 @@
             
             <!-- <button id="buttonBayar" type="submit" class="btn btn-red btn-danger">Bayar Sekarang</button> -->
             <button id="buttonBayarMidtrans" type="submit" class="btn btn-red btn-danger">Bayar Sekarang</button>
+            <a style="margin-top: 10px;" href="{{ route('list-item') }}?category=all" class="btn btn-red btn-danger">Tambah Item Lain</a>
 
         </div>
     </div>

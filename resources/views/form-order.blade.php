@@ -41,18 +41,24 @@ $priceString = number_format($price);
         </div>
 
         <div class="row">
+            <span id="msgPilihan" style="color: red; margin-left: 20px; margin-top: 8px;"></span>
             <div class="form-group" style="margin-left: 20px; margin-top: 10px;">
-                <input checked type="radio" class="radioButton" name="radioButton" value="hour"> Hour
-                <input type="hidden" name="priceHour" id="priceHour">
-                &nbsp;&nbsp;
-                <input type="radio" class="radioButton" name="radioButton" value="day"> Day
-                <input type="hidden" name="priceDay" id="priceDay">
-                &nbsp;&nbsp;
-                <input type="radio" class="radioButton" name="radioButton" value="week"> Week
-                <input type="hidden" name="priceWeek" id="priceWeek">
-                &nbsp;&nbsp;
-                <input type="radio" class="radioButton" name="radioButton" value="month"> Month
-                <input type="hidden" name="priceMonth" id="priceMonth">
+                <label id="pilihHour">
+                    <input type="radio" class="radioButton" name="radioButton" value="hour"> Hour
+                    <input type="hidden" name="priceHour" id="priceHour">
+                </label>
+                <label id="pilihDay">
+                    <input type="radio" class="radioButton" name="radioButton" value="day"> Day
+                    <input type="hidden" name="priceDay" id="priceDay">
+                </label>
+                <label id="pilihWeek">
+                    <input type="radio" class="radioButton" name="radioButton" value="week"> Week
+                    <input type="hidden" name="priceWeek" id="priceWeek">
+                </label>
+                <label id="pilihMonth">
+                    <input type="radio" class="radioButton" name="radioButton" value="month"> Month
+                    <input type="hidden" name="priceMonth" id="priceMonth">
+                </label>
             </div>
         </div>
 
@@ -270,17 +276,22 @@ $priceString = number_format($price);
     }
 
     $(function() {
-        $('#formHour').show();
+        $('#formHour').hide();
         $('#formDay').hide();
         $('#formWeek').hide();
         $('#formMonth').hide();
+        
+        $('#pilihHour').hide();
+        $('#pilihDay').hide();
+        $('#pilihWeek').hide();
+        $('#pilihMonth').hide();
 
         $('.radioButton').on('click', function(){
             var thisValue = $(this).val();
             console.log(thisValue);
 
             if(thisValue == 'hour') {
-                $('#btnLanjutPembayaran').html('<button type="button" id="btnBayarHour" class="btn btn-red btn-danger">Lanjut Pembayaran</button>').bind('click', btnLanjutPembayaranHour);
+                $('#btnLanjutPembayaran').html('<button type="button" onmousedown="btnLanjutPembayaranHour()" id="btnBayarHour" class="btn btn-red btn-danger">Lanjut Pembayaran</button>');
                 $('#xjml').html('1');
                 $('#jml_hari').html('1 Hour')
                 $('#harga_xhari').html($('#priceHour').val())
@@ -290,7 +301,7 @@ $priceString = number_format($price);
                 $('#formWeek').hide();
                 $('#formMonth').hide();
             } else if(thisValue == 'day') {
-                $('#btnLanjutPembayaran').html('<button type="button" id="btnBayarDay" class="btn btn-red btn-danger">Lanjut Pembayaran</button>').bind('click', btnLanjutPembayaranDay);
+                $('#btnLanjutPembayaran').html('<button type="button" onmousedown="btnLanjutPembayaranDay()" id="btnBayarDay" class="btn btn-red btn-danger">Lanjut Pembayaran</button>');
                 $('#xjml').html('1');
                 $('#jml_hari').html('1 Day')
                 $('#harga_xhari').html($('#priceDay').val())
@@ -332,10 +343,24 @@ $priceString = number_format($price);
         var linkURL = "{{ env('APP_API') }}/api/item/itemDetail.php";
         var priceHtml = '';
         $.post(linkURL, {id_item: myParam}, function(data) {
-            if(data.price_hour != 0) priceHtml += formatRP(data.price_hour)+'/Hour<br>';
-            if(data.price_day != 0) priceHtml += formatRP(data.price_day)+'/Day<br>';
-            if(data.price_week != 0) priceHtml += formatRP(data.price_week)+'/Week<br>';
-            if(data.price_month != 0) priceHtml += formatRP(data.price_month)+'/Month';
+            console.log(data)
+            if(data.price_hour != 0) {
+                priceHtml += formatRP(data.price_hour)+'/Hour<br>';
+                $('#pilihHour').show();
+            }
+            if(data.price_day != 0) {
+                priceHtml += formatRP(data.price_day)+'/Day<br>';
+                $('#pilihDay').show();
+            }
+            if(data.price_week != 0) {
+                priceHtml += formatRP(data.price_week)+'/Week<br>';
+                $('#pilihWeek').show();
+            }
+            if(data.price_month != 0) {
+                priceHtml += formatRP(data.price_month)+'/Month';
+                $('#pilihMonth').show();
+            }
+
             $('#priceHtml').html(priceHtml);
             
             $('#imgItem').attr('src', data.img_item);
@@ -372,13 +397,22 @@ $priceString = number_format($price);
             _token: "{{ csrf_token() }}",
         };
 
-        var linkAPICheckout = "{{ env('APP_API') }}/api/baskets/checkout.php";
-        $.post(linkAPICheckout, formData, function(data) {
-            console.log(data);
-            if(!data.error){
-                window.location.href = "{{ route('payment') }}";
-            }
-        })
+        var pilihMethod = $("input[name='radioButton']:checked").val();
+        console.log(pilihMethod);
+        if(pilihMethod) {
+            console.log('udah')
+            var linkAPICheckout = "{{ env('APP_API') }}/api/baskets/checkout.php";
+            $.post(linkAPICheckout, formData, function(data) {
+                console.log(data);
+                if(!data.error){
+                    window.location.href = "{{ route('payment') }}";
+                }
+            })
+        } else {
+            console.log('belum')
+            $('#msgPilihan').html('Pilih Durasi Pinjam');
+        }
+
     }
 
     function btnLanjutPembayaranDay() {
@@ -392,13 +426,22 @@ $priceString = number_format($price);
             _token: "{{ csrf_token() }}",
         };
 
-        var linkAPICheckout = "{{ env('APP_API') }}/api/baskets/checkout.php";
-        $.post(linkAPICheckout, formData, function(data) {
-            console.log(data);
-            if(!data.error){
-                window.location.href = "{{ route('payment') }}";
-            }
-        })
+        var pilihMethod = $("input[name='radioButton']:checked").val();
+        console.log(pilihMethod);
+        if(pilihMethod) {
+            console.log('udah')
+            var linkAPICheckout = "{{ env('APP_API') }}/api/baskets/checkout.php";
+            $.post(linkAPICheckout, formData, function(data) {
+                console.log(data);
+                if(!data.error){
+                    window.location.href = "{{ route('payment') }}";
+                }
+            })
+        } else {
+            console.log('belum')
+            $('#msgPilihan').html('Pilih Durasi Pinjam');
+        }
+
     }
 
     function btnLanjutPembayaranWeek() {
@@ -416,13 +459,22 @@ $priceString = number_format($price);
             _token: "{{ csrf_token() }}",
         };
 
-        var linkAPICheckout = "{{ env('APP_API') }}/api/baskets/checkout.php";
-        $.post(linkAPICheckout, formData, function(data) {
-            console.log(data);
-            if(!data.error){
-                window.location.href = "{{ route('payment') }}";
-            }
-        })
+        var pilihMethod = $("input[name='radioButton']:checked").val();
+        console.log(pilihMethod);
+        if(pilihMethod) {
+            console.log('udah')
+            var linkAPICheckout = "{{ env('APP_API') }}/api/baskets/checkout.php";
+            $.post(linkAPICheckout, formData, function(data) {
+                console.log(data);
+                if(!data.error){
+                    window.location.href = "{{ route('payment') }}";
+                }
+            })
+        } else {
+            console.log('belum')
+            $('#msgPilihan').html('Pilih Durasi Pinjam');
+        }
+
     }
 
     function btnLanjutPembayaranMonth() {
@@ -440,13 +492,22 @@ $priceString = number_format($price);
             _token: "{{ csrf_token() }}",
         };
 
-        var linkAPICheckout = "{{ env('APP_API') }}/api/baskets/checkout.php";
-        $.post(linkAPICheckout, formData, function(data) {
-            console.log(data);
-            if(!data.error){
-                window.location.href = "{{ route('payment') }}";
-            }
-        })
+        var pilihMethod = $("input[name='radioButton']:checked").val();
+        console.log(pilihMethod);
+        if(pilihMethod) {
+            console.log('udah')
+            var linkAPICheckout = "{{ env('APP_API') }}/api/baskets/checkout.php";
+            $.post(linkAPICheckout, formData, function(data) {
+                console.log(data);
+                if(!data.error){
+                    window.location.href = "{{ route('payment') }}";
+                }
+            })
+        } else {
+            console.log('belum')
+            $('#msgPilihan').html('Pilih Durasi Pinjam');
+        }
+
     }
 
     function tambahi(){

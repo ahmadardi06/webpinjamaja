@@ -22,7 +22,7 @@
                             <input type="password" id="confirmpass" name="confirmpass" class="form-control" placeholder="Password...">
                         </div>
                         <div class="form-group">
-                            <button id="idLogin" class="btn" style="background-color: red; color: white; border-radius: 20px;">Changubah</button>
+                            <button id="idLogin" class="btn" style="background-color: red; color: white; border-radius: 20px;">Simpan</button>
                             <a href="{{ route('account') }}" style="margin-left: 20px; text-decoration: none;">kembali</a>
                         </div>
                     </div>

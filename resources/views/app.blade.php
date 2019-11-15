@@ -6,8 +6,11 @@
 
 @section('content')
 <div class="container">
-    <div class="item-category" id="menuItem">
+    <div class="" id="menuItem">
         <span>loading...</span>
+    </div>
+    <div style="margin-bottom: 10px;" class="text-right">
+        <a href="{{ route('list-item') }}?category=all" style=" border: 1px solid red; padding: 5px; border-radius: 5px; text-decoration: none; color: red;">Item Baru</a>
     </div>
 
     <div class="item-category for-carousel">

@@ -6,58 +6,45 @@
 @endsection
 
 @section('content')
-    <div class="tab">
-        <div class="title-page" >List Item</div>
-        <a href="{{ route('list-item') }}?category=all" class="tablinks btn">All</a>
-        <!-- <button class="tablinks" data-toggle="modal" data-target="#myModal"> -->
-            <!-- All -->
-        <!-- </button> -->
+<div class="tab">
+    <div class="title-page" >List Item</div>
+    <!-- <a href="{{ route('list-item') }}?category=all" class="tablinks btn">All</a> -->
+    <a href="javascript:;" id="btnFilterSearch" class="tablinks btn">Filter</a>
+</div>
+
+<div class="container" id="listItem">
+    <div class="text-center">
+        <span>loading...</span>
     </div>
+</div>
 
-    <div class="container" id="listItem">
+<div class="modal" id="myModalFilterSearch">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="titleModalFilter" class="modal-title">Filter</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            
+            <div class="modal-body">
+                <label class="control-label">Cari Barang</label>
+                <input type="text" value="" name="filterNama" id="filterNama" placeholder="enter nama barang" class="form-control tgl"><br>
 
-        <div class="text-center">
-            <span>loading...</span>
-        </div>
-
-        <!-- The Modal -->
-        <div class="modal" id="myModal">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                    <h4 class="modal-title">Filter</h4>
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-                    </div>
-                    
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <form action="#">
-                            <label>Tanggal Pinjam</label>
-                            <input type="text" name="tgl-pinjam" class="form-control tgl"><br>
-    
-                            <label>Tanggal Kembali</label>
-                            <input type="text" name="tgl-kembali" class="form-control tgl"><br>
-
-                            <label>Lokasi</label>
-                            <input type="text" name="lokasi" class="form-control"><br>
-
-                            <label>Merek</label>
-                            <input type="text" name="Merek" class="form-control">                            
-                        </form>
-                        
-                    </div>
-                    
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Terapkan</button>
-                    </div>
-                    
-                </div>
+                <label>Lokasi Barang</label>
+                <select class="form-control" name="filterLokasi" id="filterLokasi">
+                    <option value="">== pilih kota ==</option>
+                    <option value="Surabaya">Surabaya</option>
+                    <option value="Sidoarjo">Sidoarjo</option>
+                </select>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-success" id="btnTerapkan">Terapkan</button>
+                <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Batal</button>
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @section('js')
@@ -89,11 +76,6 @@
     }
 
     $(function() {
-        // $('.tgl').datepicker({ format: 'dd-mm-yyyy' }).on('hide', function(event) {
-            // event.preventDefault();
-            // event.stopPropagation();
-        // });
-
         if(myParam != 'all') {
             var linkURL = "{{ env('APP_API') }}/api/item/itemCategory.php";
             var formData = {id_category: myParam};
@@ -101,13 +83,60 @@
             var linkURL = "{{ env('APP_API') }}/api/item/readPaging.php?page=1";
             var formData = {};
         }
-        $.post(linkURL, {id_category: myParam}, function(data) {
+
+        console.log(linkURL)
+        console.log(myParam)
+        $.post(linkURL, formData, function(data) {
             if(!data.error){
                 var html = '';
                 for(var i=0; i<data.items.length; i++) {
                     html += renderDOM(data.items[i]);
                 }
                 $('#listItem').html(html);
+            }
+        })
+
+        var linkAPICity = "{{ env('APP_API') }}/api/item/readCity.php";
+        $.get(linkAPICity, function(data) {
+            var html = '<option value="">== pilih kota ==</option>';
+            if(!data.error) {
+                for(var i=0; i<data.city.length; i++) {
+                    if(data.city[i].city != null) {
+                        html += '<option value="'+data.city[i].city+'">'+data.city[i].city+'</option>';
+                    }
+                }
+            }
+            $('#filterLokasi').html(html);
+        })
+
+        $('#btnFilterSearch').on('click', function(){
+            $('#myModalFilterSearch').modal('show');
+        })
+        
+        $('#btnTerapkan').on('click', function(){
+            var namaFilter = $('#filterNama').val(), lokasiFilter = $('#filterLokasi').val();
+            console.log({namaFilter, lokasiFilter})
+            if(namaFilter == '' && lokasiFilter == '') {
+                $('#titleModalFilter').html('Nama barang atau lokasi harus di isi.');
+            } else {
+                $('#myModalFilterSearch').modal('hide');
+
+                var linkItemCategory = '{{env("APP_API")}}/api/item/itemCategory.php';
+                $.post(linkItemCategory, {id_category: myParam == 'all' ? '8' : myParam, city: lokasiFilter}, function(data){
+                    console.log(data);
+                    var html = '';
+                    if(!data.error){
+                        if(data.items.length != 0) {
+                            for(var i=0; i<data.items.length; i++){
+                                html += renderDOM(data.items[i]);
+                            }
+                        } else {
+                            html += '<span>Item tidak ditemukan.</span>';
+                        }
+
+                        $('#listItem').html(html);
+                    }
+                })
             }
         })
     })

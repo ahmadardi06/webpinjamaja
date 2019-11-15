@@ -71,7 +71,7 @@
                 var formData = { 
                     token: token, 
                     name: user.name, 
-                    email: user.email, 
+                    email: $('#txtEmail').val(), 
                     _token: '{{ csrf_token() }}' 
                 };
                 if(!popUpModal) {
