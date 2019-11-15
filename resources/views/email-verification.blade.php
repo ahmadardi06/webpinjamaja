@@ -91,6 +91,10 @@
 		    		} else {
 		    			if(tokenOTP == localStorage.getItem('tokenEmail')) {
                             $('#msgVerfikasi').html('Email successfully verified.').attr('style', 'color: green;');
+                            var linkUpdate = "{{ env('APP_API') }}/api/baskets/updateverifikasi.php";
+                            $.post(linkUpdate, {action: 'verifikasi-email', id_user: user.id_user, email: formData.email}, function(data){
+                                console.log(data);
+                            })
                         } else {
                             $('#msgVerfikasi').html('Token mismatch!').attr('style', 'color: red;');
                         }
