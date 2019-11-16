@@ -17,6 +17,7 @@
                 </div>
                 <div class="input-text">
                     <input type="file" name="imgItem" id="imgItem" class="form-group" onchange="encodeImageFileAsURL(this)">
+                    <input type="hidden" name="imgItemValue" id="imgItemValue" value="">
                     <div id="imgPreview" class="form-group" style="text-align: left; margin-left: 20px;"></div>
                 </div>
             </div>
@@ -189,6 +190,7 @@
         reader.onloadend = function() {
             console.log('RESULT', reader.result)
             $('#imgPreview').html('<img src="'+reader.result+'" class="img-thumbnail" width="100px"/>');
+            $('#imgItemValue').val(reader.result);
         }
     
         reader.readAsDataURL(file);
@@ -219,7 +221,7 @@
                 category: $('#categoryItem').val(),
                 stock: $('#stockItem').val(),
                 merk: $('#merkItem').val(),
-                img_item: $('#imgPreview img').attr('src'),
+                img_item: $('#imgItemValue').val(),
                 selling: $('#beliItem').val(),
                 color: $('#warnaItem').val(),
                 delivery: $('#deliveryItem').val(),
