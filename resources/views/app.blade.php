@@ -66,16 +66,16 @@
             for(var i=0; i<data.length; i++) {
                 if(i == 0){
                     indicator += '<li data-target="#demo" data-slide-to="'+i+'" class="active"></li>';
-                    slider += '<div class="carousel-item active">';
-                        slider += '<img src="'+data[i].img_item+'" alt="'+data[i].item_name+'">';
+                    slider += '<div class="carousel-item active" style="object-fit: cover;">';
+                        slider += '<img class="img-responsive" src="'+data[i].img_item+'" alt="'+data[i].item_name+'">';
                         slider += '<div class="carousel-caption">';
                             slider += '<h3>'+data[i].item_name+'</h3>';
                         slider += '</div>';
                     slider += '</div>';
                 } else {
                     indicator += '<li data-target="#demo" data-slide-to="'+i+'"></li>';
-                    slider += '<div class="carousel-item">';
-                        slider += '<img src="'+data[i].img_item+'" alt="'+data[i].item_name+'">';
+                    slider += '<div class="carousel-item" style="object-fit: cover;">';
+                        slider += '<img style="object-fit: cover;" class="img-responsive" src="'+data[i].img_item+'" alt="'+data[i].item_name+'">';
                         slider += '<div class="carousel-caption">';
                             slider += '<h3>'+data[i].item_name+'</h3>';
                         slider += '</div>';

@@ -14,6 +14,7 @@
 Auth::routes();
 
 Route::get('/', 'AppController@index')->name('app');
+Route::get('/privacy', 'AppController@privacy')->name('privacy');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/activity', 'ActivityController@index')->name('activity');
 Route::get('/investation', 'InvestationController@index')->name('investation');
