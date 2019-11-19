@@ -25,4 +25,9 @@ class RentProductController extends Controller
     {
         return view('rent-product');
     }
+
+    public function item()
+    {
+        return view('store-item');
+    }
 }

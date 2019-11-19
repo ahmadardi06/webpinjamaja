@@ -80,7 +80,7 @@
                         @endif
                     </div>
                     <div class="menu-text">
-                        <span>Ivestasi</span>
+                        <span>Investasi</span>
                     </div>
                 </div>
             </a>

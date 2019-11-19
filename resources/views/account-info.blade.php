@@ -5,10 +5,15 @@
 @endsection
 
 @section('content')
-
 <div class="container">
     <div class="profile-pic">
         <img id="userPict" src="{{ asset('tema/img/img1.jpg') }}">
+    </div>
+    <div class="row text-left" style="margin: 0px 0px 15px 0px;">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile" accept="image/*">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
     </div>
     <span id="message"></span>
     <!-- <form action="{{ route('account') }}" class="form"> -->
@@ -39,6 +44,35 @@
 @section('js')
     <script>
         var linkOrigin = window.location.origin;
+
+        function encodeImageFileAsURL(element) {
+            var file = element.files[0];
+            var reader = new FileReader();
+            reader.onloadend = function() {
+                $('#userPict').attr('src', reader.result);
+            }
+            reader.readAsDataURL(file);
+            handleFileSelect(element);
+        }
+
+        function handleFileSelect(evt) {
+          var f = evt.files[0];
+          var reader = new FileReader();
+          reader.onload = (function(theFile) {
+            return function(e) {
+              var binaryData = e.target.result;
+              var base64String = window.btoa(binaryData);
+              $('#imgItemValue').val(base64String);
+            };
+          })(f);
+          reader.readAsBinaryString(f);
+        }
+
+        $(".custom-file-input").on("change", function() {
+          var fileName = $(this).val().split("\\").pop();
+          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+          encodeImageFileAsURL(this);
+        });
 
         $(function(){
             var userInfo = localStorage.getItem('user');
