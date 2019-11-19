@@ -22,7 +22,8 @@ Route::get('/notification', 'NotificationController@index')->name('notification'
 Route::get('/account', 'AccountController@index')->name('account');
 Route::get('/list-item', 'ListItemController@index')->name('list-item');
 Route::get('/tracking-order', 'TrackingOrderController@index')->name('tracking-order');
-// Route::get('/tracking-order-investor', 'TrackingOrderController@investor')->name('tracking-order-investor');
+Route::get('/tracking-order-investor', 'TrackingOrderController@investor')->name('tracking-order-investor');
+
 Route::get('/account-info', 'AccountInfoController@index')->name('account-info');
 Route::get('/account-verification', 'AccountVerificationController@index')->name('account-verification');
 Route::get('/email-verification', 'EmailVerificationController@index')->name('email-verification');
@@ -38,6 +39,7 @@ Route::get('/after-payment', 'AfterPaymentController@index')->name('after-paymen
 Route::get('/change-pass', 'AccountController@change')->name('change-pass');
 
 Route::get('/rent-product', 'RentProductController@index')->name('rent-product');
+Route::get('/rent-product-item', 'RentProductController@item')->name('rent-product-item');
 Route::get('/preview-item', 'PreviewItemController@index')->name('preview-item');
 Route::get('/add-item', 'AddItemController@index')->name('add-item');
 

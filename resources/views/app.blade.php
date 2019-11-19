@@ -100,7 +100,13 @@
         }
 
         function renderListDOM(data) {
-            var price = 'Rp'+parseInt(data.price_day).toLocaleString()+'/hari'; 
+            var htmlPrice = '';
+            if(data.price_hour != 0) { htmlPrice = 'Rp'+parseInt(data.price_hour).toLocaleString()+'/jam'; }
+            if(data.price_day != 0) { htmlPrice = 'Rp'+parseInt(data.price_day).toLocaleString()+'/hari'; }
+            if(data.price_week != 0) { htmlPrice = 'Rp'+parseInt(data.price_week).toLocaleString()+'/minggu'; }
+            if(data.price_month != 0) { htmlPrice = 'Rp'+parseInt(data.price_month).toLocaleString()+'/bulan'; }
+
+            var price = htmlPrice;
             var html = '';
                 html += '<div class="item-category list-for-rent">';
                 html += '<a href="{{ route('detail-product') }}?id='+data.id_item+'" class="click-link">';

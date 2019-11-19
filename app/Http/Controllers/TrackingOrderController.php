@@ -26,4 +26,9 @@ class TrackingOrderController extends Controller
     {
         return view('tracking-order');
     }
+
+    public function investor()
+    {
+        return view('tracking-investor');
+    }
 }

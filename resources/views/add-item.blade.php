@@ -55,22 +55,22 @@
                         <input type="checkbox" class="custom-control-input" id="price_jam" onclick="priceJam(this)">
                         <label class="custom-control-label" for="price_jam">Jam</label>
                     </div>
-                    <input id="form_price_jam" type="text" class="form-group" name="price_jam" placeholder="Harga per jam" style="margin-left: 24px;" hidden="hidden">
+                    <input id="form_price_jam" value="0" type="text" class="form-group" name="price_jam" placeholder="Harga per jam" style="margin-left: 24px;" hidden="hidden">
                     <div class="custom-control custom-checkbox mb-3" style="margin-left: 24px;">
                         <input type="checkbox" class="custom-control-input" id="price_hari" onclick="priceHari(this)">
                         <label class="custom-control-label" for="price_hari">Hari</label>
                     </div>
-                    <input id="form_price_hari" type="text" class="form-group" name="price_hari" placeholder="Harga per hari" style="margin-left: 24px;" hidden="hidden">
+                    <input id="form_price_hari" value="0" type="text" class="form-group" name="price_hari" placeholder="Harga per hari" style="margin-left: 24px;" hidden="hidden">
                     <div class="custom-control custom-checkbox mb-3" style="margin-left: 24px;">
                         <input type="checkbox" class="custom-control-input" id="price_minggu" onclick="priceMinggu(this)">
                         <label class="custom-control-label" for="price_minggu">Minggu</label>
                     </div>
-                    <input id="form_price_minggu" type="text" class="form-group" name="price_minggu" placeholder="Harga per minggu" style="margin-left: 24px;" hidden="hidden">
+                    <input id="form_price_minggu" value="0" type="text" class="form-group" name="price_minggu" placeholder="Harga per minggu" style="margin-left: 24px;" hidden="hidden">
                     <div class="custom-control custom-checkbox mb-3" style="margin-left: 24px;">
                         <input type="checkbox" class="custom-control-input" id="price_bulan" onclick="priceBulan(this)">
                         <label class="custom-control-label" name="price_bulan" for="price_bulan">Bulan</label>
                     </div>
-                    <input id="form_price_bulan" type="text" class="form-group" placeholder="Harga per bulan" style="margin-left: 24px;" hidden="hidden">
+                    <input id="form_price_bulan" value="0" type="text" class="form-group" placeholder="Harga per bulan" style="margin-left: 24px;" hidden="hidden">
                 </div>
             </div>
             <div class="input-item">
@@ -106,7 +106,7 @@
                 </div>
                 <div class="input-text">
                     <select id="beliItem" name="kondisi" class="custom-select mb-3">
-                        <option value="">Bisa Dibeli</option>
+                        <option value="">== Apakah Bisa Dibeli ==</option>
                         <option value="Ya">Ya</option>
                         <option value="Tidak">Tidak</option>
                     </select>
@@ -118,9 +118,9 @@
                 </div>
                 <div class="input-text">
                     <select id="deliveryItem" name="delivery" class="custom-select mb-3">
-                        <option value="">Pengiriman</option>
+                        <option value="">== Pilih Pengiriman ==</option>
                         <option value="Bisa Dikirim">Bisa Dikirim</option>
-                        <option value="Ambil Ditempat">Ambil Ditempat</option>
+                        <option value="Ambil di Tempat">Ambil di Tempat</option>
                     </select>
                 </div>
             </div>
@@ -190,10 +190,22 @@
         reader.onloadend = function() {
             console.log('RESULT', reader.result)
             $('#imgPreview').html('<img src="'+reader.result+'" class="img-thumbnail" width="100px"/>');
-            $('#imgItemValue').val(reader.result);
         }
-    
         reader.readAsDataURL(file);
+        handleFileSelect(element);
+    }
+
+    function handleFileSelect(evt) {
+      var f = evt.files[0];
+      var reader = new FileReader();
+      reader.onload = (function(theFile) {
+        return function(e) {
+          var binaryData = e.target.result;
+          var base64String = window.btoa(binaryData);
+          $('#imgItemValue').val(base64String);
+        };
+      })(f);
+      reader.readAsBinaryString(f);
     }
 
     $(function(){
@@ -204,9 +216,9 @@
         var linkURL = "{{ env('APP_API') }}/api/item/category.php";
         $.get(linkURL, function(data) {
             if(!data.error){
-                var html = '<option value="">Pilih Kategori</option>';
+                var html = '<option value="">== Pilih Kategori ==</option>';
                 for(var i=0; i<data.items.length; i++) {
-                    html += '<option value="'+data.items[i].id_category+'">'+data.items[i].category+'</option>';
+                    html += '<option value="'+data.items[i].category+'">'+data.items[i].category+'</option>';
                 }
                 $('#categoryItem').html(html);
             }
