@@ -249,7 +249,7 @@
             $.post(linkURL, formData, function(data) {
                 console.log(data);
                 if(!data.error) {
-                    window.location.href = myOrigin+'/rent-product?id='+myParam;
+                    window.location.href = "{{ route('rent-product') }}?id="+myParam;
                 }
             })
         })
