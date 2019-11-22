@@ -118,10 +118,10 @@ $id = $_GET['id'];
             $.post(linkURL, {id_item: myParam}, function(data) {
                 $('#imgItem').attr('src', data.img_item)
                 $('#nameItem').html(data.item_name)
-                if(data.price_hour != 0) priceHtml += formatRP(data.price_hour)+'/Hour<br>';
-                if(data.price_day != 0) priceHtml += formatRP(data.price_day)+'/Day<br>';
-                if(data.price_week != 0) priceHtml += formatRP(data.price_week)+'/Week<br>';
-                if(data.price_month != 0) priceHtml += formatRP(data.price_month)+'/Month';
+                if(data.price_hour != 0) priceHtml += formatRP(data.price_hour)+'/Jam<br>';
+                if(data.price_day != 0) priceHtml += formatRP(data.price_day)+'/Hari<br>';
+                if(data.price_week != 0) priceHtml += formatRP(data.price_week)+'/Minggu<br>';
+                if(data.price_month != 0) priceHtml += formatRP(data.price_month)+'/Bulan';
                 $('#priceItem').html(priceHtml)
                 $('#descriptionItem').html(data.description)
                 
@@ -140,7 +140,7 @@ $id = $_GET['id'];
                 $('#nameStore').html(data.store.store_name)
                 $('#addressStore').html(data.store.address)
 
-                var linkURLItems = "{{ env('APP_API') }}/api/store/readItemStore.php";
+                var linkURLItems = "{{ env('APP_API') }}/api/store/readItemStore.php?page=2";
                 $.post(linkURLItems, {id_store: data.store.id_store}, function(data) {
                     if(!data.error) {
                         var html = '';

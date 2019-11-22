@@ -334,7 +334,7 @@
                 }
             })
 
-            var linkURLItems = "{{ env('APP_API') }}/api/store/readItemStore.php";
+            var linkURLItems = "{{ env('APP_API') }}/api/store/readItemStore.php?page=2";
             $.post(linkURLItems, {id_store: myParam}, function(data) {
                 if(!data.error) {
                     var html = '';

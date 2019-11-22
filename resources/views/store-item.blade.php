@@ -74,59 +74,6 @@
             $('#detailInvestor').attr('href', $('#detailInvestor').attr('href')+'?id='+myParam);
             $('#btnKembali').attr('href', $('#btnKembali').attr('href')+'?id='+myParam);
 
-            $('#btnEditStore').on('click', function(){
-                $('#myModal').modal('show');
-
-                var linkURL = "{{ env('APP_API') }}/api/store/storeDetail.php";
-                $.post(linkURL, {id_store: myParam}, function(data){
-                    $('#idStore').val(data.id_store);
-                    $('#storeName').val(data.store_name);
-                    $('#address').val(data.address);
-                    $('#city').val(data.city);
-                    $('#photo').val(data.img_store);
-                })
-            })
-            
-            $('#btnSave').on('click', function(){
-                var formData = { 
-                    id_store: $('#idStore').val(),
-                    store_name: $('#storeName').val(),
-                    address: $('#address').val(),
-                    city: $('#city').val(),
-                    img_store: $('#photo').val(),
-                };
-
-                var linkURLEdit = "{{ env('APP_API') }}/api/store/editStore.php";
-                $.post(linkURLEdit, formData, function(data){
-                    window.location.reload();
-                })
-            })
-
-            $('#btnMyBank').on('click', function(){
-                $('#myModalBank').modal('show');
-            })
-
-            $('#btnSaveBank').on('click', function(){
-                var formData = {
-                    bank_name: $('#nameBank').val(),
-                    name: $('#atasNama').val(),
-                    no_rekening: $('#noRekening').val(),
-                    id_store: myParam
-                };
-
-                if($('#nameBank').val() == "" && $('#atasNama').val() == "" && $('#noRekening').val() == ""){
-                    $('#titleMyBank').html('Semua kolom harus terisi.');
-                    $('#nameBank').focus();
-                } else {
-                    var linkBank = "{{ env('APP_API') }}/api/store/bankStore.php";
-                    $.post(linkBank, formData, function(data){
-                        if(!data.error) {
-                            window.location.reload();
-                        }
-                    })
-                }
-            })
-
             var linkURL = "{{ env('APP_API') }}/api/store/storeDetail.php";
             $.post(linkURL, {id_store: myParam}, function(data){
                 if(data.fk_user == user.id_user) {
@@ -145,7 +92,7 @@
                 $('#emailStore').html(data.address);
             })
 
-            var linkURLItems = "{{ env('APP_API') }}/api/store/readItemStore.php";
+            var linkURLItems = "{{ env('APP_API') }}/api/store/readItemStore.php?page=2";
             $.post(linkURLItems, {id_store: myParam}, function(data) {
                 if(!data.error) {
                     var html = '';
