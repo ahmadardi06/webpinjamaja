@@ -47,7 +47,7 @@
 @endsection
 
 @section('js')
-<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-lOOPKaHMI2vqnvNJ"></script>
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="Mid-client-UAsmCx6rgN2JFl33"></script>
 <script>
     var userInfo = localStorage.getItem('user');
     var user = JSON.parse(userInfo);
@@ -136,7 +136,7 @@
           order_id: 'INV-'+Math.round((new Date()).getTime() / 1000) 
         },
         callbacks: {
-            finish: window.location.origin
+            finish: "{{ route('activity') }}"
         }
       }
       
