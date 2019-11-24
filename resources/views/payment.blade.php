@@ -134,6 +134,9 @@
           gross_amount: Number(grandTotal) + randomRange(300, 501),
           // as example we use timestamp as order ID
           order_id: 'INV-'+Math.round((new Date()).getTime() / 1000) 
+        },
+        callbacks: {
+            finish: window.location.origin
         }
       }
       
