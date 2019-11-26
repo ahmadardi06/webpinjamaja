@@ -113,6 +113,10 @@
                 <input type="text" name="city" id="city" placeholder="enter..." class="form-control">
             </div>
             <div class="form-group">
+                <label class="form-label">No LinkAja</label>
+                <input type="text" name="noLinkAja" id="noLinkAja" placeholder="enter..." class="form-control">
+            </div>
+            <div class="form-group">
                 <label class="form-label">Photo</label>
                 <input type="file" name="filePicker" onchange="encodeImageFileAsURL(this)" id="filePicker" placeholder="enter..." class="form-control">
             </div>
@@ -274,6 +278,7 @@
                     address: $('#address').val(),
                     city: $('#city').val(),
                     img_store: $('#photoHidden').val(),
+                    no_linkaja: $('#noLinkAja').val(),
                 };
 
                 var linkURLEdit = "{{ env('APP_API') }}/api/store/editStore.php";

@@ -79,6 +79,9 @@ $id = $_GET['id'];
         var urlOrigin = window.location.origin;
         var storeId;
 
+        var userInfo = localStorage.getItem('user');
+        var user = JSON.parse(userInfo);
+
         function formatRP(data) {
             return 'Rp'+parseInt(data).toLocaleString(); 
         }
@@ -153,7 +156,6 @@ $id = $_GET['id'];
                     }
                 })
             })
-
         })
     </script>
 @endsection
