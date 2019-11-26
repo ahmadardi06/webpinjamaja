@@ -131,17 +131,6 @@ $priceString = number_format($price);
             </div>
         </div>
 
-        <div class="form-group row" style="text-align: left;">
-            <label for="inputEmail3" class="col-sm-3 col-form-label">Pengiriman</label>
-            <div class="col-sm-9">
-                <select name="pengiriman" id="pengiriman" class="custom-select mb-3">
-                    <option selected disabled>Opsi Pengiriman</option>
-                    <option value="Ambil Sendiri">Ambil Sendiri</option>
-                    <option value="Diantar">Diantar</option>
-                </select>
-            </div>
-        </div>
-
         <hr>
 
         <div class="form item-margin">
@@ -215,107 +204,112 @@ $priceString = number_format($price);
     }
 
     $(function() {
-        $('#formHour').hide();
-        $('#formDay').hide();
-        $('#formWeek').hide();
-        $('#formMonth').hide();
-        
-        $('#pilihHour').hide();
-        $('#pilihDay').hide();
-        $('#pilihWeek').hide();
-        $('#pilihMonth').hide();
+        if(userInfo == null) {
+            window.location.href = "{{ route('login') }}";
+        } else {
 
-        $('.radioButton').on('click', function(){
-            var thisValue = $(this).val();
-            console.log(thisValue);
-
-            if(thisValue == 'hour') {
-                $('#btnLanjutPembayaran').html('<button type="button" onmousedown="btnLanjutPembayaranHour()" id="btnBayarHour" class="btn btn-red btn-danger">Lanjut Pembayaran</button>');
-                $('#xjml').html('1');
-                $('#jml_hari').html('1 Hour')
-                $('#harga_xhari').html($('#priceHour').val())
-                $('#total_price').html($('#priceHour').val())
-                $('#formHour').show();
-                $('#formDay').hide();
-                $('#formWeek').hide();
-                $('#formMonth').hide();
-            } else if(thisValue == 'day') {
-                $('#btnLanjutPembayaran').html('<button type="button" onmousedown="btnLanjutPembayaranDay()" id="btnBayarDay" class="btn btn-red btn-danger">Lanjut Pembayaran</button>');
-                $('#xjml').html('1');
-                $('#jml_hari').html('1 Day')
-                $('#harga_xhari').html($('#priceDay').val())
-                $('#total_price').html($('#priceDay').val())
-                $('#formHour').hide();
-                $('#formDay').show();
-                $('#formWeek').hide();
-                $('#formMonth').hide();
-            } else if(thisValue == 'week') {
-                $('#btnLanjutPembayaran').html('<button type="button" id="btnBayarWeek" class="btn btn-red btn-danger">Lanjut Pembayaran</button>').bind('click', btnLanjutPembayaranWeek);
-                $('#xjml').html('1');
-                $('#jml_hari').html('1 Week')
-                $('#harga_xhari').html($('#priceWeek').val())
-                $('#total_price').html($('#priceWeek').val())
-                $('#formHour').hide();
-                $('#formDay').hide();
-                $('#formWeek').show();
-                $('#formMonth').hide();
-            } else {
-                $('#btnLanjutPembayaran').html('<button type="button" id="btnBayarMonth" class="btn btn-red btn-danger">Lanjut Pembayaran</button>').bind('click', btnLanjutPembayaranMonth);
-                $('#xjml').html('1');
-                $('#jml_hari').html('1 Month')
-                $('#harga_xhari').html($('#priceMonth').val())
-                $('#total_price').html($('#priceMonth').val())
-                $('#formHour').hide();
-                $('#formDay').hide();
-                $('#formWeek').hide();
-                $('#formMonth').show();
-            }
-        })
-
-        $('.tgl').datepicker({
-            format: 'mm-dd-yyyy'
-        }).on('hide', function(event) {
-            event.preventDefault();
-            event.stopPropagation();
-        });
-
-        var linkURL = "{{ env('APP_API') }}/api/item/itemDetail.php";
-        var priceHtml = '';
-        $.post(linkURL, {id_item: myParam}, function(data) {
-            console.log(data)
-            if(data.price_hour != 0) {
-                priceHtml += formatRP(data.price_hour)+'/Hour<br>';
-                $('#pilihHour').show();
-            }
-            if(data.price_day != 0) {
-                priceHtml += formatRP(data.price_day)+'/Day<br>';
-                $('#pilihDay').show();
-            }
-            if(data.price_week != 0) {
-                priceHtml += formatRP(data.price_week)+'/Week<br>';
-                $('#pilihWeek').show();
-            }
-            if(data.price_month != 0) {
-                priceHtml += formatRP(data.price_month)+'/Month';
-                $('#pilihMonth').show();
-            }
-
-            $('#priceHtml').html(priceHtml);
+            $('#formHour').hide();
+            $('#formDay').hide();
+            $('#formWeek').hide();
+            $('#formMonth').hide();
             
-            $('#imgItem').attr('src', data.img_item);
-            $('#nameItem').html(data.item_name);
-            $('#priceHour').val(data.price_hour);
-            $('#priceDay').val(data.price_day);
-            $('#priceWeek').val(data.price_week);
-            $('#priceMonth').val(data.price_month);
-            $('#idStore').val(data.store.id_store);
+            $('#pilihHour').hide();
+            $('#pilihDay').hide();
+            $('#pilihWeek').hide();
+            $('#pilihMonth').hide();
 
-            var initPrice = eval($('#priceHour').val()) * eval($('#durasiJam').val());
-            $('#harga_xhari').html(initPrice);
-            $('#jml_hari').html($('#durasiJam').val() + ' Hour')
-            var initTotalPrice = initPrice * eval($('#xjml').html());
-            $('#total_price').html(initTotalPrice);
-        })
+            $('.radioButton').on('click', function(){
+                var thisValue = $(this).val();
+                console.log(thisValue);
+
+                if(thisValue == 'hour') {
+                    $('#btnLanjutPembayaran').html('<button type="button" onmousedown="btnLanjutPembayaranHour()" id="btnBayarHour" class="btn btn-red btn-danger">Lanjut Pembayaran</button>');
+                    $('#xjml').html('1');
+                    $('#jml_hari').html('1 Hour')
+                    $('#harga_xhari').html($('#priceHour').val())
+                    $('#total_price').html($('#priceHour').val())
+                    $('#formHour').show();
+                    $('#formDay').hide();
+                    $('#formWeek').hide();
+                    $('#formMonth').hide();
+                } else if(thisValue == 'day') {
+                    $('#btnLanjutPembayaran').html('<button type="button" onmousedown="btnLanjutPembayaranDay()" id="btnBayarDay" class="btn btn-red btn-danger">Lanjut Pembayaran</button>');
+                    $('#xjml').html('1');
+                    $('#jml_hari').html('1 Day')
+                    $('#harga_xhari').html($('#priceDay').val())
+                    $('#total_price').html($('#priceDay').val())
+                    $('#formHour').hide();
+                    $('#formDay').show();
+                    $('#formWeek').hide();
+                    $('#formMonth').hide();
+                } else if(thisValue == 'week') {
+                    $('#btnLanjutPembayaran').html('<button type="button" id="btnBayarWeek" class="btn btn-red btn-danger">Lanjut Pembayaran</button>').bind('click', btnLanjutPembayaranWeek);
+                    $('#xjml').html('1');
+                    $('#jml_hari').html('1 Week')
+                    $('#harga_xhari').html($('#priceWeek').val())
+                    $('#total_price').html($('#priceWeek').val())
+                    $('#formHour').hide();
+                    $('#formDay').hide();
+                    $('#formWeek').show();
+                    $('#formMonth').hide();
+                } else {
+                    $('#btnLanjutPembayaran').html('<button type="button" id="btnBayarMonth" class="btn btn-red btn-danger">Lanjut Pembayaran</button>').bind('click', btnLanjutPembayaranMonth);
+                    $('#xjml').html('1');
+                    $('#jml_hari').html('1 Month')
+                    $('#harga_xhari').html($('#priceMonth').val())
+                    $('#total_price').html($('#priceMonth').val())
+                    $('#formHour').hide();
+                    $('#formDay').hide();
+                    $('#formWeek').hide();
+                    $('#formMonth').show();
+                }
+            })
+
+            $('.tgl').datepicker({
+                format: 'mm-dd-yyyy'
+            }).on('hide', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+            });
+
+            var linkURL = "{{ env('APP_API') }}/api/item/itemDetail.php";
+            var priceHtml = '';
+            $.post(linkURL, {id_item: myParam}, function(data) {
+                console.log(data)
+                if(data.price_hour != 0) {
+                    priceHtml += formatRP(data.price_hour)+'/Hour<br>';
+                    $('#pilihHour').show();
+                }
+                if(data.price_day != 0) {
+                    priceHtml += formatRP(data.price_day)+'/Day<br>';
+                    $('#pilihDay').show();
+                }
+                if(data.price_week != 0) {
+                    priceHtml += formatRP(data.price_week)+'/Week<br>';
+                    $('#pilihWeek').show();
+                }
+                if(data.price_month != 0) {
+                    priceHtml += formatRP(data.price_month)+'/Month';
+                    $('#pilihMonth').show();
+                }
+
+                $('#priceHtml').html(priceHtml);
+                
+                $('#imgItem').attr('src', data.img_item);
+                $('#nameItem').html(data.item_name);
+                $('#priceHour').val(data.price_hour);
+                $('#priceDay').val(data.price_day);
+                $('#priceWeek').val(data.price_week);
+                $('#priceMonth').val(data.price_month);
+                $('#idStore').val(data.store.id_store);
+
+                var initPrice = eval($('#priceHour').val()) * eval($('#durasiJam').val());
+                $('#harga_xhari').html(initPrice);
+                $('#jml_hari').html($('#durasiJam').val() + ' Hour')
+                var initTotalPrice = initPrice * eval($('#xjml').html());
+                $('#total_price').html(initTotalPrice);
+            })
+        }
     })
 
     function btnLanjutPembayaranHour() {

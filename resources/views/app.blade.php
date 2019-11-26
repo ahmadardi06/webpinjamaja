@@ -146,7 +146,6 @@
             $.post(linkURL+'?page=1', function(data) {
                 if(!data.error){
                     var html = ''; var slider = '';
-                    console.log(data.items.slice(0, 5));
                     slider += renderSliderDOM(data.items.slice(0, 5));
                     for(var i=5; i<10; i++) {
                         html += renderListDOM(data.items[i]);
