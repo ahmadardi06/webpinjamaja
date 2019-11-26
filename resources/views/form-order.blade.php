@@ -44,19 +44,19 @@ $priceString = number_format($price);
             <span id="msgPilihan" style="color: red; margin-left: 20px; margin-top: 8px;"></span>
             <div class="form-group" style="margin-left: 20px; margin-top: 10px;">
                 <label id="pilihHour">
-                    <input type="radio" class="radioButton" name="radioButton" value="hour"> Hour
+                    <input type="radio" class="radioButton" name="radioButton" value="hour"> Jam
                     <input type="hidden" name="priceHour" id="priceHour">
                 </label>
                 <label id="pilihDay">
-                    <input type="radio" class="radioButton" name="radioButton" value="day"> Day
+                    <input type="radio" class="radioButton" name="radioButton" value="day"> Hari
                     <input type="hidden" name="priceDay" id="priceDay">
                 </label>
                 <label id="pilihWeek">
-                    <input type="radio" class="radioButton" name="radioButton" value="week"> Week
+                    <input type="radio" class="radioButton" name="radioButton" value="week"> Minggu
                     <input type="hidden" name="priceWeek" id="priceWeek">
                 </label>
                 <label id="pilihMonth">
-                    <input type="radio" class="radioButton" name="radioButton" value="month"> Month
+                    <input type="radio" class="radioButton" name="radioButton" value="month"> Bulan
                     <input type="hidden" name="priceMonth" id="priceMonth">
                 </label>
             </div>
@@ -277,19 +277,19 @@ $priceString = number_format($price);
             $.post(linkURL, {id_item: myParam}, function(data) {
                 console.log(data)
                 if(data.price_hour != 0) {
-                    priceHtml += formatRP(data.price_hour)+'/Hour<br>';
+                    priceHtml += formatRP(data.price_hour)+'/Jam<br>';
                     $('#pilihHour').show();
                 }
                 if(data.price_day != 0) {
-                    priceHtml += formatRP(data.price_day)+'/Day<br>';
+                    priceHtml += formatRP(data.price_day)+'/Hari<br>';
                     $('#pilihDay').show();
                 }
                 if(data.price_week != 0) {
-                    priceHtml += formatRP(data.price_week)+'/Week<br>';
+                    priceHtml += formatRP(data.price_week)+'/Minggu<br>';
                     $('#pilihWeek').show();
                 }
                 if(data.price_month != 0) {
-                    priceHtml += formatRP(data.price_month)+'/Month';
+                    priceHtml += formatRP(data.price_month)+'/Bulan';
                     $('#pilihMonth').show();
                 }
 
