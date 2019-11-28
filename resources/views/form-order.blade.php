@@ -154,10 +154,35 @@ $priceString = number_format($price);
                 </div>
             </div>
 
-            <div id="btnLanjutPembayaran">
+            <!-- <div id="btnLanjutPembayaran">
                 <button type="button" id="btnBayarHour" onclick="btnLanjutPembayaranHour()" class="btn btn-red btn-danger">Lanjut Pembayaran</button>
-            </div>
+            </div> -->
 
+            <button type="button" id="btnBayarHour" class="btn btn-red btn-danger">Lanjut Pembayaran</button>
+            <button type="button" id="btnBayarDay" class="btn btn-red btn-danger">Lanjut Pembayaran</button>
+            <button type="button" id="btnBayarWeek" class="btn btn-red btn-danger">Lanjut Pembayaran</button>
+            <button type="button" id="btnBayarMonth" class="btn btn-red btn-danger">Lanjut Pembayaran</button>
+
+            <hr>
+
+            <a href="{{ route('payment') }}" class="btn btn-red btn-danger">Lihat Keranjang</a>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modalBedaItem">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Konfirmasi</h4>
+            </div>
+            <div class="modal-body">
+                <p>Item bukan dari store yang sama. Silahkan cek keranjang Anda terlebih dahulu.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+            </div>
         </div>
     </div>
 </div>
@@ -170,6 +195,7 @@ $priceString = number_format($price);
     var myParam = urlParams.get('id');
     var userInfo = localStorage.getItem('user');
     var user = JSON.parse(userInfo);
+    var item = {};
 
     function formatRP(data) {
         return 'Rp'+parseInt(data).toLocaleString(); 
@@ -218,50 +244,71 @@ $priceString = number_format($price);
             $('#pilihWeek').hide();
             $('#pilihMonth').hide();
 
+            $('#btnBayarHour').show();
+            $('#btnBayarDay').hide();
+            $('#btnBayarWeek').hide();
+            $('#btnBayarMonth').hide();
+
             $('.radioButton').on('click', function(){
                 var thisValue = $(this).val();
                 console.log(thisValue);
 
                 if(thisValue == 'hour') {
-                    $('#btnLanjutPembayaran').html('<button type="button" onmousedown="btnLanjutPembayaranHour()" id="btnBayarHour" class="btn btn-red btn-danger">Lanjut Pembayaran</button>');
                     $('#xjml').html('1');
-                    $('#jml_hari').html('1 Hour')
+                    $('#jml_hari').html('1 Jam')
                     $('#harga_xhari').html($('#priceHour').val())
                     $('#total_price').html($('#priceHour').val())
                     $('#formHour').show();
                     $('#formDay').hide();
                     $('#formWeek').hide();
                     $('#formMonth').hide();
+
+                    $('#btnBayarHour').show();
+                    $('#btnBayarDay').hide();
+                    $('#btnBayarWeek').hide();
+                    $('#btnBayarMonth').hide();
                 } else if(thisValue == 'day') {
-                    $('#btnLanjutPembayaran').html('<button type="button" onmousedown="btnLanjutPembayaranDay()" id="btnBayarDay" class="btn btn-red btn-danger">Lanjut Pembayaran</button>');
                     $('#xjml').html('1');
-                    $('#jml_hari').html('1 Day')
+                    $('#jml_hari').html('1 Hari')
                     $('#harga_xhari').html($('#priceDay').val())
                     $('#total_price').html($('#priceDay').val())
                     $('#formHour').hide();
                     $('#formDay').show();
                     $('#formWeek').hide();
                     $('#formMonth').hide();
+
+                    $('#btnBayarHour').hide();
+                    $('#btnBayarDay').show();
+                    $('#btnBayarWeek').hide();
+                    $('#btnBayarMonth').hide();
                 } else if(thisValue == 'week') {
-                    $('#btnLanjutPembayaran').html('<button type="button" id="btnBayarWeek" class="btn btn-red btn-danger">Lanjut Pembayaran</button>').bind('click', btnLanjutPembayaranWeek);
                     $('#xjml').html('1');
-                    $('#jml_hari').html('1 Week')
+                    $('#jml_hari').html('1 Minggu')
                     $('#harga_xhari').html($('#priceWeek').val())
                     $('#total_price').html($('#priceWeek').val())
                     $('#formHour').hide();
                     $('#formDay').hide();
                     $('#formWeek').show();
                     $('#formMonth').hide();
+
+                    $('#btnBayarHour').hide();
+                    $('#btnBayarDay').hide();
+                    $('#btnBayarWeek').show();
+                    $('#btnBayarMonth').hide();
                 } else {
-                    $('#btnLanjutPembayaran').html('<button type="button" id="btnBayarMonth" class="btn btn-red btn-danger">Lanjut Pembayaran</button>').bind('click', btnLanjutPembayaranMonth);
                     $('#xjml').html('1');
-                    $('#jml_hari').html('1 Month')
+                    $('#jml_hari').html('1 Bulan')
                     $('#harga_xhari').html($('#priceMonth').val())
                     $('#total_price').html($('#priceMonth').val())
                     $('#formHour').hide();
                     $('#formDay').hide();
                     $('#formWeek').hide();
                     $('#formMonth').show();
+
+                    $('#btnBayarHour').hide();
+                    $('#btnBayarDay').hide();
+                    $('#btnBayarWeek').hide();
+                    $('#btnBayarMonth').show();
                 }
             })
 
@@ -275,7 +322,8 @@ $priceString = number_format($price);
             var linkURL = "{{ env('APP_API') }}/api/item/itemDetail.php";
             var priceHtml = '';
             $.post(linkURL, {id_item: myParam}, function(data) {
-                console.log(data)
+                item = data;
+
                 if(data.price_hour != 0) {
                     priceHtml += formatRP(data.price_hour)+'/Jam<br>';
                     $('#pilihHour').show();
@@ -309,135 +357,162 @@ $priceString = number_format($price);
                 var initTotalPrice = initPrice * eval($('#xjml').html());
                 $('#total_price').html(initTotalPrice);
             })
+
+            $('#btnBayarHour').on('click', function() {
+                var formData = {
+                    pinjam: 'hour',
+                    id_user: user.id_user,
+                    id_item: myParam,
+                    date_start: convertTglIndo($('#tanggalPinjamJam').val()),
+                    date_end: convertTglIndo($('#tanggalPinjamJam').val()),
+                    amount: $('#jml').val(),
+                    total: $('#total_price').html(),
+                    delivery: $('#pengiriman').val(),
+                    id_store: $('#idStore').val(),
+                    user_id: user.id_user, item_id: myParam,
+                    _token: "{{ csrf_token() }}",
+                };
+
+                var pilihMethod = $("input[name='radioButton']:checked").val();
+                if(pilihMethod) {
+                    isSameStore(item.store.id_store, function(result) {
+                        if(result){
+                            var linkAPICheckout = "{{ env('APP_API') }}/api/baskets/checkout.php";
+                            $.post(linkAPICheckout, formData, function(data) {
+                                if(!data.error){
+                                    window.location.href = "{{ route('payment') }}";
+                                }
+                            })
+                        } else {
+                            $('#modalBedaItem').modal('show');
+                        }
+                    })
+                } else {
+                    $('#msgPilihan').html('Pilih Durasi Pinjam');
+                }
+            });
+
+            $('#btnBayarDay').on('click', function() {
+                var formData = {
+                    pinjam: 'day', id_user: user.id_user, id_item: myParam,
+                    date_start: convertTglIndo($('#tglPinjam').val()),
+                    date_end: convertTglIndo($('#tglKembali').val()),
+                    amount: $('#jml').val(), total: $('#total_price').html(),
+                    delivery: $('#pengiriman').val(), id_store: $('#idStore').val(),
+                    user_id: user.id_user, item_id: myParam,
+                    _token: "{{ csrf_token() }}",
+                };
+
+                var pilihMethod = $("input[name='radioButton']:checked").val();
+                if(pilihMethod) {
+                    isSameStore(item.store.id_store, function(result) {
+                        if(result) {
+                            var linkAPICheckout = "{{ env('APP_API') }}/api/baskets/checkout.php";
+                            $.post(linkAPICheckout, formData, function(data) {
+                                console.log(data);
+                                if(!data.error){
+                                    window.location.href = "{{ route('payment') }}";
+                                }
+                            })
+                        } else {
+                            $('#modalBedaItem').modal('show');
+                        } 
+                    })
+                } else {
+                    console.log('belum')
+                    $('#msgPilihan').html('Pilih Durasi Pinjam');
+                }
+            });
+
+            $('#btnBayarWeek').on('click', function() {
+                var formData = {
+                    pinjam: 'week',
+                    id_user: user.id_user,
+                    id_item: myParam,
+                    date_start: convertTglIndo($('#tanggalPinjamMinggu').val()),
+                    date_end: convertTglIndo($('#tanggalPinjamMinggu').val()),
+                    amount: $('#jml').val(),
+                    total: $('#total_price').html(),
+                    delivery: $('#pengiriman').val(),
+                    id_store: $('#idStore').val(),
+                    user_id: user.id_user, item_id: myParam,
+                    _token: "{{ csrf_token() }}",
+                };
+
+                var pilihMethod = $("input[name='radioButton']:checked").val();
+                if(pilihMethod) {
+                    isSameStore(item.store.id_store, function(result) {
+                        if(result) {
+                            var linkAPICheckout = "{{ env('APP_API') }}/api/baskets/checkout.php";
+                            $.post(linkAPICheckout, formData, function(data) {
+                                console.log(data);
+                                if(!data.error){
+                                    window.location.href = "{{ route('payment') }}";
+                                }
+                            })
+                        } else {
+                            $('#modalBedaItem').modal('show');
+                        }
+                    })
+                } else {
+                    console.log('belum')
+                    $('#msgPilihan').html('Pilih Durasi Pinjam');
+                }
+            });
+
+            $('#btnBayarMonth').on('click', function() {
+                var formData = {
+                    pinjam: 'month',
+                    id_user: user.id_user,
+                    id_item: myParam,
+                    date_start: convertTglIndo($('#tanggalPinjamBulan').val()),
+                    date_end: convertTglIndo($('#tanggalPinjamBulan').val()),
+                    amount: $('#jml').val(),
+                    total: $('#total_price').html(),
+                    delivery: $('#pengiriman').val(),
+                    id_store: $('#idStore').val(),
+                    user_id: user.id_user, item_id: myParam,
+                    _token: "{{ csrf_token() }}",
+                };
+
+                var pilihMethod = $("input[name='radioButton']:checked").val();
+                if(pilihMethod) {
+                    isSameStore(item.store.id_store, function(result) {
+                        if(result) {
+                            var linkAPICheckout = "{{ env('APP_API') }}/api/baskets/checkout.php";
+                            $.post(linkAPICheckout, formData, function(data) {
+                                console.log(data);
+                                if(!data.error){
+                                    window.location.href = "{{ route('payment') }}";
+                                }
+                            })
+                        } else {
+                            $('#modalBedaItem').modal('show');
+                        }
+                    });
+                } else {
+                    console.log('belum')
+                    $('#msgPilihan').html('Pilih Durasi Pinjam');
+                }
+            });
         }
     })
 
-    function btnLanjutPembayaranHour() {
-        var formData = {
-            pinjam: 'hour',
-            id_user: user.id_user,
-            id_item: myParam,
-            date_start: convertTglIndo($('#tanggalPinjamJam').val()),
-            date_end: convertTglIndo($('#tanggalPinjamJam').val()),
-            amount: $('#jml').val(),
-            total: $('#total_price').html(),
-            delivery: $('#pengiriman').val(),
-            id_store: $('#idStore').val(),
-            user_id: user.id_user, item_id: myParam,
-            _token: "{{ csrf_token() }}",
-        };
-
-        var pilihMethod = $("input[name='radioButton']:checked").val();
-        console.log(pilihMethod);
-        if(pilihMethod) {
-            console.log('udah')
-            var linkAPICheckout = "{{ env('APP_API') }}/api/baskets/checkout.php";
-            $.post(linkAPICheckout, formData, function(data) {
-                console.log(data);
-                if(!data.error){
-                    window.location.href = "{{ route('payment') }}";
+    function isSameStore(id_store, callback) {
+        var linkDetail = "{{ env('APP_API') }}/api/baskets/mybasket.php";
+        $.post(linkDetail, {user_id: user.id_user}, function(data){
+            var isFirstItem = false;
+            if(data.data.length != 0) {
+                if(id_store == data.data[0].item.id_store) {
+                    isFirstItem = true;
+                } else {
+                    isFirstItem = false
                 }
-            })
-        } else {
-            console.log('belum')
-            $('#msgPilihan').html('Pilih Durasi Pinjam');
-        }
-
-    }
-
-    function btnLanjutPembayaranDay() {
-        var formData = {
-            pinjam: 'day', id_user: user.id_user, id_item: myParam,
-            date_start: convertTglIndo($('#tglPinjam').val()),
-            date_end: convertTglIndo($('#tglKembali').val()),
-            amount: $('#jml').val(), total: $('#total_price').html(),
-            delivery: $('#pengiriman').val(), id_store: $('#idStore').val(),
-            user_id: user.id_user, item_id: myParam,
-            _token: "{{ csrf_token() }}",
-        };
-
-        var pilihMethod = $("input[name='radioButton']:checked").val();
-        console.log(pilihMethod);
-        if(pilihMethod) {
-            console.log('udah')
-            var linkAPICheckout = "{{ env('APP_API') }}/api/baskets/checkout.php";
-            $.post(linkAPICheckout, formData, function(data) {
-                console.log(data);
-                if(!data.error){
-                    window.location.href = "{{ route('payment') }}";
-                }
-            })
-        } else {
-            console.log('belum')
-            $('#msgPilihan').html('Pilih Durasi Pinjam');
-        }
-
-    }
-
-    function btnLanjutPembayaranWeek() {
-        var formData = {
-            pinjam: 'week',
-            id_user: user.id_user,
-            id_item: myParam,
-            date_start: convertTglIndo($('#tanggalPinjamMinggu').val()),
-            date_end: convertTglIndo($('#tanggalPinjamMinggu').val()),
-            amount: $('#jml').val(),
-            total: $('#total_price').html(),
-            delivery: $('#pengiriman').val(),
-            id_store: $('#idStore').val(),
-            user_id: user.id_user, item_id: myParam,
-            _token: "{{ csrf_token() }}",
-        };
-
-        var pilihMethod = $("input[name='radioButton']:checked").val();
-        console.log(pilihMethod);
-        if(pilihMethod) {
-            console.log('udah')
-            var linkAPICheckout = "{{ env('APP_API') }}/api/baskets/checkout.php";
-            $.post(linkAPICheckout, formData, function(data) {
-                console.log(data);
-                if(!data.error){
-                    window.location.href = "{{ route('payment') }}";
-                }
-            })
-        } else {
-            console.log('belum')
-            $('#msgPilihan').html('Pilih Durasi Pinjam');
-        }
-
-    }
-
-    function btnLanjutPembayaranMonth() {
-        var formData = {
-            pinjam: 'month',
-            id_user: user.id_user,
-            id_item: myParam,
-            date_start: convertTglIndo($('#tanggalPinjamBulan').val()),
-            date_end: convertTglIndo($('#tanggalPinjamBulan').val()),
-            amount: $('#jml').val(),
-            total: $('#total_price').html(),
-            delivery: $('#pengiriman').val(),
-            id_store: $('#idStore').val(),
-            user_id: user.id_user, item_id: myParam,
-            _token: "{{ csrf_token() }}",
-        };
-
-        var pilihMethod = $("input[name='radioButton']:checked").val();
-        console.log(pilihMethod);
-        if(pilihMethod) {
-            console.log('udah')
-            var linkAPICheckout = "{{ env('APP_API') }}/api/baskets/checkout.php";
-            $.post(linkAPICheckout, formData, function(data) {
-                console.log(data);
-                if(!data.error){
-                    window.location.href = "{{ route('payment') }}";
-                }
-            })
-        } else {
-            console.log('belum')
-            $('#msgPilihan').html('Pilih Durasi Pinjam');
-        }
-
+            } else {
+                isFirstItem = true;
+            }
+            callback(isFirstItem);
+        });
     }
 
     function tambahi(){
