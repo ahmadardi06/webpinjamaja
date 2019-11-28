@@ -59,7 +59,9 @@ $id = $_GET['id'];
             </div>
         </div>
     </div>
-    <a id="orderItem" href="{{ route('form-order') }}" class="btn btn-red btn-danger">Order Sekarang</a>
+    <div id="editItem">
+        <a id="orderItem" href="{{ route('form-order') }}" class="btn btn-red btn-danger">Order Sekarang</a>
+    </div>
     <hr>
     <div style="margin: 3px; padding: 3px;">
         <div class="text-left">
@@ -119,6 +121,12 @@ $id = $_GET['id'];
             var linkURL = "{{ env('APP_API') }}/api/item/itemDetail.php";
             var priceHtml = '';
             $.post(linkURL, {id_item: myParam}, function(data) {
+                if(userInfo != null) {
+                    if(data.store.fk_user == user.id_user) {
+                        $('#editItem').html('<a href="#" class="btn btn-red btn-danger">Edit Item</a>');
+                    }
+                }
+
                 $('#imgItem').attr('src', data.img_item)
                 $('#nameItem').html(data.item_name)
                 if(data.price_hour != 0) priceHtml += formatRP(data.price_hour)+'/Jam<br>';

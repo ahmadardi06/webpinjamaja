@@ -51,16 +51,16 @@
                 <input type="hidden" name="id_transaction" id="id_transaction">
                 <input type="hidden" name="id_user" id="id_user">
                 <input type="hidden" name="img_bukti" id="img_bukti">
-                <div class="form">
-                    <div class="form-group">
-                        <label>Bukti Transfer</label>
-                        <input onchange="encodeImageFileAsURL(this)" type="file" name="img_bukti" id="img_bukti" class="form-control">
-                    </div>
+                <div class="form-group">
+                    <label id="fileLabel">Upload Bukti</label>
+                    <input type="hidden" id="fileHidden" name="fileHidden" value="">
+                    <input type="file" accept="image/*" name="file" id="file" class="form-control" onchange="encodeImageFileAsURL(this)">
                 </div>
+                <div id="imgPreview"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" id="btnSubmitUpload">Submit</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button id="btnUploadSekarang" type="button" class="btn btn-danger">Upload</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>
@@ -71,6 +71,7 @@
     <script>
         var userInfo = localStorage.getItem('user');
         var user = JSON.parse(userInfo);
+        var randomString = '';
 
         function renderDOM(data) {
             var price = 'Rp'+parseInt(data.order_total).toLocaleString(); 
@@ -89,11 +90,12 @@
             } else {
                 var statusOrder = 'Status Tidak Tersedia';
             }
+
             var html = '';
             html += '<div class="item-category list-for-rent" style="border: 1px solid #e9e9e9; padding: 5px; margin: 3px; border-radius: 5px;">';
-                html += '<div class="one-list-for-rent">';
+                html += '<div class="one-list-for-rent" style="margin: 2px 0px;">';
                     html += '<figure class="pic-for-rent">';
-                        html += '<img src="{{ asset('tema/img/img1.jpg') }}" class="">';
+                        html += '<img src="'+data.items.img_item+'" class="">';
                     html += '</figure>';
                     html += '<div class="desc-for-rent">';
                         html += '<span class="desc" style="font-weight: bold;">'+data.store.store_name+'</span>';
@@ -103,20 +105,35 @@
                         html += '<span class="desc" style="color: red;">'+statusOrder+'</span>';
                     html += '</div>';
                 html += '</div>';
-                html += '<hr>';
                 html += '<div class="row">';
                     html += '<div class="col col-sm-6" style="text-align: right;">';
                         if(data.status_order == 'pending') {
                             if(data.payment == 'LinkAja') {
-                                html += '<button data-id="'+data.id_transaction+'" class="btn btn-sm btn-primary" onclick="uploadBukti(this)">Upload</button>';
+                                html += '<button data-unique="'+data.unique_code+'" data-id="'+data.id_transaction+'" class="btn btn-sm btn-primary" onclick="uploadBukti(this)">Upload</button>';
                             } else {
                                 html += '';
                             }
+                        } else if(data.status_order == 'dikirim') {
+                            html += '<button data-store="'+data.store.id_store+'" data-id="'+data.id_transaction+'" class="btn btn-sm btn-primary" onclick="terimaBarang(this)">Terima</button>';
                         }
                     html += '</div>';
                 html += '</div>';
             html += '</div>';
             return html;
+        }
+
+        function terimaBarang(elem) {
+            var transId = $(elem).attr('data-id');
+            var userId = $(elem).attr('data-store');
+            var statusOrder = 'dipinjam';
+            var formData = { id_transaction: transId, id_store: userId, status_order: statusOrder };
+
+            var linklihatPembayaran = "{{ env('APP_API') }}/api/transaction/store/statusOrder.php";
+            $.post(linklihatPembayaran, formData, function(data){
+                if(!data.error) {
+                    window.location.href = "{{route('tracking-order')}}";
+                }
+            })
         }
 
         function encodeImageFileAsURL(element) {
@@ -132,8 +149,13 @@
         function uploadBukti(elem) {
             var transasctionId = $(elem).attr('data-id');
             $('#id_transaction').val(transasctionId);
-            $('#id_user').val(user.id_user);
-            $('#myFirstModal').modal('show');
+            var linkUnique = "{{env('APP_API')}}/api/baskets/unique.php";
+            $.post(linkUnique, {id_transaction: transasctionId}, function(data){
+                if(!data.error){
+                    randomString = data.data.unique_code;
+                    $('#myFirstModal').modal('show');
+                }
+            })
         }
 
         function openCity(evt, cityName) {
@@ -149,6 +171,29 @@
             document.getElementById(cityName).style.display = "block";
             evt.currentTarget.className += " active";
         }
+
+        function encodeImageFileAsURL(element) {
+            var file = element.files[0];
+            var reader = new FileReader();
+            reader.onloadend = function() {
+                $('#imgPreview').html('<img src="'+reader.result+'" class="img-thumbnail" width="200px"/>');
+            }
+            reader.readAsDataURL(file);
+            handleFileSelect(element);
+        }
+
+        function handleFileSelect(evt) {
+          var f = evt.files[0];
+          var reader = new FileReader();
+          reader.onload = (function(theFile) {
+            return function(e) {
+              var binaryData = e.target.result;
+              var base64String = window.btoa(binaryData);
+              $('#fileHidden').val(base64String);
+            };
+          })(f);
+          reader.readAsBinaryString(f);
+        }
         
         document.getElementById("defaultOpen").click();
 
@@ -163,9 +208,10 @@
                 var formDataDikirim = {id_user: user.id_user, status_order: 'dikirim'};
                 var formDataDipinjam = {id_user: user.id_user, status_order: 'dipinjam'};
                 var formDataSelesai = {id_user: user.id_user, status_order: 'selesai'};
-                var formDataBatal = {id_user: user.id_user, status_order: 'batal'};
+                var formDataBatal = {id_user: user.id_user, status_order: 'expire'};
 
                 $.post(linkDiProses, formDataPending, function(data){
+                    console.log(data)
                     if(!data.error){
                         var html = '';
                         if(data.transactions.length != 0) {
@@ -261,6 +307,24 @@
                             window.location.href = "{{route('tracking-order')}}";
                         }
                     })
+                })
+
+                $('#btnUploadSekarang').on('click', function(){
+                    var fileHidden = $('#fileHidden').val();
+                    var linkURLTransaction = "{{ env('APP_API') }}/api/baskets/transaction.php";
+                    if(fileHidden == ""){
+                        $('#fileLabel').html('Upload Bukti Harus Terisi').css('color', 'red');
+                        $('#file').focus();
+                    } else {
+                        $.post(linkURLTransaction, {unique_code: randomString}, function(data){
+                            var linkUploadBukti = "{{ env('APP_API') }}/api/transaction/user/uploadBukti.php";
+                            $.post(linkUploadBukti, {id_user: user.id_user, id_transaction: data.data.id_transaction, img_bukti: $('#fileHidden').val()}, function(result){
+                                if(!result.error){
+                                    window.location.href = "{{ route('activity') }}";
+                                }
+                            })
+                        })
+                    }
                 })
             }
         })

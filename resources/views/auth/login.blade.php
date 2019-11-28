@@ -42,9 +42,18 @@
                     var linkURL = "{{ env('APP_API') }}/api/user/login.php";
                     $.post(linkURL, {name: formData.user, password: formData.pass}, function(data) {
                         if(!data.error) {
-                            localStorage.setItem('user', JSON.stringify(data.data))
-                            $('#msgLogin').html(data.message)
-                            window.location.href = "{{ route('account') }}";
+                            if(data.data.status == 'investor') {
+                                $.post("{{ env('APP_API') }}/api/store/userStore.php", {id_user: data.data.id_user}, function(result) {
+                                    data.data.id_store = result.id_store;
+                                    localStorage.setItem('user', JSON.stringify(data.data))
+                                    $('#msgLogin').html(data.message)
+                                    window.location.href = "{{ route('account') }}";
+                                })
+                            } else {
+                                localStorage.setItem('user', JSON.stringify(data.data))
+                                $('#msgLogin').html(data.message)
+                                window.location.href = "{{ route('account') }}";
+                            }
                         } else {
                             $('#msgLogin').html(data.message)
                         }
