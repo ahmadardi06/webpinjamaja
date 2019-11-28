@@ -208,7 +208,7 @@
                 var formDataDikirim = {id_user: user.id_user, status_order: 'dikirim'};
                 var formDataDipinjam = {id_user: user.id_user, status_order: 'dipinjam'};
                 var formDataSelesai = {id_user: user.id_user, status_order: 'selesai'};
-                var formDataBatal = {id_user: user.id_user, status_order: 'batal'};
+                var formDataBatal = {id_user: user.id_user, status_order: 'expire'};
 
                 $.post(linkDiProses, formDataPending, function(data){
                     console.log(data)

@@ -287,7 +287,9 @@
             } else if($('#pengiriman').val() == null) {
                 $('#pengiriman').focus();
             } else {
-                console.log('Mulai Bayar Ditempat');
+                randomString = formBaskets.unique;
+                saveTransaction(formBaskets, 'pending');
+                window.location.href = "{{route('activity')}}";
             }
         });
 

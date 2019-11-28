@@ -104,7 +104,7 @@
                             if(data.payment == 'LinkAja') {
                                 html += '<button data-id="'+data.id_transaction+'" class="btn btn-sm btn-primary" onclick="lihatPembayaran(this)">Lihat Pembayaran</button>';
                             } else {
-                                html += '&nbsp;<button data-id="'+data.id_transaction+'" class="btn btn-sm btn-primary" onclick="batalBarang(this)">Batal</button>';
+                                html += '<button data-id="'+data.id_transaction+'" class="btn btn-sm btn-primary" onclick="konfirmasiBarang(this)">Konfirmasi</button>&nbsp;<button data-id="'+data.id_transaction+'" class="btn btn-sm btn-primary" onclick="batalBarang(this)">Batal</button>';
                             }
                         } else if(data.status_order == 'settlement') {
                             if(data.delivery == 'diantar') {
@@ -158,6 +158,20 @@
             var transId = $(elem).attr('data-id');
             var userId = user.id_store;
             var statusOrder = 'dipinjam';
+            var formData = { id_transaction: transId, id_store: userId, status_order: statusOrder };
+
+            var linklihatPembayaran = "{{ env('APP_API') }}/api/transaction/store/statusOrder.php";
+            $.post(linklihatPembayaran, formData, function(data){
+                if(!data.error) {
+                    window.location.href = "{{route('tracking-order-investor')}}";
+                }
+            })
+        }
+
+        function konfirmasiBarang(elem) {
+            var transId = $(elem).attr('data-id');
+            var userId = user.id_store;
+            var statusOrder = 'settlement';
             var formData = { id_transaction: transId, id_store: userId, status_order: statusOrder };
 
             var linklihatPembayaran = "{{ env('APP_API') }}/api/transaction/store/statusOrder.php";
@@ -230,7 +244,7 @@
                 var formDataDikirim = {id_store: user.id_store, status_order: 'dikirim'};
                 var formDataDipinjam = {id_store: user.id_store, status_order: 'dipinjam'};
                 var formDataSelesai = {id_store: user.id_store, status_order: 'selesai'};
-                var formDataBatal = {id_store: user.id_store, status_order: 'batal'};
+                var formDataBatal = {id_store: user.id_store, status_order: 'expire'};
 
                 $.post(linkDiProses, formDataPending, function(data){
                     if(!data.error){
