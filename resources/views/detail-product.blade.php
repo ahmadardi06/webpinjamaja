@@ -60,7 +60,9 @@ $id = $_GET['id'];
         </div>
     </div>
     <div id="editItem">
-        <a id="orderItem" href="{{ route('form-order') }}" class="btn btn-red btn-danger">Order Sekarang</a>
+        <!-- <a id="orderItem" href="{{ route('form-order') }}" class="btn btn-red btn-danger">Order Sekarang</a> -->
+        <a id="orderItem" href="javascript:;" class="btn btn-red btn-danger">Order Sekarang</a>
+        <a style="margin-top: 5px;" href="{{ route('payment') }}" class="btn btn-red btn-danger">Lihat Keranjang</a>
     </div>
     <hr>
     <div style="margin: 3px; padding: 3px;">
@@ -69,6 +71,22 @@ $id = $_GET['id'];
         </div>
         <div id="listItems" class="text-left">
             <span>loading...</span>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modalBedaItem">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Konfirmasi</h4>
+            </div>
+            <div class="modal-body">
+                <p>Item bukan dari store yang sama. Silahkan cek keranjang Anda terlebih dahulu.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+            </div>
         </div>
     </div>
 </div>
@@ -114,8 +132,27 @@ $id = $_GET['id'];
             return html;
         }
 
+        function isSameStore(id_store, callback) {
+            var linkDetail = "{{ env('APP_API') }}/api/baskets/mybasket.php";
+            $.post(linkDetail, {user_id: user.id_user}, function(data){
+                var isFirstItem = false;
+                if(data.data.length != 0) {
+                    if(id_store == data.data[0].item.id_store) {
+                        isFirstItem = true;
+                    } else {
+                        isFirstItem = false
+                    }
+                } else {
+                    isFirstItem = true;
+                }
+                callback(isFirstItem);
+            });
+        }
+
+        var idStore = '';
+
         $(function(){
-            $('#orderItem').attr('href', $('#orderItem').attr('href')+'?id='+myParam);
+            // $('#orderItem').attr('href', $('#orderItem').attr('href')+'?id='+myParam);
 
             // var linkURL = urlOrigin+"/database/item.json";
             var linkURL = "{{ env('APP_API') }}/api/item/itemDetail.php";
@@ -146,6 +183,7 @@ $id = $_GET['id'];
                 $('#sizeItem').html('Sisa Stock '+data.stock)
                 
                 $('#linkInvestor').attr('href', $('#linkInvestor').attr('href')+'?id='+data.store.id_store)
+                idStore = data.store.id_store;
 
                 $('#imgStore').attr('src', data.store.img_store)
                 $('#nameStore').html(data.store.store_name)
@@ -163,6 +201,16 @@ $id = $_GET['id'];
                         $('#listItems').html(html);
                     }
                 })
+            })
+
+            $('#orderItem').on('click', function(){
+                isSameStore(idStore, function(result) {
+                    if(result) {
+                        window.location.href = "{{ route('form-order') }}?id="+myParam;
+                    } else {
+                        $('#modalBedaItem').modal('show');
+                    }
+                });
             })
         })
     </script>

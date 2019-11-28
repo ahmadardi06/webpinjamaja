@@ -54,7 +54,8 @@
             <button id="buttonBayarLinkAja" type="submit" class="btn btn-red btn-danger">Bayar Sekarang</button>
             <button id="buttonBayarMidtrans" type="submit" class="btn btn-red btn-danger">Bayar Sekarang</button>
             <button id="buttonBayarDiTempat" type="submit" class="btn btn-red btn-danger">Bayar Sekarang</button>
-            <a style="margin-top: 10px;" href="{{ route('list-item') }}?category=all" class="btn btn-red btn-danger">Tambah Item Lain</a>
+            
+            <a id="tambahItemLain" style="margin-top: 10px;" href="{{ route('rent-product') }}" class="btn btn-red btn-danger">Tambah Item Lain</a>
 
         </div>
     </div>
@@ -149,6 +150,7 @@
                         myBaskets.push(data.data[i]);
                     }
                 }
+                $('#tambahItemLain').attr('href', $('#tambahItemLain').attr('href')+'?id='+myBaskets[0].item.id_store);
                 formBaskets.items =myBaskets;
                 $('#myBasket').html(html);
                 $('#totalPrice').html(formatRP(grandTotal));

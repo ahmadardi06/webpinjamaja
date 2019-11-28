@@ -215,19 +215,10 @@ $priceString = number_format($price);
                 </div>
             </div>
 
-            <!-- <div id="btnLanjutPembayaran">
-                <button type="button" id="btnBayarHour" onclick="btnLanjutPembayaranHour()" class="btn btn-red btn-danger">Lanjut Pembayaran</button>
-            </div> -->
-
             <button type="button" id="btnBayarHour" class="btn btn-red btn-danger">Lanjut Pembayaran</button>
             <button type="button" id="btnBayarDay" class="btn btn-red btn-danger">Lanjut Pembayaran</button>
             <button type="button" id="btnBayarWeek" class="btn btn-red btn-danger">Lanjut Pembayaran</button>
             <button type="button" id="btnBayarMonth" class="btn btn-red btn-danger">Lanjut Pembayaran</button>
-
-            <hr>
-
-            <a href="{{ route('payment') }}" class="btn btn-red btn-danger">Lihat Keranjang</a>
-
         </div>
     </div>
 </div>
