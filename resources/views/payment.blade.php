@@ -218,12 +218,14 @@
                 $('#file').focus();
             } else {
                 $.post(linkURLTransaction, {unique_code: randomString}, function(data){
-                    var linkUploadBukti = "{{ env('APP_API') }}/api/transaction/user/uploadBukti.php";
-                    $.post(linkUploadBukti, {id_user: user.id_user, id_transaction: data.data.id_transaction, img_bukti: $('#fileHidden').val()}, function(result){
-                        if(!result.error){
-                            window.location.href = "{{ route('activity') }}";
-                        }
-                    })
+                    for(var i=0; i<data.data.length; i++) {
+                        var linkUploadBukti = "{{ env('APP_API') }}/api/transaction/user/uploadBukti.php";
+                        $.post(linkUploadBukti, {id_user: user.id_user, id_transaction: data.data[i].id_transaction, img_bukti: $('#fileHidden').val()}, function(result){
+                            if(!result.error){
+                                window.location.href = "{{ route('activity') }}";
+                            }
+                        })
+                    }
                 })
             }
         })

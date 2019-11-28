@@ -136,16 +136,6 @@
             })
         }
 
-        function encodeImageFileAsURL(element) {
-            var file = element.files[0];
-            var reader = new FileReader();
-            reader.onloadend = function() {
-                $('#img_bukti').val(reader.result);
-            }
-        
-            reader.readAsDataURL(file);
-        }
-
         function uploadBukti(elem) {
             var transasctionId = $(elem).attr('data-id');
             $('#id_transaction').val(transasctionId);
@@ -211,7 +201,6 @@
                 var formDataBatal = {id_user: user.id_user, status_order: 'expire'};
 
                 $.post(linkDiProses, formDataPending, function(data){
-                    console.log(data)
                     if(!data.error){
                         var html = '';
                         if(data.transactions.length != 0) {
@@ -316,13 +305,16 @@
                         $('#fileLabel').html('Upload Bukti Harus Terisi').css('color', 'red');
                         $('#file').focus();
                     } else {
+                        console.log(randomString);
                         $.post(linkURLTransaction, {unique_code: randomString}, function(data){
-                            var linkUploadBukti = "{{ env('APP_API') }}/api/transaction/user/uploadBukti.php";
-                            $.post(linkUploadBukti, {id_user: user.id_user, id_transaction: data.data.id_transaction, img_bukti: $('#fileHidden').val()}, function(result){
-                                if(!result.error){
-                                    window.location.href = "{{ route('activity') }}";
-                                }
-                            })
+                            for(var i=0; i<data.data.length; i++) {
+                                var linkUploadBukti = "{{ env('APP_API') }}/api/transaction/user/uploadBukti.php";
+                                $.post(linkUploadBukti, {id_user: user.id_user, id_transaction: data.data[i].id_transaction, img_bukti: $('#fileHidden').val()}, function(result){
+                                    if(!result.error){
+                                        window.location.href = "{{ route('activity') }}";
+                                    }
+                                })
+                            }
                         })
                     }
                 })
